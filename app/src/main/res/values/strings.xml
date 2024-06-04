@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
 
-    <!--PreLogin-->
+    <!--pre_login-->
     <string name="refactoring_life">Refactoring Life \nAcademy</string>
     <string name="ic_logo_rl">Refactoring Life</string>
     <string name="login">Iniciar sesión</string>
