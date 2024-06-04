@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+
+    <!--PreLogin-->
+    <string name="refactoring_life">Refactoring Life \nAcademy</string>
+    <string name="ic_logo_rl">Refactoring Life</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Register</string>
+    <string name="support_message">En caso de tener problemas comunicarse con soporte</string>
+    <string name="show_password">Mostrar contraseña</string>
 </resources>
