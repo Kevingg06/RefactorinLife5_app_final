@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".ui.prelogin.presenter.PreLoginActivity">
 
     <!--Icon RL-->
     <ImageView
@@ -45,9 +45,6 @@
         android:background="@drawable/bg_btn_login"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineProvider="background"
-        android:outlineSpotShadowColor="@color/black"
         android:padding="8dp"
         android:text="@string/login"
         android:textAllCaps="false"
@@ -67,9 +64,6 @@
         android:background="@drawable/bg_btn_login"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineProvider="background"
-        android:outlineSpotShadowColor="@color/black"
         android:padding="8dp"
         android:text="@string/register"
         android:textAllCaps="false"
@@ -91,5 +85,5 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
