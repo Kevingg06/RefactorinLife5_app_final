@@ -8,4 +8,14 @@
     <string name="register">Register</string>
     <string name="support_message">En caso de tener problemas comunicarse con soporte</string>
     <string name="show_password">Mostrar contraseña</string>
+
+    <!--login-->
+    <string name="login_title">Iniciar sesión</string>
+    <string name="enter">Entrar</string>
+    <string name="edit_text_password">Contraseña</string>
+    <string name="edit_text_email">Email</string>
+    <string name="registrate_aqui">registrate aqui</string>
+    <string name="register_text">Si no tienes una cuenta,</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
 </resources>
