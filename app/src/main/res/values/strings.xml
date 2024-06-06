@@ -11,7 +11,7 @@
 
     <!--login-->
     <string name="login_title">Iniciar sesión</string>
-    <string name="Login_btn">Entrar</string>
+    <string name="login_btn">Entrar</string>
     <string name="login_password">Contraseña</string>
     <string name="login_email">Email</string>
     <string name="login_register_here">registrate aqui</string>
