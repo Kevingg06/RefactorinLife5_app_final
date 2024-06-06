@@ -24,8 +24,10 @@
 
     <LinearLayout
         android:id="@+id/register_linear_layout_input_text"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margen_estandar"
+        android:layout_marginEnd="@dimen/margen_estandar"
         android:layout_marginTop="80dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +115,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register_button_enter"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
+        android:layout_marginStart="@dimen/margen_estandar"
+        android:layout_marginEnd="@dimen/margen_estandar"
         android:layout_marginTop="60dp"
         android:background="@drawable/bg_btn_login"
         android:contentDescription="@string/register_btn_enter_description"
