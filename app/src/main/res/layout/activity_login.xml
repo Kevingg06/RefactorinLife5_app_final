@@ -117,7 +117,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/login_no_account"
         android:textColor="@color/wet_asphalt"
-        android:textSize="@dimen/little_text_size"
+        android:textSize="@dimen/login_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_btn_enter" />
 
@@ -129,7 +129,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/login_register_here"
         android:textColor="@color/wet_asphalt"
-        android:textSize="@dimen/little_text_size"
+        android:textSize="@dimen/login_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/login_tv_no_account"
         app:layout_constraintTop_toBottomOf="@id/login_btn_enter" />
