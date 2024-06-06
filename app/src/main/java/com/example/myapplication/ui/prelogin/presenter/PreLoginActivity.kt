@@ -13,13 +13,13 @@ class PreLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPreLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.loginButton.setOnClickListener {
-            navigateToLogin()
-        }
+        actions()
     }
 
-    private fun navigateToLogin() {
-        val myIntent = Intent(this, LoginActivity::class.java)
-        startActivity(myIntent)
+    private fun actions() {
+        binding.loginButton.setOnClickListener {
+            val myIntent = Intent(this, LoginActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 }

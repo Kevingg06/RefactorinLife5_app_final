@@ -11,11 +11,9 @@
 
     <!--login-->
     <string name="login_title">Iniciar sesión</string>
-    <string name="enter">Entrar</string>
-    <string name="edit_text_password">Contraseña</string>
-    <string name="edit_text_email">Email</string>
-    <string name="registrate_aqui">registrate aqui</string>
-    <string name="register_text">Si no tienes una cuenta,</string>
-    <string name="email">Email</string>
-    <string name="password">Contraseña</string>
+    <string name="Login_btn">Entrar</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_email">Email</string>
+    <string name="login_register_here">registrate aqui</string>
+    <string name="login_no_account">Si no tienes una cuenta,</string>
 </resources>
