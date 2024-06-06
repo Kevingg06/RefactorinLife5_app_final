@@ -17,7 +17,7 @@ class PreLoginActivity : AppCompatActivity() {
     }
 
     private fun actions() {
-        binding.loginButton.setOnClickListener {
+        binding.loginBtnEnter.setOnClickListener {
             val myIntent = Intent(this, LoginActivity::class.java)
             startActivity(myIntent)
         }
