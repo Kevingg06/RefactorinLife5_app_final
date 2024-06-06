@@ -9,139 +9,129 @@
     android:background="@color/white"
     tools:context=".ui.register.presenter.RegisterActivity">
 
-    <!--Title-->
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/register_text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="@string/register1"
+        android:text="@string/register_tv_title"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linear_layout_input_text"
+        android:id="@+id/register_linear_layout_input_text"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+        app:layout_constraintTop_toBottomOf="@+id/register_text_view_title">
 
-        <!--Input Email-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email_layout"
+            android:id="@+id/register_text_input_layout_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp">
-            <!--Input email-->
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_email"
+                android:id="@+id/register_text_input_edit_text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="15dp"
-                android:ems="10"
-                android:hint="@string/email"
-                android:textSize="@dimen/text_size_16sp"
+                android:hint="@string/register_text_input_email"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp" />
+                android:paddingVertical="12dp"
+                android:textSize="@dimen/text_size_16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Input Password-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_password_layout"
+            android:id="@+id/register_text_input_layout_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
-            <!--Input Confirm Password-->
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_password"
+                android:id="@+id/register_text_input_edit_text_pasword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:drawableStart="@drawable/ic_pwd"
                 android:drawablePadding="15dp"
-                android:ems="10"
-                android:hint="@string/password"
-                android:textSize="@dimen/text_size_16sp"
+                android:hint="@string/register_text_input_password"
                 android:inputType="textPassword"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp" />
+                android:paddingVertical="12dp"
+                android:textSize="@dimen/text_size_16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Checkbox password-->
         <CheckBox
-            android:id="@+id/check_box_password"
+            android:id="@+id/register_check_box_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/show_or_hide_password"
-            android:textSize="@dimen/text_size_12sp"
-            android:text="@string/show_password" />
+            android:contentDescription="@string/register_checkbox_show_password"
+            android:text="@string/pre_login_checkbox_show_password"
+            android:textSize="@dimen/text_size_12sp" />
 
-        <!--Input Confirm Password-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_confirm_password_layout"
+            android:id="@+id/register_text_input_layout_confirm_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_confirm_password"
+                android:id="@+id/register_text_input_edit_text_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input"
                 android:drawableStart="@drawable/ic_pwd"
                 android:drawablePadding="15dp"
-                android:ems="10"
-                android:hint="@string/confirm_password"
-                android:textSize="@dimen/text_size_16sp"
+                android:hint="@string/register_text_input_confirm_password"
                 android:inputType="textPassword"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp" />
+                android:paddingVertical="12dp"
+                android:textSize="@dimen/text_size_16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Checkbox confirm password-->
         <CheckBox
-            android:id="@+id/check_box_confirm_password"
+            android:id="@+id/register_check_box_confirm_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/show_or_hide_confirm_password"
-            android:textSize="@dimen/text_size_12sp"
-            android:text="@string/show_password" />
+            android:contentDescription="@string/register_checkbox_show_confirm_password"
+            android:text="@string/pre_login_checkbox_show_password"
+            android:textSize="@dimen/text_size_12sp" />
     </LinearLayout>
 
-    <!--Btn register-->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/register_button"
+        android:id="@+id/register_button_enter"
         android:layout_width="320dp"
         android:layout_height="54dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/bg_btn_login"
+        android:contentDescription="@string/register_btn_enter_description"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
         android:padding="8dp"
-        android:text="@string/enter"
+        android:text="@string/register_btn_enter"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_14sp"
-        android:contentDescription="@string/register_button_description"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linear_layout_input_text" />
+        app:layout_constraintTop_toBottomOf="@id/register_linear_layout_input_text" />
 
     <LinearLayout
-        android:id="@+id/linear_layout_tv"
+        android:id="@+id/register_linear_layout_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -149,27 +139,27 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/tv_register"
+            android:id="@+id/register_text_view_has_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="@string/has_account"
-            android:textSize="@dimen/text_size_16sp"
+            android:text="@string/register_tv_has_account"
             android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_register_here"
+            android:id="@+id/register_text_view_register_here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/register_here"
+            android:text="@string/register_tv_register_here"
             android:textSize="@dimen/text_size_16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_register" />
+            app:layout_constraintStart_toEndOf="@+id/register_text_view_has_account" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
