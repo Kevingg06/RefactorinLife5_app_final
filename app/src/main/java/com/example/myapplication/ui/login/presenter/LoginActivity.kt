@@ -3,6 +3,7 @@ package com.example.myapplication.ui.login.presenter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.example.myapplication.ui.utils.StringExtensions
 
 class LoginActivity : AppCompatActivity() {
 
