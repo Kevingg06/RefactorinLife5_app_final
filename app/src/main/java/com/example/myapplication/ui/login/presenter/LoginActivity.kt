@@ -1,12 +1,11 @@
 package com.example.myapplication.ui.login.presenter
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.Observer
 import com.example.myapplication.databinding.ActivityLoginBinding
-import com.example.myapplication.ui.LoginViewModel
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
         actions()
         setButtonState()
+        setCheckBoxStatus()
     }
 
     private fun actions() {
@@ -37,11 +37,26 @@ class LoginActivity : AppCompatActivity() {
                 binding.loginInputPassword.text.toString()
             )
         }
+
+        binding.loginCheckboxPassword.setOnCheckedChangeListener {_, isChecked ->
+            viewModel.setCheckBoxStatus(isChecked)
+        }
     }
 
     private fun setButtonState() {
-        viewModel.validateFields.observe(this, Observer { isEnabled ->
+        viewModel.validateFields.observe(this) { isEnabled ->
             binding.loginBtnEnter.isEnabled = isEnabled
-        })
+        }
     }
+
+    private fun setCheckBoxStatus() {
+        viewModel.checkBoxState.observe(this) { checkBoxStatus ->
+            if (checkBoxStatus) {
+                binding.loginInputPassword.transformationMethod = null
+            } else {
+                binding.loginInputPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+        }
+    }
+
 }

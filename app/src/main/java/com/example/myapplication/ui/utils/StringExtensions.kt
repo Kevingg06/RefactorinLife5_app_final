@@ -8,7 +8,8 @@ fun String?.isValidPassword(): Boolean {
     val lowercaseRegex = ".*[a-z].*".toRegex()
 
     return when {
-        this.isNullOrEmpty() -> false
+
+        this.isNullOrBlank() -> false
 
         this.length < 8 || this.length > 20 -> false
 
@@ -27,7 +28,7 @@ fun String?.isValidPassword(): Boolean {
 
 fun String?.isValidEmail(): Boolean {
     val regex = "^[a-z0-9+_.-]+@[a-z.-]+\\.[a-z0-9]{2,}$".toRegex()
-    return if (this.isNullOrEmpty()) {
+    return if (this.isNullOrBlank()) {
         false
     } else {
         this.matches(regex)
