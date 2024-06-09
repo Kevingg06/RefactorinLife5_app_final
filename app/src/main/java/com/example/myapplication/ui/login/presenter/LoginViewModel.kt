@@ -20,5 +20,4 @@ class LoginViewModel : ViewModel() {
     fun setCheckBoxStatus(checkBoxStatus : Boolean){
         _checkBoxState.postValue(checkBoxStatus)
     }
-
 }
