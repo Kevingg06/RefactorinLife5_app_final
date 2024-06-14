@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#7353BA</color>
     <color name="sapphire_blue">#5DADE2</color>
-    <color name="wt_asphalt">#34495E</color>
+    <color name="wet_asphalt">#34495E</color>
+    <color name="disabled_button_gray">#D9D9D9</color>
 </resources>
