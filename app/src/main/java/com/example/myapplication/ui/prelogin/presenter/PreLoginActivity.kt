@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 
 class PreLoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPreLoginBinding
+    private lateinit var binding : ActivityPreLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPreLoginBinding.inflate(layoutInflater)
