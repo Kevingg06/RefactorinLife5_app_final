@@ -16,6 +16,9 @@
             android:name=".ui.login.presenter.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.register.presenter.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.prelogin.presenter.PreLoginActivity"
             android:exported="true">
             <intent-filter>
