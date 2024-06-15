@@ -25,6 +25,7 @@
     <string name="login_btn">Entrar</string>
     <string name="login_password">Contraseña</string>
     <string name="login_email">Email</string>
+    <string name="login_checkbox_show_password">Mostrar contraseña</string>
     <string name="login_register_here">registrate aqui</string>
     <string name="login_no_account">Si no tienes una cuenta,</string>
     <string name="register_error">Error en el usuario o contraseña!</string>
