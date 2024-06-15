@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
+import com.example.myapplication.ui.register.presenter.RegisterActivity
 
 class PreLoginActivity : AppCompatActivity() {
 
@@ -20,6 +21,11 @@ class PreLoginActivity : AppCompatActivity() {
     private fun actions() {
         binding.loginBtnEnter.setOnClickListener {
             val myIntent = Intent(this, LoginActivity::class.java)
+            startActivity(myIntent)
+        }
+
+        binding.registerButtonEnter.setOnClickListener(){
+            val myIntent = Intent(this, RegisterActivity::class.java)
             startActivity(myIntent)
         }
     }
