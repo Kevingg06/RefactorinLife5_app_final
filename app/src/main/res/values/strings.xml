@@ -2,6 +2,7 @@
     <string name="app_name">My Application</string>
 
     <!--pre_login-->
+
     <string name="pre_login_tv_title">Refactoring Life \nAcademy</string>
     <string name="pre_login_text_view_description">Refactoring Life</string>
     <string name="pre_login_btn_login">Iniciar sesión</string>
@@ -18,4 +19,13 @@
     <string name="register_btn_enter">Entrar</string>
     <string name="register_tv_no_account">Si no tienes una cuenta,</string>
     <string name="register_register_here">registrate aqui</string>
+
+    <!--login-->
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_btn">Entrar</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_email">Email</string>
+    <string name="login_register_here">registrate aqui</string>
+    <string name="login_no_account">Si no tienes una cuenta,</string>
+
 </resources>
