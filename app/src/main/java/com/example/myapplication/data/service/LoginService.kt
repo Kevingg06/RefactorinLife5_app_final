@@ -1,7 +1,7 @@
-package com.example.myapplication.ui.data.service
+package com.example.myapplication.data.service
 
-import com.example.myapplication.ui.data.dto.request.LoginRequest
-import com.example.myapplication.ui.data.dto.response.LoginResponse
+import com.example.myapplication.data.dto.request.LoginRequest
+import com.example.myapplication.data.dto.response.LoginResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,7 +9,7 @@ import retrofit2.create
 
 class LoginService {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.com")
+        .baseUrl("https://api-users-c9xg.onrender.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
