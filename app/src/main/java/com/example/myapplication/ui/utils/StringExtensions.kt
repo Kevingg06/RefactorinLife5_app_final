@@ -34,3 +34,7 @@ fun String?.isValidEmail(): Boolean {
         this.matches(regex)
     }
 }
+
+fun String?.isConfirmedPassword(confirmPassword: String?): Boolean {
+    return this == confirmPassword
+}

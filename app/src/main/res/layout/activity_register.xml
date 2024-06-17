@@ -133,12 +133,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/register_linearLayout_textInput" />
 
+    <TextView
+        android:id="@+id/register_tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/tv_error_message"
+        android:textColor="@color/red_error"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_cb_confirm_password" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register_btn_enter"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/bg_button_selector"
         android:elevation="10dp"
@@ -150,7 +164,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_cb_confirm_password"
+        app:layout_constraintTop_toBottomOf="@id/register_tv_error_message"
         android:enabled="false" />
 
     <LinearLayout
@@ -168,7 +182,6 @@
             android:text="@string/register_tv_yes_account"
             android:textColor="@color/wet_asphalt"
             android:textSize="@dimen/text_size_medium" />
-
 
         <TextView
             android:id="@+id/register_tv_login_here"
