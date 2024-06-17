@@ -169,6 +169,7 @@
             android:textColor="@color/wet_asphalt"
             android:textSize="@dimen/text_size_medium" />
 
+
         <TextView
             android:id="@+id/register_tv_login_here"
             android:layout_width="wrap_content"

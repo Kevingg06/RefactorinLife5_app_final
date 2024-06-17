@@ -9,7 +9,8 @@ import com.example.myapplication.ui.register.presenter.RegisterActivity
 
 class PreLoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPreLoginBinding
+    private lateinit var binding : ActivityPreLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPreLoginBinding.inflate(layoutInflater)
