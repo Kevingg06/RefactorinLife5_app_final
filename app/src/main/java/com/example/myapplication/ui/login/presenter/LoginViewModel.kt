@@ -1,11 +1,22 @@
 package com.example.myapplication.ui.login.presenter
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.dto.model.StateLogin
+import com.example.myapplication.data.dto.request.LoginRequest
+import com.example.myapplication.data.repository.UserRepository
+import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.ui.utils.isValidEmail
 import com.example.myapplication.ui.utils.isValidPassword
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(private val repository: UserRepository = UserRepository()) : ViewModel() {
+
+    private val _data = MutableLiveData<StateLogin>()
+    val data: LiveData<StateLogin> = _data
 
     private val _validateFields = MutableLiveData<Boolean>()
     val validateFields = _validateFields
@@ -17,7 +28,20 @@ class LoginViewModel : ViewModel() {
         _validateFields.postValue(email.isValidEmail() && password.isValidPassword())
     }
 
-    fun setCheckBoxStatus(checkBoxStatus : Boolean){
+    fun setCheckBoxStatus(checkBoxStatus: Boolean) {
         _checkBoxState.postValue(checkBoxStatus)
+    }
+
+    fun login(email: String, password: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.login(LoginRequest(email, password))
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _data.postValue(StateLogin.Success(it))
+                } ?: _data.postValue(StateLogin.Error(Constants.LOGIN_FAILED))
+            } else {
+                _data.postValue(StateLogin.Error(Constants.NETWORK_ERROR))
+            }
+        }
     }
 }
