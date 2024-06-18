@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
+import com.example.myapplication.ui.register.presenter.RegisterActivity
 
 class PreLoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPreLoginBinding
+    private lateinit var binding : ActivityPreLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPreLoginBinding.inflate(layoutInflater)
@@ -18,8 +20,13 @@ class PreLoginActivity : AppCompatActivity() {
 
     private fun actions() {
         binding.loginBtnEnter.setOnClickListener {
-            val myIntent = Intent(this, LoginActivity::class.java)
-            startActivity(myIntent)
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+        binding.registerBtnEnter.setOnClickListener {
+            val registerIntent = Intent(this, RegisterActivity::class.java)
+            startActivity(registerIntent)
         }
     }
+
 }

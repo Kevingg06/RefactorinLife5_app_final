@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        binding.loginCheckboxPassword.setOnCheckedChangeListener { _, isChecked ->
+        binding.loginCbPassword.setOnCheckedChangeListener {_, isChecked ->
             viewModel.setCheckBoxStatus(isChecked)
         }
 

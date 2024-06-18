@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="login_text_size">17sp</dimen>
+    <!-- Text sizes -->
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_medium">17sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_title_pre_login">26sp</dimen>
+    <dimen name="text_size_title_login">40sp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_standard">9dp</dimen>
+    <dimen name="padding_horizontal">8dp</dimen>
+    <dimen name="padding_vertical">12dp</dimen>
+    <dimen name="padding_drawable">19dp</dimen>
 </resources>

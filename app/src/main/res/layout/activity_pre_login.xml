@@ -10,78 +10,78 @@
 
     <!--Icon RL-->
     <ImageView
-        android:id="@+id/logo_image_view"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/pre_login_iv_logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="24dp"
-        android:contentDescription="@string/ic_logo_rl"
+        android:contentDescription="@string/pre_login_tv_description"
         android:src="@drawable/ico_logo_rl"
-        app:layout_constraintBottom_toTopOf="@id/app_title_text_view"
+        app:layout_constraintBottom_toTopOf="@id/pre_login_tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--Title-->
     <TextView
-        android:id="@+id/app_title_text_view"
+        android:id="@+id/pre_login_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/refactoring_life"
+        android:text="@string/pre_login_tv_title"
         android:textAlignment="center"
         android:textColor="@color/purple"
-        android:textSize="26sp"
+        android:textSize="@dimen/text_size_title_pre_login"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/login_btn_enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/pre_login_iv_logo" />
 
     <!--Btn login-->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_btn_enter"
         android:layout_width="284dp"
         android:layout_height="48dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="150dp"
         android:background="@drawable/bg_btn_login_enabled"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
         android:padding="8dp"
-        android:text="@string/login"
+        android:text="@string/pre_login_btn_login"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_title_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/pre_login_tv_title" />
 
     <!--Btn register-->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/register_button"
+        android:id="@+id/register_btn_enter"
         android:layout_width="284dp"
         android:layout_height="48dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/bg_btn_login_enabled"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
         android:padding="8dp"
-        android:text="@string/register"
+        android:text="@string/pre_login_btn_register"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_btn_enter" />
 
     <TextView
-        android:id="@+id/help_text_view"
+        android:id="@+id/pre_login_tv_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:text="@string/support_message"
+        android:layout_marginBottom="27dp"
+        android:text="@string/pre_login_tv_support_message"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
