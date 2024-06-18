@@ -2,12 +2,11 @@ package com.example.myapplication.ui.login.presenter
 
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.databinding.ActivityLoginBinding
-import com.example.myapplication.data.dto.model.StateLoginViewModel
+import com.example.myapplication.data.dto.model.StateLogin
 
 
 class LoginActivity : AppCompatActivity() {
@@ -63,29 +62,23 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
-        //        falta componente de progressBar en el diseño
-        //        binding.loadingScreen.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        //        falta componente de progressBar en el diseño
-        //        binding.loadingScreen.visibility = View.GONE
     }
 
     private fun observerLogin() {
         viewModel.data.observe(this) { data ->
             when (data) {
-                is StateLoginViewModel.Success -> {
+                is StateLogin.Success -> {
                     hideLoading()
-                    Toast.makeText(this,"Exito: " + data.info.accessToken, Toast.LENGTH_SHORT).show()
                 }
 
-                is StateLoginViewModel.Loading -> {
+                is StateLogin.Loading -> {
                     showLoading()
                 }
 
-                is StateLoginViewModel.Error -> {
-                    Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+                is StateLogin.Error -> {
                 }
             }
         }
@@ -96,7 +89,8 @@ class LoginActivity : AppCompatActivity() {
             if (checkBoxStatus) {
                 binding.loginInputPassword.transformationMethod = null
             } else {
-                binding.loginInputPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.loginInputPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
             }
         }
     }

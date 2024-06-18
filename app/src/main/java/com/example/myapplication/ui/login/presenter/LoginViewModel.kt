@@ -3,19 +3,20 @@ package com.example.myapplication.ui.login.presenter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.data.dto.model.StateLoginViewModel
+import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.data.dto.request.LoginRequest
-import com.example.myapplication.data.repository.LoginRepository
+import com.example.myapplication.data.repository.UserRepository
+import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.ui.utils.isValidEmail
 import com.example.myapplication.ui.utils.isValidPassword
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: LoginRepository = LoginRepository()) : ViewModel() {
+class LoginViewModel(private val repository: UserRepository = UserRepository()) : ViewModel() {
 
-    private val _data = MutableLiveData<StateLoginViewModel>()
-    val data: LiveData<StateLoginViewModel> = _data
+    private val _data = MutableLiveData<StateLogin>()
+    val data: LiveData<StateLogin> = _data
 
     private val _validateFields = MutableLiveData<Boolean>()
     val validateFields = _validateFields
@@ -27,19 +28,19 @@ class LoginViewModel(private val repository: LoginRepository = LoginRepository()
         _validateFields.postValue(email.isValidEmail() && password.isValidPassword())
     }
 
-    fun setCheckBoxStatus(checkBoxStatus : Boolean){
+    fun setCheckBoxStatus(checkBoxStatus: Boolean) {
         _checkBoxState.postValue(checkBoxStatus)
     }
 
-    fun login(email: String, password: String){
+    fun login(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.login(LoginRequest(email,password))
+            val response = repository.login(LoginRequest(email, password))
             if (response.isSuccessful) {
                 response.body()?.let {
-                    _data.postValue(StateLoginViewModel.Success(it))
-                } ?: _data.postValue(StateLoginViewModel.Error("No data"))
+                    _data.postValue(StateLogin.Success(it))
+                } ?: _data.postValue(StateLogin.Error(Constants.LOGIN_FAILED))
             } else {
-                _data.postValue(StateLoginViewModel.Error("Service error"))
+                _data.postValue(StateLogin.Error(Constants.NETWORK_ERROR))
             }
         }
     }
