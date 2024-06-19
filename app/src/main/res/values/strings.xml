@@ -9,15 +9,16 @@
     <string name="pre_login_tv_support_message">En caso de tener problemas comunicarse con soporte</string>
 
     <!--login - register-->
-    <string name="login_tv_title">Iniciar sesión</string>
-    <string name="register_tv_title">Registrarse</string>
     <string name="tie_email">Email</string>
     <string name="tie_password">Contraseña</string>
     <string name="tie_confirm_password">Confirmar contraseña</string>
     <string name="cb_show_password">Mostrar contraseña</string>
     <string name="btn_enter">Entrar</string>
-    <string name="login_tv_no_account">Si no tienes una cuenta,</string>
-    <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
+    <string name="tv_error_message">Error en el usuario o contraseña!</string>
+    <string name="login_tv_title">Iniciar sesión</string>
     <string name="login_tv_register_here">registrate aquí</string>
+    <string name="login_tv_no_account">Si no tienes una cuenta,</string>
+    <string name="register_tv_title">Registrarse</string>
+    <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
     <string name="register_tv_login_here">inicia sesión aquí</string>
 </resources>
