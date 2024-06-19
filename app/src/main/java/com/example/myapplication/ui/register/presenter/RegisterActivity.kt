@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.register.presenter
 
 import RegisterViewModel
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.databinding.ActivityRegisterBinding
+import com.example.myapplication.ui.login.presenter.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -22,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         actions()
         setButtonState()
         observeErrorMessage()
+        setLoginRedirection()
     }
 
     private fun actions() {
@@ -57,7 +60,6 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.setCheckBoxConfirmPasswordStatus(isChecked)
         }
 
-        // Observador para el estado del CheckBox de Password
         viewModel.checkBoxPasswordState.observe(this) { checkBoxStatus ->
             if (checkBoxStatus) {
                 binding.registerInputPassword.transformationMethod = null
@@ -66,7 +68,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Observador para el estado del CheckBox de Confirm Password
         viewModel.checkBoxConfirmPasswordState.observe(this) { checkBoxStatus ->
             if (checkBoxStatus) {
                 binding.registerInputConfirmPassword.transformationMethod = null
@@ -90,6 +91,12 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 binding.registerTvErrorMessage.visibility = TextView.GONE
             }
+        }
+    }
+    private fun setLoginRedirection() {
+        binding.registerTvLoginHere.setOnClickListener {
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
         }
     }
 }
