@@ -21,4 +21,10 @@
     <string name="register_tv_title">Registrarse</string>
     <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
     <string name="register_tv_login_here">inicia sesión aquí</string>
+    <string name="home_icon_description">Icono de la app</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_sv_hint">Busca en Refactoring Life Shop</string>
+    <string name="home_heart_icon_description">Favoritos</string>
+    <string name="home_item_rv_description">Producto</string>
 </resources>
