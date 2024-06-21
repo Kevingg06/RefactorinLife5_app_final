@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.37" />
 
     <LinearLayout
         android:id="@+id/header_home"
@@ -33,9 +33,9 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="5dp"
                 android:contentDescription="@string/home_icon_description"
                 android:src="@drawable/icon"
@@ -47,9 +47,9 @@
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/sv_home"
                 android:layout_width="250dp"
-                android:layout_height="35dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:background="@drawable/bg_sv_home"
                 app:iconifiedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:contentDescription="@string/home_heart_icon_description"
                 android:src="@drawable/icon_heart"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,7 +74,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_categories_home"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_rv_categories_home" />
@@ -83,11 +84,138 @@
             android:id="@+id/rv_recommendations_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_rv_recommendations" />
 
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/bg_layout_main_sale"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintTop_toTopOf="@+id/guideLine_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_main_sale"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_add_favorites"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/home_heart_icon_description"
+                android:src="@drawable/icon_favorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_main_sale"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:contentDescription="@string/product_image_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_main_sale"
+            app:layout_constraintTop_toBottomOf="@+id/header_main_sale" />
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:maxLines="1"
+            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:text="Rusty"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bottom_main_sale" />
+
+        <TextView
+            android:id="@+id/product_description"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:text="Buzo canguro capucha con cordon"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:maxLines="1"
+            android:paddingStart="25dp"
+            android:paddingEnd="15dp"
+            android:text="$52.000"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/support_message_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/support_message"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
