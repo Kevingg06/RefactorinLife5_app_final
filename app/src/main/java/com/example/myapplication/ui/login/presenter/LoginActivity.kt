@@ -10,8 +10,6 @@ import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.ui.register.presenter.RegisterActivity
 import com.example.myapplication.data.dto.model.StateLogin
 
-
-
 class LoginActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<LoginViewModel>()
@@ -26,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         setButtonState()
         setCheckBoxStatus()
         setRegisterRedirection()
+        observerLogin()
     }
 
     private fun actions() {
@@ -49,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginBtnEnter.setOnClickListener {
             sendLogin()
-            observerLogin()
         }
     }
 
