@@ -27,6 +27,11 @@ class PreLoginActivity : AppCompatActivity() {
             val registerIntent = Intent(this, RegisterActivity::class.java)
             startActivity(registerIntent)
         }
+
+        binding.registerButtonEnter.setOnClickListener(){
+            val myIntent = Intent(this, RegisterActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
 }
