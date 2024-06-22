@@ -153,7 +153,7 @@
             android:id="@+id/register_tv_no_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_tv_no_account"
+            android:text="@string/register_tv_yes_account"
             android:textColor="@color/wet_asphalt"
             android:textSize="17sp"/>
 
@@ -162,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="@string/register_register_here"
+            android:text="@string/register_tv_login_here"
             android:textColor="@color/wet_asphalt"
             android:textSize="17sp"
             android:textStyle="bold"/>

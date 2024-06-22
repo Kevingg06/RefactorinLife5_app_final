@@ -17,8 +17,8 @@
     <string name="register_confirm_password">Confirmar contraseña</string>
     <string name="register_checkbox_show_password">Mostrar contraseña</string>
     <string name="register_btn_enter">Entrar</string>
-    <string name="register_tv_no_account">Si no tienes una cuenta,</string>
-    <string name="register_register_here">registrate aqui</string>
+    <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
+    <string name="register_tv_login_here">inicia sesión aquí</string>
 
     <!--login-->
     <string name="login_title">Iniciar sesión</string>
