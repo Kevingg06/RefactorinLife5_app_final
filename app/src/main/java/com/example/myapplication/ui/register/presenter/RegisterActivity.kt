@@ -7,6 +7,7 @@ import android.text.method.PasswordTransformationMethod
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.databinding.ActivityLoginBinding
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
@@ -20,7 +21,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         actions()
         setButtonState()
         observeErrorMessage()

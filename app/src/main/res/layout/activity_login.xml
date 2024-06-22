@@ -83,8 +83,8 @@
         android:id="@+id/login_cb_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:text="@string/cb_show_password"
+        android:layout_marginStart="34dp"
+        android:text="@string/login_checkbox_show_password"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_linearLayout_inputText" />
