@@ -35,5 +35,6 @@
     <string name="login_checkbox_show_password">Mostrar contraseña</string>
     <string name="login_register_here">registrate aqui</string>
     <string name="login_no_account">Si no tienes una cuenta,</string>
+    <string name="login_error">Error en el usuario o contraseña!</string>
     <string name="register_error">Error en el usuario o contraseña!</string>
 </resources>
