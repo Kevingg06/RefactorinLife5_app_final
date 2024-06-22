@@ -13,6 +13,7 @@
         app:cardCornerRadius="20dp">
 
         <ImageView
+            android:id="@+id/image_product"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:contentDescription="@string/product_image_description"
@@ -23,6 +24,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/name_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -32,6 +34,7 @@
         android:textColor="@color/black" />
 
     <TextView
+        android:id="@+id/price_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
