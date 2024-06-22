@@ -20,8 +20,12 @@ class PreLoginActivity : AppCompatActivity() {
 
     private fun actions() {
         binding.loginBtnEnter.setOnClickListener {
-            val myIntent = Intent(this, LoginActivity::class.java)
-            startActivity(myIntent)
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+        binding.registerBtnEnter.setOnClickListener {
+            val registerIntent = Intent(this, RegisterActivity::class.java)
+            startActivity(registerIntent)
         }
 
         binding.registerButtonEnter.setOnClickListener(){
@@ -29,4 +33,5 @@ class PreLoginActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
     }
+
 }

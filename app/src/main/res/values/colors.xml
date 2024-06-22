@@ -8,4 +8,5 @@
     <color name="disabled_button_gray">#D9D9D9</color>
     <color name="login_red_error">#BF392B</color>
     <color name="register_red_error">#CF6A60</color>
+    <color name="red_error">#C0392B</color>
 </resources>

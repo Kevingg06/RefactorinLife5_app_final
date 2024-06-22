@@ -5,17 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.login.presenter.LoginActivity">
 
     <TextView
         android:id="@+id/login_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="180dp"
-        android:text="@string/login_title"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="120dp"
+        android:text="@string/login_tv_title"
         android:textColor="@color/black"
-        android:textSize="40sp"
+        android:textSize="@dimen/text_size_title_login"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,20 +39,20 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/login_tv_title"
-            tools:layout_editor_absoluteX="16dp">
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/login_tv_title">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_stroke"
-                android:drawableStart="@drawable/login_person"
-                android:drawablePadding="19dp"
-                android:hint="@string/login_email"
+                android:background="@drawable/et_stroke"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="@dimen/padding_drawable"
+                android:hint="@string/tie_email"
                 android:inputType="textEmailAddress"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp" />
+                android:paddingHorizontal="@dimen/padding_horizontal"
+                android:paddingVertical="@dimen/padding_vertical" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Input Password-->
@@ -61,25 +62,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@+id/login_inputText_container_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_stroke"
-                android:drawableStart="@drawable/login_padlock"
-                android:drawablePadding="15dp"
-                android:hint="@string/login_password"
+                android:background="@drawable/et_stroke"
+                android:drawableStart="@drawable/ic_padlock"
+                android:drawablePadding="@dimen/padding_drawable"
+                android:hint="@string/tie_password"
                 android:inputType="textPassword"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp" />
+                android:paddingHorizontal="@dimen/padding_horizontal"
+                android:paddingVertical="@dimen/padding_vertical" />
         </com.google.android.material.textfield.TextInputLayout>
-
     </LinearLayout>
 
     <CheckBox
-        android:id="@+id/login_checkbox_password"
+        android:id="@+id/login_cb_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
@@ -92,47 +93,49 @@
         android:id="@+id/login_btn_enter"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/bg_button_selector"
         android:elevation="10dp"
+        android:enabled="false"
         android:foreground="?attr/selectableItemBackground"
         android:padding="8dp"
-        android:text="@string/login_btn"
+        android:text="@string/btn_enter"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/login_linearLayout_textInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_linearLayout_inputText"
-        android:enabled="false"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/login_linearLayout_textInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn_enter">
+        app:layout_constraintEnd_toEndOf="parent" >
 
         <TextView
             android:id="@+id/login_tv_no_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_no_account"
+            android:text="@string/login_tv_no_account"
             android:textColor="@color/wet_asphalt"
-            android:textSize="@dimen/login_text_size"/>
+            android:textSize="@dimen/text_size_medium"/>
 
         <TextView
             android:id="@+id/login_tv_register_here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="@string/login_register_here"
+            android:text="@string/login_tv_register_here"
             android:textColor="@color/wet_asphalt"
-            android:textSize="@dimen/login_text_size"
+            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
