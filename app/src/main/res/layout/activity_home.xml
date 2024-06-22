@@ -213,10 +213,16 @@
         android:id="@+id/support_message_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/support_message"
         android:layout_marginBottom="5dp"
+        android:text="@string/support_message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/loading_screen"
+        layout="@layout/loading_screen"
+        android:visibility="gone" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
