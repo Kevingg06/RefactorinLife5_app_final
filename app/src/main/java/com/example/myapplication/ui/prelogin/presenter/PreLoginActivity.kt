@@ -12,7 +12,7 @@ import com.example.myapplication.ui.register.presenter.RegisterActivity
 
 class PreLoginActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPreLoginBinding
+    private lateinit var binding: ActivityPreLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,21 +36,24 @@ class PreLoginActivity : AppCompatActivity() {
 //            startActivity(myIntent)
 //        }
 
-        fun communicationSupport(view: View) {
-            val supportEmail = "karen.24.tc@gmail.com"
-            val subject = "Necesito ayuda con la aplicación"
-            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(supportEmail))
-                putExtra(Intent.EXTRA_SUBJECT, subject)
-            }
+    }
+    fun communicationSupport(view: View) {
+        val supportEmail = "karen.24.tc@gmail.com"
+        val subject = "Necesito ayuda con la aplicación"
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(supportEmail))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
 
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "No hay ninguna aplicación de correo instalada.", Toast.LENGTH_SHORT).show()
-            }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Toast.makeText(
+                this,
+                "No hay ninguna aplicación de correo instalada.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
-
 }
