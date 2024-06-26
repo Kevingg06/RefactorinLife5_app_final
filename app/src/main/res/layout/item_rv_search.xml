@@ -22,7 +22,7 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/product_image_description"
-            android:src="@drawable/icon" />
+             />
 
     </androidx.cardview.widget.CardView>
 
@@ -33,7 +33,7 @@
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
         android:maxLines="1"
-        android:text="Rusty"
+
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
@@ -46,7 +46,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:maxLines="1"
-        android:text="Buzo canguro capucha con cordon"
         android:textSize="@dimen/text_size_small"
         app:layout_constraintBottom_toTopOf="@id/item_product_price"
         app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
@@ -60,7 +59,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
         android:maxLines="1"
-        android:text="$ 52.000"
         android:textSize="@dimen/text_size_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/item_cv_product_image" />

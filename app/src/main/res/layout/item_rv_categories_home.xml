@@ -14,8 +14,6 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:paddingEnd="15dp"
-        android:paddingStart="15dp"
-        android:text="Pants"
-        />
+        android:paddingStart="15dp" />
 
 </LinearLayout>
