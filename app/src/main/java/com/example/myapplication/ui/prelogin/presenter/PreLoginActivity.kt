@@ -4,12 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
 import com.example.myapplication.ui.register.presenter.RegisterActivity
-
-private const val SUPPORT_EMAIL = "centro.ayuda.rla@gmail.com"
-private const val SUPPORT_EMAIL_SUBJECT = "Consulta de soporte - RLA"
 
 class PreLoginActivity : AppCompatActivity() {
 
@@ -41,7 +39,9 @@ class PreLoginActivity : AppCompatActivity() {
     }
 
     private fun createEmailIntent(): Intent {
-        val uriText = "mailto:$SUPPORT_EMAIL?subject=${Uri.encode(SUPPORT_EMAIL_SUBJECT)}"
+        val subject = Constants.SUPPORT_EMAIL_SUBJECT
+        val email = Constants.SUPPORT_EMAIL
+        val uriText = "mailto:$email?subject=${Uri.encode(subject)}"
         return Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse(uriText)
         }
