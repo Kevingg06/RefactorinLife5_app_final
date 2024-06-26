@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityLoginBinding
 import androidx.core.widget.addTextChangedListener
+import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
 
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         setButtonState()
         observeErrorMessage()
         setLoginRedirection()
+        observerRegister()
     }
 
     private fun actions() {
@@ -75,11 +77,43 @@ class RegisterActivity : AppCompatActivity() {
                 binding.registerInputConfirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             }
         }
+
+        binding.registerBtnEnter.setOnClickListener {
+            sendRegister()
+        }
     }
 
     private fun setButtonState() {
         viewModel.validateFields.observe(this) { isEnabled ->
             binding.registerBtnEnter.isEnabled = isEnabled
+        }
+    }
+    private fun sendRegister() {
+        val email = binding.registerInputEmail.text.toString()
+        val password = binding.registerInputPassword.text.toString()
+        viewModel.register(email, password)
+    }
+
+    private fun showLoading() {
+    }
+
+    private fun hideLoading() {
+    }
+
+    private fun observerRegister() {
+        viewModel.data.observe(this) { data ->
+            when (data) {
+                is StateRegister.Success -> {
+                    hideLoading()
+                }
+
+                is StateRegister.Loading -> {
+                    showLoading()
+                }
+
+                is StateRegister.Error -> {
+                }
+            }
         }
     }
 
