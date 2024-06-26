@@ -10,4 +10,5 @@
     <color name="register_red_error">#CF6A60</color>
     <color name="red_error">#C0392B</color>
     <color name="gray_home">#F5F5F5</color>
+    <color name="text_color_error">#154360</color>
 </resources>

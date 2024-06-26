@@ -12,4 +12,10 @@
     <dimen name="padding_horizontal">8dp</dimen>
     <dimen name="padding_vertical">12dp</dimen>
     <dimen name="padding_drawable">19dp</dimen>
+    <dimen name="padding_text">15dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin_standard">20dp</dimen>
+    <dimen name="margin_small">15dp</dimen>
+    <dimen name="margin_very_small">10dp</dimen>
 </resources>
