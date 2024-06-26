@@ -3,12 +3,13 @@ package com.example.myapplication.ui.prelogin.presenter
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
 import com.example.myapplication.ui.register.presenter.RegisterActivity
+
+private const val SUPPORT_EMAIL = "centro.ayuda.rla@gmail.com"
+private const val SUPPORT_EMAIL_SUBJECT = "Consulta de soporte - RLA"
 
 class PreLoginActivity : AppCompatActivity() {
 
@@ -23,37 +24,33 @@ class PreLoginActivity : AppCompatActivity() {
 
     private fun actions() {
         binding.loginBtnEnter.setOnClickListener {
-            val loginIntent = Intent(this, LoginActivity::class.java)
-            startActivity(loginIntent)
+            navigateTo(LoginActivity::class.java)
         }
+
         binding.registerBtnEnter.setOnClickListener {
-            val registerIntent = Intent(this, RegisterActivity::class.java)
-            startActivity(registerIntent)
+            navigateTo(RegisterActivity::class.java)
         }
 
-//        binding.registerButtonEnter.setOnClickListener(){
-//            val myIntent = Intent(this, RegisterActivity::class.java)
-//            startActivity(myIntent)
-//        }
-
+        binding.preLoginTvHelp.setOnClickListener {
+            sendSupportEmail()
+        }
     }
-    fun communicationSupport(view: View) {
-        val supportEmail = "karen.24.tc@gmail.com"
-        val subject = "Necesito ayuda con la aplicación"
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:")
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(supportEmail))
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-        }
 
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        } else {
-            Toast.makeText(
-                this,
-                "No hay ninguna aplicación de correo instalada.",
-                Toast.LENGTH_SHORT
-            ).show()
+    private fun navigateTo(clazz: Class<*>) {
+        startActivity(Intent(this, clazz))
+    }
+
+    private fun createEmailIntent(): Intent {
+        val uriText = "mailto:$SUPPORT_EMAIL?subject=${Uri.encode(SUPPORT_EMAIL_SUBJECT)}"
+        return Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(uriText)
         }
+    }
+
+    private fun sendSupportEmail() {
+        val emailIntent = createEmailIntent()
+        startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
     }
 }
+
+
