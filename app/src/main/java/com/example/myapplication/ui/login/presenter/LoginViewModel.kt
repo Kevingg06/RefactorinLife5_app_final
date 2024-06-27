@@ -24,6 +24,13 @@ class LoginViewModel(private val repository: UserRepository = UserRepository()) 
     private val _checkBoxState = MutableLiveData<Boolean>()
     val checkBoxState = _checkBoxState
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+
+    init {
+        _errorMessage.postValue(null)
+    }
+
     fun checkFields(email: String?, password: String?) {
         _validateFields.postValue(email.isValidEmail() && password.isValidPassword())
     }
@@ -34,13 +41,19 @@ class LoginViewModel(private val repository: UserRepository = UserRepository()) 
 
     fun login(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            _data.postValue(StateLogin.Loading)
             val response = repository.login(LoginRequest(email, password))
             if (response.isSuccessful) {
                 response.body()?.let {
                     _data.postValue(StateLogin.Success(it))
-                } ?: _data.postValue(StateLogin.Error(Constants.LOGIN_FAILED))
+                    _errorMessage.postValue(null)
+                } ?: {
+                    _data.postValue(StateLogin.Error(Constants.LOGIN_FAILED))
+                    _errorMessage.postValue(Constants.LOGIN_FAILED)
+                }
             } else {
                 _data.postValue(StateLogin.Error(Constants.NETWORK_ERROR))
+                _errorMessage.postValue(Constants.LOGIN_FAILED)
             }
         }
     }

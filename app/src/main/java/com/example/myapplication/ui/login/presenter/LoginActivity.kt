@@ -3,6 +3,8 @@ package com.example.myapplication.ui.login.presenter
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -24,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         setButtonState()
         setCheckBoxStatus()
         setRegisterRedirection()
+        observeErrorMessage()
         observerLogin()
     }
 
@@ -56,31 +59,28 @@ class LoginActivity : AppCompatActivity() {
             binding.loginBtnEnter.isEnabled = isEnabled
         }
     }
-
     private fun sendLogin() {
         val email = binding.loginInputEmail.text.toString()
         val password = binding.loginInputPassword.text.toString()
         viewModel.login(email, password)
     }
-
     private fun showLoading() {
+        binding.loginRlLoading.visibility = View.VISIBLE
     }
-
     private fun hideLoading() {
+        binding.loginRlLoading.visibility = View.GONE
     }
-
     private fun observerLogin() {
         viewModel.data.observe(this) { data ->
             when (data) {
                 is StateLogin.Success -> {
                     hideLoading()
                 }
-
                 is StateLogin.Loading -> {
                     showLoading()
                 }
-
                 is StateLogin.Error -> {
+                    hideLoading()
                 }
             }
         }
@@ -93,6 +93,17 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 binding.loginInputPassword.transformationMethod =
                     PasswordTransformationMethod.getInstance()
+            }
+        }
+    }
+
+    private fun observeErrorMessage() {
+        viewModel.errorMessage.observe(this) { errorMessage ->
+            if (!errorMessage.isNullOrBlank()) {
+                binding.registerTvErrorMessage.text = errorMessage
+                binding.registerTvErrorMessage.visibility = TextView.VISIBLE
+            } else {
+                binding.registerTvErrorMessage.visibility = TextView.GONE
             }
         }
     }
