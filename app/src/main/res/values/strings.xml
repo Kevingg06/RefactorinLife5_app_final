@@ -27,6 +27,19 @@
     <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
     <string name="register_tv_login_here">inicia sesión aquí</string>
 
+    <!-- Home -->
+    <string name="no_content_message">Perdon, no pudimos encontrar el contenido</string>
+    <string name="retry_message">Reintentar</string>
+    <string name="error_message">Perdón, no pudimos cargar el contenido</string>
+    <string name="error_img_description">Imagen de error</string>
+    <string name="item_rv_btn_text">Ver</string>
+    <string name="home_icon_description">Icono de la app</string>
+    <string name="home_sv_hint">Busca en Refactoring Life Shop</string>
+    <string name="home_heart_icon_description">Favoritos</string>
+    <string name="product_image_description">Producto</string>
+    <string name="support_message">En caso de problemas comunicate con <b>soporte</b></string>
+
+
     <!--login-->
     <string name="login_title">Iniciar sesión</string>
     <string name="login_btn">Entrar</string>
@@ -37,4 +50,5 @@
     <string name="login_no_account">Si no tienes una cuenta,</string>
     <string name="login_error">Error en el usuario o contraseña!</string>
     <string name="register_error">Error en el usuario o contraseña!</string>
+
 </resources>
