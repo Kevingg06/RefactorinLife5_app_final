@@ -2,14 +2,12 @@ package com.example.myapplication.ui.home.presenter
 
 import ProductTypesAdapter
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.R
-import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.data.dto.model.StateProductType
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.databinding.ActivityHomeBinding
@@ -30,10 +28,26 @@ class HomeActivity : AppCompatActivity() {
         }
         getProductTypes()
         observerProductTypes()
+
+        getProducts()
+        getLastUserProduct()
+        getDailyOffer()
     }
 
     private fun getProductTypes(){
         viewModel.getProductTypes()
+    }
+
+    private fun getProducts() {
+        viewModel.getProducts()
+    }
+
+    private fun getLastUserProduct() {
+        viewModel.getLastUserProduct()
+    }
+
+    private fun getDailyOffer() {
+        viewModel.getDailyOffer()
     }
 
     private fun setRecicleView(value: ProductTypesResponse) {

@@ -29,4 +29,43 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             }
         }
     }
+
+    fun getProducts() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getProducts()
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                }
+            } else {
+
+            }
+        }
+    }
+
+    fun getLastUserProduct() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getLastUserProduct()
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                }
+            } else {
+
+            }
+        }
+    }
+
+    fun getDailyOffer() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getDailyOffer()
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                }
+            } else {
+
+            }
+        }
+    }
 }

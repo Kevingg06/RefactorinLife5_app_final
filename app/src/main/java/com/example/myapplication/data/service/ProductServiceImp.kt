@@ -1,6 +1,8 @@
 package com.example.myapplication.data.service
 
+import com.example.myapplication.data.dto.response.ProductResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
+import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -17,5 +19,17 @@ class ProductServiceImp {
 
     suspend fun getProductTypes(): Response<ProductTypesResponse> {
         return service.getProductTypes()
+    }
+
+    suspend fun getProducts(): Response<ProductResponse> {
+        return service.getProducts()
+    }
+
+    suspend fun getLastUserProduct(): Response<SingleProductResponse> {
+        return service.getLastUserProduct()
+    }
+
+    suspend fun getDailyOffer(): Response<SingleProductResponse> {
+        return service.getDailyOffer()
     }
 }
