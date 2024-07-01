@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.R
-import com.example.myapplication.data.dto.model.StateLogin
-import com.example.myapplication.data.dto.model.StateProductType
+import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.databinding.ActivityHomeBinding
 
@@ -40,15 +39,38 @@ class HomeActivity : AppCompatActivity() {
         val adapter = ProductTypesAdapter(value)
         binding.rvCategoriesHome.adapter = adapter
     }
+
+    private fun showLoading(){
+        binding.loadingScreen.rlLoading.visibility = View.VISIBLE
+    }
+    private fun hideLoading(){
+        binding.loadingScreen.rlLoading.visibility = View.GONE
+    }
+
+    private fun showError(){
+        binding.rvRecommendationsHome.visibility = View.GONE
+        binding.rvCategoriesHome.visibility = View.GONE
+        binding.mainSaleLayout.visibility = View.GONE
+        binding.errorLayout.visibility = View.VISIBLE
+    }
+
     private fun observerProductTypes() {
         viewModel.data.observe(this) { data ->
             when (data) {
-                is StateProductType.Success -> {
+                is StateProduct.SuccessProductType -> {
                     setRecicleView(data.info)
                 }
-                is StateProductType.Loading -> {
+                is StateProduct.SuccessProducts -> {
                 }
-                is StateProductType.Error -> {
+                is StateProduct.SuccessLastProduct -> {
+                }
+                is StateProduct.SuccessDailyOffer -> {
+                }
+                is StateProduct.Loading -> {
+                    showLoading()
+                }
+                is StateProduct.Error -> {
+                    showError()
                 }
             }
         }

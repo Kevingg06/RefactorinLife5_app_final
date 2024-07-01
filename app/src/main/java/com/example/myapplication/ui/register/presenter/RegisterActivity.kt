@@ -4,6 +4,7 @@ import RegisterViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.example.myapplication.databinding.ActivityLoginBinding
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.databinding.ActivityRegisterBinding
+import com.example.myapplication.ui.home.presenter.HomeActivity
 import com.example.myapplication.ui.login.presenter.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
@@ -66,7 +68,8 @@ class RegisterActivity : AppCompatActivity() {
             if (checkBoxStatus) {
                 binding.registerInputPassword.transformationMethod = null
             } else {
-                binding.registerInputPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.registerInputPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
             }
         }
 
@@ -74,7 +77,8 @@ class RegisterActivity : AppCompatActivity() {
             if (checkBoxStatus) {
                 binding.registerInputConfirmPassword.transformationMethod = null
             } else {
-                binding.registerInputConfirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.registerInputConfirmPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
             }
         }
 
@@ -88,6 +92,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.registerBtnEnter.isEnabled = isEnabled
         }
     }
+
     private fun sendRegister() {
         val email = binding.registerInputEmail.text.toString()
         val password = binding.registerInputPassword.text.toString()
@@ -95,9 +100,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
+        binding.registerRlLoading.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
+        binding.registerRlLoading.visibility = View.GONE
     }
 
     private fun observerRegister() {
@@ -105,6 +112,7 @@ class RegisterActivity : AppCompatActivity() {
             when (data) {
                 is StateRegister.Success -> {
                     hideLoading()
+                    setHomeRedirection()
                 }
 
                 is StateRegister.Loading -> {
@@ -127,6 +135,12 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun setHomeRedirection() {
+        val homeIntent = Intent(this, HomeActivity::class.java)
+        startActivity(homeIntent)
+    }
+
     private fun setLoginRedirection() {
         binding.registerTvLoginHere.setOnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)

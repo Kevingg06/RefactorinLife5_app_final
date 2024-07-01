@@ -1,6 +1,7 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.data.dto.request.RegisterRequest
 import com.example.myapplication.data.repository.UserRepository
@@ -56,6 +57,7 @@ class RegisterViewModel(private val repository: UserRepository = UserRepository(
 
     fun register(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            _data.postValue(StateRegister.Loading)
             val response = repository.register(RegisterRequest(email, password))
             if (response.isSuccessful) {
                 response.body()?.let {
