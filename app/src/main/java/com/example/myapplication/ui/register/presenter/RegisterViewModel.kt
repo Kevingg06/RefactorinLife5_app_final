@@ -56,6 +56,7 @@ class RegisterViewModel(private val repository: UserRepository = UserRepository(
 
     fun register(email: String, password: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            _data.postValue(StateRegister.Loading)
             val response = repository.register(RegisterRequest(email, password))
             if (response.isSuccessful) {
                 response.body()?.let {

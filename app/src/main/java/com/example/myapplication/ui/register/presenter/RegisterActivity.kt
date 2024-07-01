@@ -4,10 +4,10 @@ import RegisterViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.ActivityLoginBinding
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.databinding.ActivityRegisterBinding
@@ -95,9 +95,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
+        binding.loginRlLoading.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
+        binding.loginRlLoading.visibility = View.GONE
     }
 
     private fun observerRegister() {
