@@ -10,7 +10,7 @@ interface ProductService {
     @GET("/mocks/refactoring-life/refactoring-life/431128877/api/v2/product-types")
     suspend fun getProductTypes(): Response<ProductTypesResponse>
 
-    @GET("/api/v1/products")
+    @GET("/mocks/refactoring-life/refactoring-life/431128877/api/v1/products")
     suspend fun getProducts(): Response<ProductResponse>
 
     @GET("/api/v1/products/lastUserProduct")

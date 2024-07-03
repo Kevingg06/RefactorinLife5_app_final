@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myapplication.R
+import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.model.StateProductType
+import com.example.myapplication.data.dto.response.ProductResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.databinding.ActivityHomeBinding
+import com.example.myapplication.ui.adapter.AdapterProduct
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
@@ -30,6 +33,8 @@ class HomeActivity : AppCompatActivity() {
         observerProductTypes()
 
         getProducts()
+        observerProduct()
+
         getLastUserProduct()
         getDailyOffer()
     }
@@ -63,6 +68,26 @@ class HomeActivity : AppCompatActivity() {
                 is StateProductType.Loading -> {
                 }
                 is StateProductType.Error -> {
+                }
+            }
+        }
+    }
+
+    private fun setRecyclerViewProduct(value: ProductResponse) {
+        val adapter = AdapterProduct(value)
+        binding.rvRecommendationsHome.adapter = adapter
+    }
+    private fun observerProduct() {
+        viewModel.productState.observe(this) { state ->
+            when (state) {
+                is StateProduct.Success -> {
+                    setRecyclerViewProduct(state.info)
+                }
+                is StateProduct.Loading -> {
+
+                }
+                is StateProduct.Error -> {
+
                 }
             }
         }

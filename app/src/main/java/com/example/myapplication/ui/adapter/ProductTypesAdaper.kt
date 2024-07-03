@@ -13,6 +13,7 @@ class ProductTypesAdapter(private val productTypesList: ProductTypesResponse) : 
     }
 
     override fun getItemCount(): Int {
+        //return productTypesList.productTypes?.size ?: 0
         return productTypesList.productTypes?.size ?: 0
     }
 

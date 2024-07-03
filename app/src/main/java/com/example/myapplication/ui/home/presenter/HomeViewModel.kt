@@ -3,6 +3,7 @@ package com.example.myapplication.ui.home.presenter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.model.StateProductType
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
@@ -13,6 +14,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _data = MutableLiveData<StateProductType>()
     val data: LiveData<StateProductType> = _data
+
+    private val _productState = MutableLiveData<StateProduct>()
+    val productState: MutableLiveData<StateProduct> = _productState
 
     fun getProductTypes() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -32,13 +36,15 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
 
     fun getProducts() {
         CoroutineScope(Dispatchers.IO).launch {
+            _productState.postValue(StateProduct.Loading)
             val response = repository.getProducts()
             if (response.isSuccessful) {
                 response.body()?.let {
-
+                } ?: {
+                    _productState.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
                 }
             } else {
-
+                _productState.postValue(StateProduct.Error(Constants.NETWORK_ERROR))
             }
         }
     }
