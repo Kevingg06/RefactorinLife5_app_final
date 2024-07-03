@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.dto.model.StateProduct
+import com.example.myapplication.data.dto.model.StateProductType
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -13,6 +14,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
+
+    private val _productState = MutableLiveData<StateProduct>()
+    val productState: MutableLiveData<StateProduct> = _productState
 
     fun getProductTypes() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -26,6 +30,47 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                 }
             } else {
                 _data.postValue(StateProduct.Error(Constants.NETWORK_ERROR))
+            }
+        }
+    }
+
+    fun getProducts() {
+        CoroutineScope(Dispatchers.IO).launch {
+            _productState.postValue(StateProduct.Loading)
+            val response = repository.getProducts()
+            if (response.isSuccessful) {
+                response.body()?.let {
+                } ?: {
+                    _productState.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
+                }
+            } else {
+                _productState.postValue(StateProduct.Error(Constants.NETWORK_ERROR))
+            }
+        }
+    }
+
+    fun getLastUserProduct() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getLastUserProduct()
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                }
+            } else {
+
+            }
+        }
+    }
+
+    fun getDailyOffer() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getDailyOffer()
+            if (response.isSuccessful) {
+                response.body()?.let {
+
+                }
+            } else {
+
             }
         }
     }
