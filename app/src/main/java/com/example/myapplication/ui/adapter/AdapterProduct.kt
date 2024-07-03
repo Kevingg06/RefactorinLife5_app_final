@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.response.Product
-import com.example.myapplication.data.dto.response.ProductResponse
+import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.databinding.ItemRvRecommendationsBinding
 import com.squareup.picasso.Picasso
 
-class AdapterProduct(private val productList: ProductResponse) : RecyclerView.Adapter<ProductHolder>() {
+class AdapterProduct(private val productList: ProductsResponse) : RecyclerView.Adapter<ProductHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_recommendations, parent, false)
         return ProductHolder(view)

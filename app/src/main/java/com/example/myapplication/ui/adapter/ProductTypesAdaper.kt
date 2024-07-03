@@ -1,3 +1,5 @@
+package com.example.myapplication.ui.adapter
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,6 @@ class ProductTypesAdapter(private val productTypesList: ProductTypesResponse) : 
     }
 
     override fun getItemCount(): Int {
-        //return productTypesList.productTypes?.size ?: 0
         return productTypesList.productTypes?.size ?: 0
     }
 

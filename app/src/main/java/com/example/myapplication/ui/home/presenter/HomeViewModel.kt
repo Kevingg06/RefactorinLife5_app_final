@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.dto.model.StateProduct
-import com.example.myapplication.data.dto.model.StateProductType
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -15,63 +14,49 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
 
-    private val _productState = MutableLiveData<StateProduct>()
-    val productState: MutableLiveData<StateProduct> = _productState
-
-    fun getProductTypes() {
+    fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateProduct.Loading)
-            val response = repository.getProductTypes()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _data.postValue(StateProduct.SuccessProductType(it))
-                } ?: {
-                    _data.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
+
+            val response = repository.getInfoHome()
+
+            response.let { info ->
+                info.productTypes.let {
+                    if (it.isSuccessful) {
+                        _data.postValue(
+                            it.body()?.let { it1 -> StateProduct.SuccessProductType(it1) })
+                    } else {
+                        _data.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
+                    }
                 }
-            } else {
-                _data.postValue(StateProduct.Error(Constants.NETWORK_ERROR))
+
+                info.products.let {
+                    if (it.isSuccessful) {
+                        _data.postValue(it.body()?.let { it1 -> StateProduct.SuccessProducts(it1) })
+                    } else {
+                        _data.postValue(StateProduct.Error(Constants.PRODUCTS_FAILED))
+                    }
+                }
+
+                info.lastUserProduct.let {
+                    if (it.isSuccessful) {
+                        _data.postValue(
+                            it.body()?.let { it1 -> StateProduct.SuccessLastUserProduct(it1) })
+                    } else {
+                        _data.postValue(StateProduct.Error(Constants.LAST_USER_PRODUCT_FAILED))
+                    }
+                }
+
+                info.dailyOffer.let {
+                    if (it.isSuccessful) {
+                        _data.postValue(
+                            it.body()?.let { it1 -> StateProduct.SuccessDailyOffer(it1) })
+                    } else {
+                        _data.postValue(StateProduct.Error(Constants.DAILY_OFFER_FAILED))
+                    }
+                }
             }
         }
     }
 
-    fun getProducts() {
-        CoroutineScope(Dispatchers.IO).launch {
-            _productState.postValue(StateProduct.Loading)
-            val response = repository.getProducts()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                } ?: {
-                    _productState.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
-                }
-            } else {
-                _productState.postValue(StateProduct.Error(Constants.NETWORK_ERROR))
-            }
-        }
-    }
-
-    fun getLastUserProduct() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getLastUserProduct()
-            if (response.isSuccessful) {
-                response.body()?.let {
-
-                }
-            } else {
-
-            }
-        }
-    }
-
-    fun getDailyOffer() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getDailyOffer()
-            if (response.isSuccessful) {
-                response.body()?.let {
-
-                }
-            } else {
-
-            }
-        }
-    }
 }

@@ -1,6 +1,6 @@
 package com.example.myapplication.data.service
 
-import com.example.myapplication.data.dto.response.ProductResponse
+import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
@@ -21,7 +21,7 @@ class ProductServiceImp {
         return service.getProductTypes()
     }
 
-    suspend fun getProducts(): Response<ProductResponse> {
+    suspend fun getProducts(): Response<ProductsResponse> {
         return service.getProducts()
     }
 

@@ -2,7 +2,7 @@ package com.example.myapplication.data.dto.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductResponse(
+data class ProductsResponse(
     @SerializedName("page")
     val page: Int?,
     @SerializedName("size")
