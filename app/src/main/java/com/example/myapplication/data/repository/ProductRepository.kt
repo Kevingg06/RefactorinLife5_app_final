@@ -7,21 +7,6 @@ import com.example.myapplication.data.service.ProductServiceImp
 import retrofit2.Response
 
 class ProductRepository(private val service: ProductServiceImp = ProductServiceImp()) {
-    suspend fun getProductTypes(): Response<ProductTypesResponse> {
-        return service.getProductTypes()
-    }
-
-    suspend fun getProducts(): Response<ProductsResponse> {
-        return service.getProducts()
-    }
-
-    suspend fun getLastUserProduct(): Response<SingleProductResponse> {
-        return service.getLastUserProduct()
-    }
-
-    suspend fun getDailyOffer(): Response<SingleProductResponse> {
-        return service.getDailyOffer()
-    }
 
     suspend fun getInfoHome(): ObjectComplete {
         val resultProductTypes = service.getProductTypes()
@@ -45,6 +30,4 @@ data class ObjectComplete(
     val products: Response<ProductsResponse>,
     val lastUserProduct: Response<SingleProductResponse>,
     val dailyOffer: Response<SingleProductResponse>
-) {
-
-}
+)
