@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.ProductTypesResponse
@@ -25,9 +26,16 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        actions()
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
+    }
+
+    private fun actions() {
+        binding.retryMessage.setOnClickListener {
+            getHomeInfo()
+        }
     }
 
     private fun setupRecyclerViews() {
@@ -38,6 +46,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getHomeInfo() {
+        hideError()
         viewModel.getHomeInfo()
     }
 
@@ -75,6 +84,12 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun hideError() {
+        runOnUiThread {
+            binding.errorLayout.visibility = View.GONE
+        }
+    }
+
     private fun observerHomeInfo() {
         viewModel.data.observe(this) { data ->
             when (data) {
@@ -82,20 +97,25 @@ class HomeActivity : AppCompatActivity() {
                     hideLoading()
                     setRecicleView(data.info)
                 }
+
                 is StateProduct.SuccessProducts -> {
                     hideLoading()
                     setRecyclerViewProduct(data.info)
                 }
+
                 is StateProduct.SuccessLastUserProduct -> {
                     hideLoading()
                 }
+
                 is StateProduct.SuccessDailyOffer -> {
                     hideLoading()
                     setProductDailyOffer(data.info)
                 }
+
                 is StateProduct.Loading -> {
                     showLoading()
                 }
+
                 is StateProduct.Error -> {
                     hideLoading()
                     showError()
@@ -117,7 +137,8 @@ class HomeActivity : AppCompatActivity() {
             Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
+            binding.productPrice.text =
+                "${singleProductResponse.currency} ${singleProductResponse.price}"
         }
     }
 }
