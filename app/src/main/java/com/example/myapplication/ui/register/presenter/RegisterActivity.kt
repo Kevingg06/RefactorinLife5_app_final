@@ -99,11 +99,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
-        binding.loginRlLoading.visibility = View.VISIBLE
+        binding.registerRlLoading.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        binding.loginRlLoading.visibility = View.GONE
+        binding.registerRlLoading.visibility = View.GONE
     }
 
     private fun observerRegister() {
