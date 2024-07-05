@@ -34,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun actions() {
         binding.retryMessage.setOnClickListener {
+            hideError()
             getHomeInfo()
         }
     }
@@ -46,7 +47,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getHomeInfo() {
-        hideError()
         viewModel.getHomeInfo()
     }
 
