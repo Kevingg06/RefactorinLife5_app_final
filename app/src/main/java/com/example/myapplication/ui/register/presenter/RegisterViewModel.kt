@@ -1,6 +1,7 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.data.dto.request.RegisterRequest
 import com.example.myapplication.data.repository.UserRepository

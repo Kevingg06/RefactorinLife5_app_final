@@ -6,6 +6,7 @@ import com.example.myapplication.data.dto.response.LoginResponse
 import com.example.myapplication.data.dto.response.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserService {

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_home"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".ui.home.presenter.HomeActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
@@ -109,7 +109,7 @@
         app:layout_constraintGuide_percent="0.94" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/main_sale_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_standard"
@@ -132,7 +132,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_state_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"

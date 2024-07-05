@@ -209,7 +209,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/login_rl_loading"
+        android:id="@+id/register_rl_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#61000000"
@@ -217,7 +217,7 @@
         android:visibility="gone">
 
         <ProgressBar
-            android:id="@+id/login_pb_loading"
+            android:id="@+id/register_pb_loading"
             android:layout_width="130dp"
             android:layout_height="130dp"/>
 
