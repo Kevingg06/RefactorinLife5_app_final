@@ -17,6 +17,11 @@
         <activity
             android:name=".ui.home.presenter.HomeActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.login.presenter.LoginActivity"
@@ -24,11 +29,7 @@
         <activity
             android:name=".ui.prelogin.presenter.PreLoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.register.presenter.RegisterActivity"
