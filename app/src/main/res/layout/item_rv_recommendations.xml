@@ -18,7 +18,7 @@
             android:layout_height="100dp"
             android:contentDescription="@string/product_image_description"
             android:padding="10dp"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
              />
 
     </androidx.cardview.widget.CardView>
