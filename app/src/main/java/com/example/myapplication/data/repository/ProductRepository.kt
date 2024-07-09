@@ -13,14 +13,12 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
         val resultProducts = service.getProducts()
         val resultLastUserProduct = service.getLastUserProduct()
         val resultDailyOffer = service.getDailyOffer()
-
         val objectComplete = ObjectComplete(
             productTypes = resultProductTypes,
             products = resultProducts,
             lastUserProduct = resultLastUserProduct,
             dailyOffer = resultDailyOffer
         )
-
         return objectComplete
     }
 }
