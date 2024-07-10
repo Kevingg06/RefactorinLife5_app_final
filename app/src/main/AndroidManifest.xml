@@ -23,31 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--            />-->
         <activity
             android:name=".ui.login.presenter.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".ui.prelogin.presenter.PreLoginActivity"
             android:exported="false"/>
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-        <activity
-            android:name=".ui.login.presenter.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.prelogin.presenter.PreLoginActivity"
-            android:exported="true">
-
-        </activity>
         <activity
             android:name=".ui.register.presenter.RegisterActivity"
             android:exported="false" />
     </application>
-
 </manifest>
