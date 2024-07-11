@@ -10,11 +10,45 @@ import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.databinding.ItemRvRecommendationsBinding
 import com.squareup.picasso.Picasso
 
-class AdapterProduct(private val productList: ProductsResponse) : RecyclerView.Adapter<ProductHolder>() {
+//class AdapterProduct(private val productList: ProductsResponse) : RecyclerView.Adapter<ProductHolder>() {
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
+//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_recommendations, parent, false)
+//        return ProductHolder(view)
+//
+//    }
+//
+//    override fun getItemCount(): Int {
+//        return productList.products?.size ?: 0
+//    }
+//
+//    override fun onBindViewHolder(holder: ProductHolder, position: Int) {
+//        //holder.render(productList[position])
+//        val product = productList.products?.get(position)
+//        product?.let {
+//            holder.render(it)
+//        }
+//    }
+//}
+//
+//class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
+//    private val binding = ItemRvRecommendationsBinding.bind(view)
+//
+//    fun render(value: Product) {
+//        val image = value.image
+//        val name = value.name
+//        val price = value.price
+//        Picasso.get().load(image).into(binding.imageProduct)
+//        binding.nameProduct.text = name
+//        binding.priceProduct.text = price
+//    }
+//}
+
+
+class AdapterProduct(private var productList: ProductsResponse) : RecyclerView.Adapter<ProductHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_recommendations, parent, false)
         return ProductHolder(view)
-
     }
 
     override fun getItemCount(): Int {
@@ -22,11 +56,16 @@ class AdapterProduct(private val productList: ProductsResponse) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        //holder.render(productList[position])
         val product = productList.products?.get(position)
         product?.let {
             holder.render(it)
         }
+    }
+
+    fun updateProducts(newProducts: List<Product>) {
+        productList.products?.clear()
+        productList.products?.addAll(newProducts)
+        notifyDataSetChanged()
     }
 }
 
