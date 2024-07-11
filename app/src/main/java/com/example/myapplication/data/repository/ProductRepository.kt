@@ -21,6 +21,10 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
         )
         return objectComplete
     }
+
+    suspend fun updateFavoriteProduct(productId: String): Response<Unit>{
+        return service.updateFavoriteProduct(productId)
+    }
 }
 
 data class ObjectComplete(

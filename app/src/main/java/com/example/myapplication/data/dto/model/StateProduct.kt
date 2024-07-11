@@ -11,4 +11,5 @@ sealed class StateProduct {
     data class SuccessDailyOffer(val info: SingleProductResponse) : StateProduct()
     data class Error(val message: String) : StateProduct()
     data object Loading : StateProduct()
+    data object SuccessFavorites : StateProduct()
 }

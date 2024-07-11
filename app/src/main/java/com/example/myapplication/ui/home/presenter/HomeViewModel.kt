@@ -19,6 +19,9 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
 
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> = _isFavorite
+
     fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateProduct.Loading)
@@ -29,6 +32,23 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             if (!processLastUserProduct(response.lastUserProduct)) return@launch
             if (!processDailyOffer(response.dailyOffer)) return@launch
         }
+    }
+
+    fun setFavorites(id : String){
+        CoroutineScope(Dispatchers.IO).launch {
+            _data.postValue((StateProduct.Loading))
+            val response = repository.updateFavoriteProduct(id)
+
+            if (response.isSuccessful){
+                _data.postValue(StateProduct.SuccessFavorites)
+            }else{
+                _data.postValue(StateProduct.Error(Constants.PRODUCT_NOT_UPDATED))
+            }
+        }
+    }
+
+    fun setFavoriteIcon(isFavoriteProduct: Boolean?){
+        _isFavorite.postValue(isFavoriteProduct ?: false)
     }
 
     private suspend fun processProductTypes(productTypes: Response<ProductTypesResponse>?): Boolean {

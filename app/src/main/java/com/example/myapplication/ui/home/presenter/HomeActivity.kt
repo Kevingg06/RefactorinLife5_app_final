@@ -30,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
+        observeFavorites()
     }
 
     private fun actions() {
@@ -112,6 +113,10 @@ class HomeActivity : AppCompatActivity() {
                     setProductDailyOffer(data.info)
                 }
 
+                is StateProduct.SuccessFavorites -> {
+                    hideLoading()
+                }
+
                 is StateProduct.Loading -> {
                     showLoading()
                 }
@@ -124,10 +129,25 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun observeFavorites() {
+        viewModel.isFavorite.observe(this) { isFavorite ->
+            favoriteButtonIsPressed(isFavorite)
+        }
+    }
+
     private fun setRecyclerViewProduct(value: ProductsResponse) {
         runOnUiThread {
             val adapter = AdapterProduct(value)
             binding.rvRecommendationsHome.adapter = adapter
+        }
+    }
+
+    private fun favoriteButtonIsPressed(isFavorite: Boolean){
+
+        binding.ivAddFavorites.setOnClickListener {
+            setFavoriteIcon(!isFavorite)
+            viewModel.setFavoriteIcon(isFavorite)
+            // hay que pasarle la id viewModel.setFavorites()
         }
     }
 

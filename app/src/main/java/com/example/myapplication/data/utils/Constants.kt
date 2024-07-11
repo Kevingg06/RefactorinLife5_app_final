@@ -10,6 +10,7 @@ object Constants {
     const val PRODUCTS_FAILED = "Error al obtener los productos!"
     const val LAST_USER_PRODUCT_FAILED = "Error al obtener el ultimo producto visitado!"
     const val DAILY_OFFER_FAILED = "Error al obtener la oferta del dia!"
+    const val PRODUCT_NOT_UPDATED = "No se pudo actualizar el producto"
 
     const val DAILY_OFFER_STATE = "Oferta del día"
     const val LAST_USER_PRODUCT_STATE = "Ultimo visitado"
