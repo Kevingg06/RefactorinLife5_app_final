@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".ui.viewItem.presenter.ViewItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.presenter.HomeActivity"
             android:exported="true">
             <intent-filter>
@@ -28,9 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.prelogin.presenter.PreLoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.register.presenter.RegisterActivity"
             android:exported="false" />
