@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.myapplication.data.dto.dataSource.saveToken
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import com.example.myapplication.ui.home.presenter.HomeActivity
@@ -112,6 +113,7 @@ class RegisterActivity : AppCompatActivity() {
                 is StateRegister.Success -> {
                     hideLoading()
                     setHomeRedirection()
+                    saveToken(this, data.info.accessToken)
                 }
 
                 is StateRegister.Loading -> {
@@ -147,4 +149,3 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 }
-
