@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
         viewModel.getHomeInfo()
     }
 
-    private fun setRecicleView(value: ProductTypesResponse) {
+    private fun setRecyclerView(value: ProductTypesResponse) {
         runOnUiThread {
             val adapter = ProductTypesAdapter(value)
             binding.rvCategoriesHome.adapter = adapter
@@ -95,7 +95,7 @@ class HomeActivity : AppCompatActivity() {
             when (data) {
                 is StateProduct.SuccessProductType -> {
                     hideLoading()
-                    setRecicleView(data.info)
+                    setRecyclerView(data.info)
                 }
 
                 is StateProduct.SuccessProducts -> {
@@ -131,14 +131,23 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun setFavoriteIcon(isFavorite: Boolean?) {
+        val favorite = isFavorite ?: false
+        if (favorite) {
+            binding.ivAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
+        } else {
+            binding.ivAddFavorites.setImageResource(R.drawable.icon_favorite)
+        }
+    }
+
     private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
             Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text =
-                "${singleProductResponse.currency} ${singleProductResponse.price}"
+            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
+            setFavoriteIcon(singleProductResponse.isFavorite)
         }
     }
 }

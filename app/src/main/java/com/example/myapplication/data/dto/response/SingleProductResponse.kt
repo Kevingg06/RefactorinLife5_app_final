@@ -16,7 +16,7 @@ data class SingleProductResponse(
     @SerializedName("image")
     val image: String?,
     @SerializedName("isFavorite")
-    val isFavorite: String?,
+    val isFavorite: Boolean?,
     @SerializedName("description")
     val description: String?
 )
