@@ -26,9 +26,17 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        actions()
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
+    }
+
+    private fun actions() {
+        binding.retryMessage.setOnClickListener {
+            hideError()
+            getHomeInfo()
+        }
     }
 
     private fun setupRecyclerViews() {
@@ -73,6 +81,12 @@ class HomeActivity : AppCompatActivity() {
             binding.rvCategoriesHome.visibility = View.GONE
             binding.mainSaleLayout.visibility = View.GONE
             binding.errorLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideError() {
+        runOnUiThread {
+            binding.errorLayout.visibility = View.GONE
         }
     }
 

@@ -24,16 +24,14 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
             _data.postValue(StateProduct.Loading)
             val response = repository.getInfoHome()
 
-            response.let { info ->
-                processProductTypes(info.productTypes)
-                processProducts(info.products)
-                processLastUserProduct(info.lastUserProduct)
-                processDailyOffer(info.dailyOffer)
-            }
+            if (!processProductTypes(response.productTypes)) return@launch
+            if (!processProducts(response.products)) return@launch
+            if (!processLastUserProduct(response.lastUserProduct)) return@launch
+            if (!processDailyOffer(response.dailyOffer)) return@launch
         }
     }
 
-    private suspend fun processProductTypes(productTypes: Response<ProductTypesResponse>?) {
+    private suspend fun processProductTypes(productTypes: Response<ProductTypesResponse>?): Boolean {
         productTypes?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
@@ -41,15 +39,18 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                         _data.postValue(StateProduct.SuccessProductType(body))
                     }
                 }
+                return true
             } else {
                 withContext(Dispatchers.Main) {
                     _data.postValue(StateProduct.Error(Constants.PRODUCT_TYPE_FAILED))
                 }
+                return false
             }
         }
+        return false
     }
 
-    private suspend fun processProducts(products: Response<ProductsResponse>?) {
+    private suspend fun processProducts(products: Response<ProductsResponse>?): Boolean {
         products?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
@@ -57,15 +58,18 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                         _data.postValue(StateProduct.SuccessProducts(body))
                     }
                 }
+                return true
             } else {
                 withContext(Dispatchers.Main) {
                     _data.postValue(StateProduct.Error(Constants.PRODUCTS_FAILED))
                 }
+                return false
             }
         }
+        return false
     }
 
-    private suspend fun processLastUserProduct(lastUserProduct: Response<SingleProductResponse>?) {
+    private suspend fun processLastUserProduct(lastUserProduct: Response<SingleProductResponse>?): Boolean {
         lastUserProduct?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
@@ -73,15 +77,18 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                         _data.postValue(StateProduct.SuccessLastUserProduct(body))
                     }
                 }
+                return true
             } else {
                 withContext(Dispatchers.Main) {
                     _data.postValue(StateProduct.Error(Constants.LAST_USER_PRODUCT_FAILED))
                 }
+                return false
             }
         }
+        return false
     }
 
-    private suspend fun processDailyOffer(dailyOffer: Response<SingleProductResponse>?) {
+    private suspend fun processDailyOffer(dailyOffer: Response<SingleProductResponse>?): Boolean {
         dailyOffer?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
@@ -89,11 +96,14 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                         _data.postValue(StateProduct.SuccessDailyOffer(body))
                     }
                 }
+                return true
             } else {
                 withContext(Dispatchers.Main) {
                     _data.postValue(StateProduct.Error(Constants.DAILY_OFFER_FAILED))
                 }
+                return false
             }
         }
+        return false
     }
 }
