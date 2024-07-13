@@ -34,7 +34,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
     }
 
-    fun setFavorites(id : String){
+    fun setFavorites(id : Int){
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue((StateProduct.Loading))
             val response = repository.updateFavoriteProduct(id)

@@ -22,5 +22,5 @@ interface ProductService {
     suspend fun getDailyOffer(): Response<SingleProductResponse>
 
     @PUT("/mocks/refactoring-life/refactoring-life/431128877/api/v1/products/{idProduct}/favorite")
-    suspend fun updateFavorite(@Path("idProduct") id : String): Response<Unit>
+    suspend fun updateFavorite(@Path("idProduct") id : Int): Response<Unit>
 }

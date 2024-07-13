@@ -33,6 +33,8 @@ class HomeActivity : AppCompatActivity() {
         observeFavorites()
     }
 
+    private var idMainProduct: Int? = null
+
     private fun actions() {
         binding.retryMessage.setOnClickListener {
             hideError()
@@ -49,6 +51,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getHomeInfo() {
         viewModel.getHomeInfo()
+    }
+
+    private fun setFavorite(id: Int?) {
+        if (id != null) {
+            viewModel.setFavorites(id)
+        }
     }
 
     private fun setRecyclerView(value: ProductTypesResponse) {
@@ -111,6 +119,7 @@ class HomeActivity : AppCompatActivity() {
                 is StateProduct.SuccessDailyOffer -> {
                     hideLoading()
                     setProductDailyOffer(data.info)
+                    idMainProduct = data.info.idProduct
                 }
 
                 is StateProduct.SuccessFavorites -> {
@@ -142,12 +151,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun favoriteButtonIsPressed(isFavorite: Boolean){
+    private fun favoriteButtonIsPressed(isFavorite: Boolean) {
 
         binding.ivAddFavorites.setOnClickListener {
             setFavoriteIcon(!isFavorite)
             viewModel.setFavoriteIcon(isFavorite)
-            // hay que pasarle la id viewModel.setFavorites()
+            idMainProduct?.let {
+                setFavorite(idMainProduct)
+            }
         }
     }
 
@@ -166,7 +177,8 @@ class HomeActivity : AppCompatActivity() {
             Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
+            binding.productPrice.text =
+                "${singleProductResponse.currency} ${singleProductResponse.price}"
             setFavoriteIcon(singleProductResponse.isFavorite)
         }
     }

@@ -33,7 +33,7 @@ class ProductServiceImp {
         return service.getDailyOffer()
     }
 
-    suspend fun updateFavoriteProduct(productId: String): Response<Unit>{
+    suspend fun updateFavoriteProduct(productId: Int): Response<Unit>{
         return service.updateFavorite(productId)
     }
 }
