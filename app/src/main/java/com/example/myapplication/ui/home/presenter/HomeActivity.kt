@@ -55,7 +55,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setFavorite(id: Int) {
-            viewModel.setFavorites(id)
+        viewModel.setFavorites(id)
     }
 
     private fun setRecyclerView(value: ProductTypesResponse) {
@@ -143,7 +143,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun initFavoriteButton(){
+    private fun initFavoriteButton() {
         binding.ivAddFavorites.setOnClickListener {
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
