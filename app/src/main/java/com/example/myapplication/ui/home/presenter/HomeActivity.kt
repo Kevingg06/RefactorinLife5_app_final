@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         actions()
-        initFavoriteButton()
+        initFavoriteIcon()
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
@@ -143,11 +143,15 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun initFavoriteButton() {
+    private fun setFavoriteData(iconState: Boolean) {
+        viewModel.setFavoriteData(iconState)
+    }
+
+    private fun initFavoriteIcon() {
         binding.ivAddFavorites.setOnClickListener {
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
-            viewModel.setFavoriteState(currentButtonState)
+            setFavoriteData(currentButtonState)
             idMainProduct?.let {
                 setFavorite(it)
             }
@@ -178,7 +182,10 @@ class HomeActivity : AppCompatActivity() {
             binding.productDescription.text = singleProductResponse.description
             binding.productPrice.text =
                 "${singleProductResponse.currency} ${singleProductResponse.price}"
-            setFavoriteIcon(singleProductResponse.isFavorite)
+
+            singleProductResponse.isFavorite?.let {
+                setFavoriteData(it)
+            }
         }
     }
 }
