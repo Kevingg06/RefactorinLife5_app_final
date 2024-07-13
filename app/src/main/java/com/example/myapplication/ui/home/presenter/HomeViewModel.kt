@@ -47,7 +47,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
     }
 
-    fun setFavoriteIcon(isFavoriteProduct: Boolean?){
+    fun setFavoriteState(isFavoriteProduct: Boolean?){
         _isFavorite.postValue(isFavoriteProduct ?: false)
     }
 
