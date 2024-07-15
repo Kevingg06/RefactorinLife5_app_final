@@ -27,47 +27,43 @@ import com.example.myapplication.databinding.ItemRvCategoriesHomeBinding
 //        } }
 //    }
 //}
-//
-//class ProductTypeHolder(view: View) : RecyclerView.ViewHolder(view) {
-//    private val binding = ItemRvCategoriesHomeBinding.bind(view)
-//    fun render(value : String){
-//        binding.categoryName.text = value
-//
-//        itemView.setOnClickListener {
-//
-//        }
-//    }
-//}
 
 class ProductTypesAdapter(
-    private val productTypesList: ProductTypesResponse,
-    private val onCategoryClick: (ProductType) -> Unit
+    private val productTypes: MutableList<ProductType>?,
+    private val listener: OnCategoryClickListener
 ) : RecyclerView.Adapter<ProductTypeHolder>() {
+    interface OnCategoryClickListener {
+        fun onCategoryClick(category: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductTypeHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_categories_home, parent, false)
-        return ProductTypeHolder(view, onCategoryClick)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_rv_categories_home, parent, false)
+        return ProductTypeHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return productTypesList.productTypes?.size ?: 0
+        return productTypes?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: ProductTypeHolder, position: Int) {
-        productTypesList.productTypes?.get(position)?.let { productType ->
-            holder.bind(productType)
+        productTypes?.get(position)?.let {
+            it.let { it1 ->
+                holder.render(
+                    it1, listener
+                )
+            }
         }
     }
 }
 
-class ProductTypeHolder(view: View, private val onCategoryClick: (ProductType) -> Unit) : RecyclerView.ViewHolder(view) {
+class ProductTypeHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemRvCategoriesHomeBinding.bind(view)
-
-    fun bind(productType: ProductType) {
-        binding.categoryName.text = productType.description
+    fun render(value: ProductType, listener: ProductTypesAdapter.OnCategoryClickListener) {
+        binding.categoryName.text = value.description
 
         itemView.setOnClickListener {
-            onCategoryClick(productType)
+            value.idProductType?.let { it1 -> listener.onCategoryClick(it1) }
         }
     }
 }

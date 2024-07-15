@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductsResponse(
     @SerializedName("page")
-    val page: Int? = null,
+    val page: Int? = 0,
     @SerializedName("size")
-    val size: Int? = null,
+    val size: Int? = 0,
     @SerializedName("totalPages")
-    val totalPages: Int? = null,
+    val totalPages: Int? = 0,
     @SerializedName("totalProducts")
-    val totalProducts: Int? = null,
+    val totalProducts: Int? = 0,
     @SerializedName("products")
     val products: MutableList<Product>? = mutableListOf()
 )
