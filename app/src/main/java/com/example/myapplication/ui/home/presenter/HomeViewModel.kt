@@ -87,25 +87,6 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         return false
     }
 
-    private suspend fun processLastUserProduct(lastUserProduct: Response<SingleProductResponse>?): Boolean {
-        lastUserProduct?.let {
-            if (it.isSuccessful) {
-                it.body()?.let { body ->
-                    withContext(Dispatchers.Main) {
-                        _data.postValue(StateProduct.SuccessLastUserProduct(body))
-                    }
-                }
-                return true
-            } else {
-                withContext(Dispatchers.Main) {
-                    _data.postValue(StateProduct.Error(Constants.LAST_USER_PRODUCT_FAILED))
-                }
-                return false
-            }
-        }
-        return false
-    }
-
     private suspend fun processDailyOffer(dailyOffer: Response<SingleProductResponse>?): Boolean {
         dailyOffer?.let {
             if (it.isSuccessful) {
