@@ -5,21 +5,29 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProduct
+import com.example.myapplication.data.dto.response.Product
+import com.example.myapplication.data.dto.response.ProductType
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
+import com.example.myapplication.data.service.ProductServiceImp
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
-class HomeActivity : AppCompatActivity() {
+
+class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     private lateinit var binding: ActivityHomeBinding
+    private var productsAdapter: AdapterProduct? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -50,9 +58,12 @@ class HomeActivity : AppCompatActivity() {
         viewModel.getHomeInfo()
     }
 
-    private fun setRecyclerView(value: ProductTypesResponse) {
+    private fun setRecicleView(
+        value: MutableList<ProductType>?,
+        listener: ProductTypesAdapter.OnCategoryClickListener
+    ) {
         runOnUiThread {
-            val adapter = ProductTypesAdapter(value)
+            val adapter = ProductTypesAdapter(value, listener)
             binding.rvCategoriesHome.adapter = adapter
         }
     }
@@ -95,12 +106,12 @@ class HomeActivity : AppCompatActivity() {
             when (data) {
                 is StateProduct.SuccessProductType -> {
                     hideLoading()
-                    setRecyclerView(data.info)
+                    setRecicleView(data.info.productTypes, this)
                 }
 
                 is StateProduct.SuccessProducts -> {
                     hideLoading()
-                    setRecyclerViewProduct(data.info)
+                    setRecyclerViewProduct(data.info.products)
                 }
 
                 is StateProduct.SuccessLastUserProduct -> {
@@ -120,14 +131,18 @@ class HomeActivity : AppCompatActivity() {
                     hideLoading()
                     showError()
                 }
+                is StateProduct.FilteredProducts -> {
+                    hideLoading()
+                    updateFilteredProducts(data.products)
+                }
             }
         }
     }
 
-    private fun setRecyclerViewProduct(value: ProductsResponse) {
+    private fun setRecyclerViewProduct(value: MutableList<Product>?) {
         runOnUiThread {
-            val adapter = AdapterProduct(value)
-            binding.rvRecommendationsHome.adapter = adapter
+            productsAdapter = AdapterProduct(value)
+            binding.rvRecommendationsHome.adapter = productsAdapter
         }
     }
 
@@ -146,8 +161,19 @@ class HomeActivity : AppCompatActivity() {
             Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
-            setFavoriteIcon(singleProductResponse.isFavorite)
+            binding.productPrice.text =
+                "${singleProductResponse.currency} ${singleProductResponse.price}"
+        }
+    }
+
+    override fun onCategoryClick(category: Int) {
+        viewModel.filterProductsByCategory(category)
+    }
+
+    private fun updateFilteredProducts(products: MutableList<Product>?) {
+        runOnUiThread {
+            productsAdapter?.updateProducts(products)
+            productsAdapter?.notifyDataSetChanged()
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.dto.model.StateProduct
+import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
@@ -15,9 +16,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
+
 class HomeViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
+
+    private var allProducts: MutableList<Product>? = mutableListOf()
 
     fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -54,6 +58,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         products?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
+                    allProducts = body.products
                     withContext(Dispatchers.Main) {
                         _data.postValue(StateProduct.SuccessProducts(body))
                     }
@@ -106,4 +111,16 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
         return false
     }
+
+    fun filterProductsByCategory(category: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val filteredProducts =
+                allProducts?.filter { it.productType?.idProductType == category }
+                    ?.toMutableList()
+            withContext(Dispatchers.Main) {
+                _data.postValue(filteredProducts?.let { StateProduct.FilteredProducts(it) })
+            }
+        }
+    }
 }
+
