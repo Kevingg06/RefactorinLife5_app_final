@@ -3,7 +3,6 @@ package com.example.myapplication.ui.home.presenter
 import com.example.myapplication.ui.adapter.ProductTypesAdapter
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -169,7 +168,6 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
 
     override fun onCategoryClick(category: Int) {
         viewModel.filterProductsByCategory(category)
-        Toast.makeText(this,category.toString(),Toast.LENGTH_SHORT).show()
     }
 
     private fun updateFilteredProducts(products: MutableList<Product>?) {
