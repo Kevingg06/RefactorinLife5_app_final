@@ -40,5 +40,6 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         Picasso.get().load(image).into(binding.imageProduct)
         binding.nameProduct.text = name
         binding.priceProduct.text = price
+
     }
 }

@@ -106,11 +106,15 @@
         app:layout_constraintGuide_begin="62dp" />
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/NavHostFragment"
+        android:name="com.example.myapplication.ui.imagenes.presenter.ImageFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@+id/viewItem_gl_leftBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/main_graph"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
