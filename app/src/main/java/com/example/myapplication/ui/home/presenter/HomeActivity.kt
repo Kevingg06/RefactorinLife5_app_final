@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.data.dto.dataSource.getToken
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
@@ -18,7 +19,8 @@ import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
-
+    private var idMainProduct: Int? = null
+    private val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcGkgVXNlcnMgU3ViamVjdCIsInJvbGUiOjEsImlzcyI6IkFwaSBVc2VycyIsInVzZXJJZCI6NDYsImlhdCI6MTcyMDkxMzA1NCwianRpIjoiNGQwMjBmZTktMzBiMS00NzZmLWFmNzktZDQ5ZjRiZWM5ZTEzIn0.hY4R-lUD0NyYMeBiuSaVW3XTOENOMa1-rpthfqP_iBU"
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,20 +28,20 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        actions()
-        initFavoriteIcon()
+        actions(token)
+        initFavoriteIcon(token)
         setupRecyclerViews()
-        getHomeInfo()
+        getHomeInfo(token)
         observerHomeInfo()
         observeFavorites()
     }
 
-    private var idMainProduct: Int? = null
-
-    private fun actions() {
+    private fun actions(token: String?) {
         binding.retryMessage.setOnClickListener {
             hideError()
-            getHomeInfo()
+            token?.let {
+                getHomeInfo("Bearer $token")
+            }
         }
     }
 
@@ -50,12 +52,14 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun getHomeInfo() {
-        viewModel.getHomeInfo()
+    private fun getHomeInfo(token: String?) {
+        token?.let {
+            viewModel.getHomeInfo("Bearer $token")
+        }
     }
 
-    private fun setFavorite(id: Int) {
-        viewModel.setFavorites(id)
+    private fun setFavorite(token: String, id: Int) {
+        viewModel.putFavorites(token, id)
     }
 
     private fun setRecyclerView(value: ProductTypesResponse) {
@@ -147,13 +151,15 @@ class HomeActivity : AppCompatActivity() {
         viewModel.setFavoriteData(iconState)
     }
 
-    private fun initFavoriteIcon() {
+    private fun initFavoriteIcon(token: String?) {
         binding.ivAddFavorites.setOnClickListener {
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
             setFavoriteData(currentButtonState)
-            idMainProduct?.let {
-                setFavorite(it)
+            if (token != null) {
+                idMainProduct?.let {
+                    setFavorite("Bearer $token", it)
+                }
             }
         }
     }
@@ -177,11 +183,12 @@ class HomeActivity : AppCompatActivity() {
     private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
-            Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text =
-                "${singleProductResponse.currency} ${singleProductResponse.price}"
+            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
+
+            if(!singleProductResponse.images.isNullOrEmpty())
+                Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)
 
             singleProductResponse.isFavorite?.let {
                 setFavoriteData(it)

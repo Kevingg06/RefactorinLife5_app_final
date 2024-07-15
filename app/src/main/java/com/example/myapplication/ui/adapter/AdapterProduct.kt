@@ -36,7 +36,7 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(value: Product) {
         val image = value.image
         val name = value.name
-        val price = value.price
+        val price = value.price.toString()
         Picasso.get().load(image).into(binding.imageProduct)
         binding.nameProduct.text = name
         binding.priceProduct.text = price
