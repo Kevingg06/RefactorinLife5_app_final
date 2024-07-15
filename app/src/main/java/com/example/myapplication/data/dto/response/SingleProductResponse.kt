@@ -1,5 +1,6 @@
 package com.example.myapplication.data.dto.response
 
+import com.example.myapplication.data.dto.model.Image
 import com.google.gson.annotations.SerializedName
 
 data class SingleProductResponse(
@@ -8,15 +9,24 @@ data class SingleProductResponse(
     @SerializedName("name")
     val name: String?,
     @SerializedName("productType")
-    val productType: ProductType?,
+    val productType: ProductType2?,
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("price")
-    val price: String?,
-    @SerializedName("image")
-    val image: String?,
+    val price: Double?,
+    @SerializedName("images")
+    val images: List<Image>?,
+    @SerializedName("description")
+    val description: String?,
     @SerializedName("isFavorite")
     val isFavorite: Boolean?,
-    @SerializedName("description")
-    val description: String?
+    @SerializedName("dailyOffer")
+    val dailyOffer : Boolean?
+)
+
+data class ProductType2 (
+    @SerializedName("idProductType")
+    val idProductType: Int?,
+    @SerializedName("descripcion")
+    val descripcion: String?
 )

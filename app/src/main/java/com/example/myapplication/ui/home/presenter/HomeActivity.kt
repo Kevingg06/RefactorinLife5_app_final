@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.data.dto.dataSource.getToken
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
@@ -18,24 +19,31 @@ import com.squareup.picasso.Picasso
 
 class HomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
-
+    private var idMainProduct: Int? = null
     private lateinit var binding: ActivityHomeBinding
+    private var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        actions()
+       token = getToken(this)
+
+        actions(token)
+        initFavoriteIcon(token)
         setupRecyclerViews()
-        getHomeInfo()
+        getHomeInfo(token)
         observerHomeInfo()
+        observeFavorites()
     }
 
-    private fun actions() {
+    private fun actions(token: String?) {
         binding.retryMessage.setOnClickListener {
             hideError()
-            getHomeInfo()
+            token?.let {
+                getHomeInfo("Bearer $it")
+            }
         }
     }
 
@@ -46,8 +54,14 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun getHomeInfo() {
-        viewModel.getHomeInfo()
+    private fun getHomeInfo(token: String?) {
+        token?.let {
+            viewModel.getHomeInfo("Bearer $it")
+        }
+    }
+
+    private fun setFavorite(token: String, id: Int) {
+        viewModel.putFavorites(token, id)
     }
 
     private fun setRecyclerView(value: ProductTypesResponse) {
@@ -110,6 +124,11 @@ class HomeActivity : AppCompatActivity() {
                 is StateProduct.SuccessDailyOffer -> {
                     hideLoading()
                     setProductDailyOffer(data.info)
+                    idMainProduct = data.info.idProduct
+                }
+
+                is StateProduct.SuccessFavorites -> {
+                    hideLoading()
                 }
 
                 is StateProduct.Loading -> {
@@ -119,6 +138,29 @@ class HomeActivity : AppCompatActivity() {
                 is StateProduct.Error -> {
                     hideLoading()
                     showError()
+                }
+            }
+        }
+    }
+
+    private fun observeFavorites() {
+        viewModel.isFavorite.observe(this) { isFavorite ->
+            setFavoriteIcon(isFavorite)
+        }
+    }
+
+    private fun setFavoriteData(iconState: Boolean) {
+        viewModel.setFavoriteData(iconState)
+    }
+
+    private fun initFavoriteIcon(token: String?) {
+        binding.ivAddFavorites.setOnClickListener {
+            val buttonState = viewModel.isFavorite.value ?: false
+            val currentButtonState = !buttonState
+            setFavoriteData(currentButtonState)
+            if (token != null) {
+                idMainProduct?.let {
+                    setFavorite("Bearer $token", it)
                 }
             }
         }
@@ -143,11 +185,16 @@ class HomeActivity : AppCompatActivity() {
     private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
-            Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
             binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
-            setFavoriteIcon(singleProductResponse.isFavorite)
+
+            if(!singleProductResponse.images.isNullOrEmpty())
+                Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)
+
+            singleProductResponse.isFavorite?.let {
+                setFavoriteData(it)
+            }
         }
     }
 }

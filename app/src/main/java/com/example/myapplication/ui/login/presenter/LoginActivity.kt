@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.myapplication.data.dto.dataSource.saveToken
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.ui.register.presenter.RegisterActivity
 import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.ui.home.presenter.HomeActivity
+import com.example.myapplication.ui.prelogin.presenter.PreLoginActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        binding.loginCbPassword.setOnCheckedChangeListener {_, isChecked ->
+        binding.loginCbPassword.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setCheckBoxStatus(isChecked)
         }
 
@@ -60,23 +62,28 @@ class LoginActivity : AppCompatActivity() {
             binding.loginBtnEnter.isEnabled = isEnabled
         }
     }
+
     private fun sendLogin() {
         val email = binding.loginInputEmail.text.toString()
         val password = binding.loginInputPassword.text.toString()
         viewModel.login(email, password)
     }
+
     private fun showLoading() {
         binding.loginRlLoading.visibility = View.VISIBLE
     }
+
     private fun hideLoading() {
         binding.loginRlLoading.visibility = View.GONE
     }
+
     private fun observerLogin() {
         viewModel.data.observe(this) { data ->
             when (data) {
                 is StateLogin.Success -> {
                     hideLoading()
                     setHomeRedirection()
+                    saveToken(this, data.info.accessToken)
                 }
 
                 is StateLogin.Loading -> {
