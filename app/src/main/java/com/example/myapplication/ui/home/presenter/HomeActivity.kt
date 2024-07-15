@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductType
@@ -146,6 +147,15 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         }
     }
 
+    private fun setFavoriteIcon(isFavorite: Boolean?) {
+        val favorite = isFavorite ?: false
+        if (favorite) {
+            binding.ivAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
+        } else {
+            binding.ivAddFavorites.setImageResource(R.drawable.icon_favorite)
+        }
+    }
+
     private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
@@ -159,6 +169,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
 
     override fun onCategoryClick(category: Int) {
         viewModel.filterProductsByCategory(category)
+        Toast.makeText(this,category.toString(),Toast.LENGTH_SHORT).show()
     }
 
     private fun updateFilteredProducts(products: MutableList<Product>?) {

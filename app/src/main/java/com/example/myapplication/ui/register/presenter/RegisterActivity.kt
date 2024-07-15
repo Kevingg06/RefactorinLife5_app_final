@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.ActivityLoginBinding
 import androidx.core.widget.addTextChangedListener
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.databinding.ActivityRegisterBinding
