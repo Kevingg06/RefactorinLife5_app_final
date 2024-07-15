@@ -20,13 +20,15 @@ import com.squareup.picasso.Picasso
 class HomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
     private var idMainProduct: Int? = null
-    private val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcGkgVXNlcnMgU3ViamVjdCIsInJvbGUiOjEsImlzcyI6IkFwaSBVc2VycyIsInVzZXJJZCI6NDYsImlhdCI6MTcyMDkxMzA1NCwianRpIjoiNGQwMjBmZTktMzBiMS00NzZmLWFmNzktZDQ5ZjRiZWM5ZTEzIn0.hY4R-lUD0NyYMeBiuSaVW3XTOENOMa1-rpthfqP_iBU"
     private lateinit var binding: ActivityHomeBinding
+    private var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+       token = getToken(this)
 
         actions(token)
         initFavoriteIcon(token)
@@ -40,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
         binding.retryMessage.setOnClickListener {
             hideError()
             token?.let {
-                getHomeInfo("Bearer $token")
+                getHomeInfo("Bearer $it")
             }
         }
     }
@@ -54,7 +56,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getHomeInfo(token: String?) {
         token?.let {
-            viewModel.getHomeInfo("Bearer $token")
+            viewModel.getHomeInfo("Bearer $it")
         }
     }
 
