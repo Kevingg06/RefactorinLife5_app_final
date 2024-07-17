@@ -52,5 +52,3 @@ class PreLoginActivity : AppCompatActivity() {
         startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
     }
 }
-
-
