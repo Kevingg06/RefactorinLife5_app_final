@@ -13,6 +13,7 @@ import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
+import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
 import com.squareup.picasso.Picasso
@@ -30,19 +31,23 @@ class HomeActivity : AppCompatActivity() {
 
        token = getToken(this)
 
-        actions(token)
-        initFavoriteIcon(token)
+        token?.let {
+            savedToken = it
+        }
+
+        actions()
+        initFavoriteIcon()
         setupRecyclerViews()
-        getHomeInfo(token)
+        getHomeInfo()
         observerHomeInfo()
         observeFavorites()
     }
 
-    private fun actions(token: String?) {
+    private fun actions() {
         binding.retryMessage.setOnClickListener {
             hideError()
             token?.let {
-                getHomeInfo("Bearer $it")
+                getHomeInfo()
             }
         }
     }
@@ -54,14 +59,12 @@ class HomeActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun getHomeInfo(token: String?) {
-        token?.let {
-            viewModel.getHomeInfo("Bearer $it")
-        }
+    private fun getHomeInfo() {
+            viewModel.getHomeInfo()
     }
 
-    private fun setFavorite(token: String, id: Int) {
-        viewModel.putFavorites(token, id)
+    private fun setFavorite( id: Int) {
+        viewModel.putFavorites(id)
     }
 
     private fun setRecyclerView(value: ProductTypesResponse) {
@@ -117,9 +120,8 @@ class HomeActivity : AppCompatActivity() {
                     setRecyclerViewProduct(data.info)
                 }
 
-                is StateProduct.SuccessLastUserProduct -> {
-                    hideLoading()
-                }
+                is StateProduct.SuccessLastUserProduct -> hideLoading()
+
 
                 is StateProduct.SuccessDailyOffer -> {
                     hideLoading()
@@ -127,13 +129,11 @@ class HomeActivity : AppCompatActivity() {
                     idMainProduct = data.info.idProduct
                 }
 
-                is StateProduct.SuccessFavorites -> {
-                    hideLoading()
-                }
+                is StateProduct.SuccessFavorites -> hideLoading()
 
-                is StateProduct.Loading -> {
-                    showLoading()
-                }
+
+                is StateProduct.Loading -> showLoading()
+
 
                 is StateProduct.Error -> {
                     hideLoading()
@@ -153,15 +153,13 @@ class HomeActivity : AppCompatActivity() {
         viewModel.setFavoriteData(iconState)
     }
 
-    private fun initFavoriteIcon(token: String?) {
+    private fun initFavoriteIcon() {
         binding.ivAddFavorites.setOnClickListener {
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
             setFavoriteData(currentButtonState)
-            if (token != null) {
                 idMainProduct?.let {
-                    setFavorite("Bearer $token", it)
-                }
+                    setFavorite(it)
             }
         }
     }

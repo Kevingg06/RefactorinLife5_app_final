@@ -11,14 +11,14 @@ import retrofit2.http.Path
 
 interface ProductService {
     @GET("/api/v1/product-types")
-    suspend fun getProductTypes(@Header("Authorization") token: String): Response<ProductTypesResponse>
+    suspend fun getProductTypes(): Response<ProductTypesResponse>
 
     @GET("/api/v1/products")
-    suspend fun getProducts(@Header("Authorization") token: String): Response<ProductsResponse>
+    suspend fun getProducts(): Response<ProductsResponse>
 
     @GET("/api/v1/products/daily-offer")
-    suspend fun getDailyOffer(@Header("Authorization") token: String): Response<SingleProductResponse>
+    suspend fun getDailyOffer(): Response<SingleProductResponse>
 
     @PUT("/api/v1/products/{idProduct}/favorite")
-    suspend fun updateFavorite(@Header("Authorization") token: String, @Path("idProduct") id : Int ): Response<Unit>
+    suspend fun updateFavorite(@Path("idProduct") id: Int): Response<Unit>
 }

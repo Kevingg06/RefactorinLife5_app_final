@@ -22,10 +22,10 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> = _isFavorite
 
-    fun getHomeInfo(token: String) {
+    fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateProduct.Loading)
-            val response = repository.getInfoHome(token)
+            val response = repository.getInfoHome()
 
             if (!processProductTypes(response.productTypes)) return@launch
             if (!processProducts(response.products)) return@launch
@@ -33,9 +33,9 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
     }
 
-    fun putFavorites(token: String, id : Int){
+    fun putFavorites(id : Int){
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.updateFavoriteProduct(token, id)
+            val response = repository.updateFavoriteProduct(id)
 
             if (response.isSuccessful){
                 _data.postValue(StateProduct.SuccessFavorites)

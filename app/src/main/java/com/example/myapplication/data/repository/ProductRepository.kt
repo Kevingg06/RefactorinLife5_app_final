@@ -8,10 +8,10 @@ import retrofit2.Response
 
 class ProductRepository(private val service: ProductServiceImp = ProductServiceImp()) {
 
-    suspend fun getInfoHome(token: String): ObjectComplete {
-        val resultProductTypes = service.getProductTypes(token)
-        val resultProducts = service.getProducts(token)
-        val resultDailyOffer = service.getDailyOffer(token)
+    suspend fun getInfoHome(): ObjectComplete {
+        val resultProductTypes = service.getProductTypes()
+        val resultProducts = service.getProducts()
+        val resultDailyOffer = service.getDailyOffer()
         val objectComplete = ObjectComplete(
             productTypes = resultProductTypes,
             products = resultProducts,
@@ -20,8 +20,8 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
         return objectComplete
     }
 
-    suspend fun updateFavoriteProduct(token: String , productId: Int): Response<Unit>{
-        return service.updateFavoriteProduct(token, productId)
+    suspend fun updateFavoriteProduct(productId: Int): Response<Unit>{
+        return service.updateFavoriteProduct(productId)
     }
 }
 
