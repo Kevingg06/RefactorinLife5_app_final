@@ -3,6 +3,7 @@ package com.example.myapplication.ui.home.presenter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductTypesResponse
@@ -37,19 +38,19 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
     }
 
-    fun putFavorites(id : Int){
-        CoroutineScope(Dispatchers.IO).launch {
+    fun putFavorites(id: Int) {
+        viewModelScope.launch {
             val response = repository.updateFavoriteProduct(id)
 
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 _data.postValue(StateProduct.SuccessFavorites)
-            }else{
+            } else {
                 _data.postValue(StateProduct.Error(Constants.PRODUCT_NOT_UPDATED))
             }
         }
     }
 
-    fun setFavoriteData(isFavoriteProduct: Boolean?){
+    fun setFavoriteData(isFavoriteProduct: Boolean?) {
         _isFavorite.postValue(isFavoriteProduct ?: false)
     }
 

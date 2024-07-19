@@ -42,6 +42,10 @@ class ProductServiceImp {
         return service.getDailyOffer()
     }
 
+    suspend fun getSimilarProducts(id: Int): Response<ProductsResponse> {
+        return service.getSimilarProducts(id)
+    }
+
     suspend fun updateFavoriteProduct(productId: Int): Response<Unit> {
         return service.updateFavorite(productId)
     }
