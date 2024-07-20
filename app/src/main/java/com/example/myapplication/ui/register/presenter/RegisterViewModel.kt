@@ -1,7 +1,6 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.data.dto.request.RegisterRequest
 import com.example.myapplication.data.repository.UserRepository
@@ -35,10 +34,7 @@ class RegisterViewModel(private val repository: UserRepository = UserRepository(
     }
 
     fun checkFields(email: String, password: String, confirmPassword: String) {
-        val isValid =
-            email.isValidEmail() && password.isValidPassword() && password.isConfirmedPassword(
-                confirmPassword
-            )
+        val isValid = email.isValidEmail() && password.isValidPassword() && password.isConfirmedPassword(confirmPassword)
         _validateFields.value = isValid
         if (!isValid) {
             _errorMessage.value = "Error en el usuario o contraseña!"

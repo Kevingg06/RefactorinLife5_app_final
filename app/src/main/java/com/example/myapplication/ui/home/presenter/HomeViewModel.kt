@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.dto.model.StateProduct
+import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
@@ -15,9 +16,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
+
 class HomeViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
+
+    private var allProducts: MutableList<Product>? = mutableListOf()
+
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> = _isFavorite
 
     fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -26,9 +33,24 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
 
             if (!processProductTypes(response.productTypes)) return@launch
             if (!processProducts(response.products)) return@launch
-            if (!processLastUserProduct(response.lastUserProduct)) return@launch
             if (!processDailyOffer(response.dailyOffer)) return@launch
         }
+    }
+
+    fun putFavorites(id : Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.updateFavoriteProduct(id)
+
+            if (response.isSuccessful){
+                _data.postValue(StateProduct.SuccessFavorites)
+            }else{
+                _data.postValue(StateProduct.Error(Constants.PRODUCT_NOT_UPDATED))
+            }
+        }
+    }
+
+    fun setFavoriteData(isFavoriteProduct: Boolean?){
+        _isFavorite.postValue(isFavoriteProduct ?: false)
     }
 
     private suspend fun processProductTypes(productTypes: Response<ProductTypesResponse>?): Boolean {
@@ -54,6 +76,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         products?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
+                    allProducts = body.products
                     withContext(Dispatchers.Main) {
                         _data.postValue(StateProduct.SuccessProducts(body))
                     }
@@ -69,7 +92,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         return false
     }
 
-    private suspend fun processLastUserProduct(lastUserProduct: Response<SingleProductResponse>?): Boolean {
+      private suspend fun processLastUserProduct(lastUserProduct: Response<SingleProductResponse>?): Boolean {
         lastUserProduct?.let {
             if (it.isSuccessful) {
                 it.body()?.let { body ->
@@ -87,7 +110,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
         return false
     }
-
+    
     private suspend fun processDailyOffer(dailyOffer: Response<SingleProductResponse>?): Boolean {
         dailyOffer?.let {
             if (it.isSuccessful) {
@@ -106,4 +129,16 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
         return false
     }
+
+    fun filterProductsByCategory(category: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val filteredProducts =
+                allProducts?.filter { it.productType?.idProductType == category }
+                    ?.toMutableList()
+            withContext(Dispatchers.Main) {
+                _data.postValue(filteredProducts?.let { StateProduct.FilteredProducts(it) })
+            }
+        }
+    }
 }
+

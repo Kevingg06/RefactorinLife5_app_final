@@ -25,11 +25,11 @@ data class Product (
     @SerializedName("currency")
     val currency: String?,
     @SerializedName("price")
-    val price: String?,
+    val price: Double?,
     @SerializedName("image")
     val image: String?,
-    @SerializedName("isFavorite")
-    val isFavorite: Boolean?,
     @SerializedName("description")
-    val description: String?
+    val description: String?,
+    @SerializedName("isFavorite")
+    val isFavorite: Boolean?
 )

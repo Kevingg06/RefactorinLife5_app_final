@@ -5,37 +5,58 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.data.dto.dataSource.getToken
 import com.example.myapplication.data.dto.model.StateProduct
+import com.example.myapplication.data.dto.response.Product
+import com.example.myapplication.data.dto.response.ProductType
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
+import com.example.myapplication.data.service.ProductServiceImp
 import com.example.myapplication.data.utils.Constants
+import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
-class HomeActivity : AppCompatActivity() {
+
+class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickListener {
     private val viewModel by viewModels<HomeViewModel>()
-
+    private var idMainProduct: Int? = null
     private lateinit var binding: ActivityHomeBinding
+    private var productsAdapter: AdapterProduct? = null
+
+    private var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+       token = getToken(this)
+
+        token?.let {
+            savedToken = it
+        }
+
         actions()
+        initFavoriteIcon()
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
+        observeFavorites()
     }
 
     private fun actions() {
         binding.retryMessage.setOnClickListener {
             hideError()
-            getHomeInfo()
+            token?.let {
+                getHomeInfo()
+            }
         }
     }
 
@@ -47,12 +68,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getHomeInfo() {
-        viewModel.getHomeInfo()
+            viewModel.getHomeInfo()
     }
 
-    private fun setRecyclerView(value: ProductTypesResponse) {
+    private fun setFavorite( id: Int) {
+        viewModel.putFavorites(id)
+    }
+
+    private fun setRecicleView(
+        value: MutableList<ProductType>?,
+        listener: ProductTypesAdapter.OnCategoryClickListener
+    ) {
         runOnUiThread {
-            val adapter = ProductTypesAdapter(value)
+            val adapter = ProductTypesAdapter(value, listener)
             binding.rvCategoriesHome.adapter = adapter
         }
     }
@@ -95,39 +123,66 @@ class HomeActivity : AppCompatActivity() {
             when (data) {
                 is StateProduct.SuccessProductType -> {
                     hideLoading()
-                    setRecyclerView(data.info)
+                    setRecicleView(data.info.productTypes, this)
                 }
 
                 is StateProduct.SuccessProducts -> {
                     hideLoading()
-                    setRecyclerViewProduct(data.info)
+                    setRecyclerViewProduct(data.info.products)
                 }
 
-                is StateProduct.SuccessLastUserProduct -> {
-                    hideLoading()
-                }
+                is StateProduct.SuccessLastUserProduct -> hideLoading()
+
 
                 is StateProduct.SuccessDailyOffer -> {
                     hideLoading()
                     setProductDailyOffer(data.info)
+                    idMainProduct = data.info.idProduct
                 }
 
-                is StateProduct.Loading -> {
-                    showLoading()
-                }
+                is StateProduct.SuccessFavorites -> hideLoading()
+
+
+                is StateProduct.Loading -> showLoading()
+
 
                 is StateProduct.Error -> {
                     hideLoading()
                     showError()
                 }
+                is StateProduct.FilteredProducts -> {
+                    hideLoading()
+                    updateFilteredProducts(data.products)
+                }
             }
         }
     }
 
-    private fun setRecyclerViewProduct(value: ProductsResponse) {
+    private fun observeFavorites() {
+        viewModel.isFavorite.observe(this) { isFavorite ->
+            setFavoriteIcon(isFavorite)
+        }
+    }
+
+    private fun setFavoriteData(iconState: Boolean) {
+        viewModel.setFavoriteData(iconState)
+    }
+
+    private fun initFavoriteIcon() {
+        binding.ivAddFavorites.setOnClickListener {
+            val buttonState = viewModel.isFavorite.value ?: false
+            val currentButtonState = !buttonState
+            setFavoriteData(currentButtonState)
+                idMainProduct?.let {
+                    setFavorite(it)
+            }
+        }
+    }
+
+    private fun setRecyclerViewProduct(value: MutableList<Product>?) {
         runOnUiThread {
-            val adapter = AdapterProduct(value)
-            binding.rvRecommendationsHome.adapter = adapter
+            productsAdapter = AdapterProduct(value)
+            binding.rvRecommendationsHome.adapter = productsAdapter
         }
     }
 
@@ -143,11 +198,28 @@ class HomeActivity : AppCompatActivity() {
     private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
-            Picasso.get().load(singleProductResponse.image).into(binding.imageMainProduct)
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = "${singleProductResponse.currency} ${singleProductResponse.price}"
-            setFavoriteIcon(singleProductResponse.isFavorite)
+            binding.productPrice.text =
+                "${singleProductResponse.currency} ${singleProductResponse.price}"
+
+            if(!singleProductResponse.images.isNullOrEmpty())
+                Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)
+
+            singleProductResponse.isFavorite?.let {
+                setFavoriteData(it)
+            }
+        }
+    }
+
+    override fun onCategoryClick(category: Int) {
+        viewModel.filterProductsByCategory(category)
+    }
+
+    private fun updateFilteredProducts(products: MutableList<Product>?) {
+        runOnUiThread {
+            productsAdapter?.updateProducts(products)
+            productsAdapter?.notifyDataSetChanged()
         }
     }
 }

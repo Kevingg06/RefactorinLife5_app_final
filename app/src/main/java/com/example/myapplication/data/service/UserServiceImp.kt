@@ -12,7 +12,7 @@ import retrofit2.create
 
 class UserServiceImp {
     private val retrofit = Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL)
+        .baseUrl(Constants.USER_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

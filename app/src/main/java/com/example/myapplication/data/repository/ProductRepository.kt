@@ -11,21 +11,22 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
     suspend fun getInfoHome(): ObjectComplete {
         val resultProductTypes = service.getProductTypes()
         val resultProducts = service.getProducts()
-        val resultLastUserProduct = service.getLastUserProduct()
         val resultDailyOffer = service.getDailyOffer()
         val objectComplete = ObjectComplete(
             productTypes = resultProductTypes,
             products = resultProducts,
-            lastUserProduct = resultLastUserProduct,
             dailyOffer = resultDailyOffer
         )
         return objectComplete
+    }
+
+    suspend fun updateFavoriteProduct(productId: Int): Response<Unit>{
+        return service.updateFavoriteProduct(productId)
     }
 }
 
 data class ObjectComplete(
     val productTypes: Response<ProductTypesResponse>,
     val products: Response<ProductsResponse>,
-    val lastUserProduct: Response<SingleProductResponse>,
     val dailyOffer: Response<SingleProductResponse>
 )
