@@ -1,5 +1,6 @@
 package com.example.myapplication.data.service
 
+import com.example.myapplication.data.dto.response.ProductExact
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
@@ -15,6 +16,9 @@ interface ProductService {
 
     @GET("/api/v1/products")
     suspend fun getProducts(): Response<ProductsResponse>
+
+    @GET("/api/v1/products/{idProduct}")
+    suspend fun getProduct(@Path("idProduct") id: Int): Response<ProductExact>
 
     @GET("/api/v1/products/daily-offer")
     suspend fun getDailyOffer(): Response<SingleProductResponse>

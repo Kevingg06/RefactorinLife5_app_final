@@ -1,5 +1,8 @@
 package com.example.myapplication.data.repository
 
+import com.example.myapplication.data.dto.request.LoginRequest
+import com.example.myapplication.data.dto.response.LoginResponse
+import com.example.myapplication.data.dto.response.ProductExact
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
@@ -18,6 +21,10 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
             dailyOffer = resultDailyOffer
         )
         return objectComplete
+    }
+
+    suspend fun getProduct(idProduct : Int): Response<ProductExact> {
+        return service.getProduct(idProduct)
     }
 
     suspend fun updateFavoriteProduct(productId: Int): Response<Unit>{

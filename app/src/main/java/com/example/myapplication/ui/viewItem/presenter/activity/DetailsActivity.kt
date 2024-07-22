@@ -12,20 +12,33 @@ import com.example.myapplication.ui.viewItem.presenter.fragment.ImageFragment
 
 class DetailsActivity : AppCompatActivity() {
 
-    private val fragmentFinancing = FinancingFragment.newInstance()
 
-    private val fragmentImage = ImageFragment.newInstance()
+//    private val fragmentFinancing = FinancingFragment.newInstance()
+//
+//    private val fragmentImage = ImageFragment.newInstance()
+//
+//    private val fragmentComment = CommentFragment.newInstance()
+//
+//    private val fragmentDescription = DescriptionFragment.newInstance()
 
-    private val fragmentComment = CommentFragment.newInstance()
-
-    private val fragmentDescription = DescriptionFragment.newInstance()
+    private val fragmentFinancing by lazy { FinancingFragment.newInstance() }
+    private val fragmentImage by lazy { ImageFragment.newInstance() }
+    private val fragmentComment by lazy { CommentFragment.newInstance() }
+    private lateinit var fragmentDescription: DescriptionFragment
 
     private lateinit var binding: ActivityDetailsBinding
+
+    private var idMainProduct: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        idMainProduct = intent.getIntExtra("ID_MAIN_PRODUCT", 0)
+        idMainProduct?.let {
+            fragmentDescription = DescriptionFragment.newInstance(it)
+        }
+
         showFragment(fragmentImage, ImageFragment::class.java.toString())
         actions()
     }

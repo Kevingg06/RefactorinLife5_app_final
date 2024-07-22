@@ -33,3 +33,27 @@ data class Product (
     @SerializedName("isFavorite")
     val isFavorite: Boolean?
 )
+
+data class ProductExact (
+    @SerializedName("idProduct")
+    val idProduct: Int?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("productType")
+    val productType: ProductType?,
+    @SerializedName("currency")
+    val currency: String?,
+    @SerializedName("price")
+    val price: Double?,
+    @SerializedName("images")
+    val image: MutableList<Images>?,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("isFavorite")
+    val isFavorite: Boolean?
+)
+
+data class Images (
+    @SerializedName("link")
+    val link: String?
+)

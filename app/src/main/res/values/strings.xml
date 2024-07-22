@@ -38,6 +38,7 @@
     <string name="home_heart_icon_description">Favoritos</string>
     <string name="product_image_description">Producto</string>
     <string name="support_message">En caso de problemas comunicate con <b>soporte</b></string>
+    <string name="currency"><b>$</b></string>
 
 
     <!--login-->

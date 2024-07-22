@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.home.presenter
 
+import android.content.Intent
 import com.example.myapplication.ui.adapter.ProductTypesAdapter
 import android.os.Bundle
 import android.view.View
@@ -20,6 +21,7 @@ import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
+import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -37,7 +39,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-       token = getToken(this)
+        token = getToken(this)
 
         token?.let {
             savedToken = it
@@ -58,6 +60,14 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
                 getHomeInfo()
             }
         }
+
+        binding.imageMainProduct.setOnClickListener {
+            val intent = Intent(this, DetailsActivity::class.java)
+            idMainProduct?.let {
+                intent.putExtra("ID_MAIN_PRODUCT", idMainProduct)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerViews() {
@@ -68,10 +78,10 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
     }
 
     private fun getHomeInfo() {
-            viewModel.getHomeInfo()
+        viewModel.getHomeInfo()
     }
 
-    private fun setFavorite( id: Int) {
+    private fun setFavorite(id: Int) {
         viewModel.putFavorites(id)
     }
 
@@ -150,6 +160,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
                     hideLoading()
                     showError()
                 }
+
                 is StateProduct.FilteredProducts -> {
                     hideLoading()
                     updateFilteredProducts(data.products)
@@ -173,8 +184,8 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
             setFavoriteData(currentButtonState)
-                idMainProduct?.let {
-                    setFavorite(it)
+            idMainProduct?.let {
+                setFavorite(it)
             }
         }
     }
@@ -203,8 +214,9 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             binding.productPrice.text =
                 "${singleProductResponse.currency} ${singleProductResponse.price}"
 
-            if(!singleProductResponse.images.isNullOrEmpty())
-                Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)
+            if (!singleProductResponse.images.isNullOrEmpty())
+                Picasso.get().load(singleProductResponse.images[0].link)
+                    .into(binding.imageMainProduct)
 
             singleProductResponse.isFavorite?.let {
                 setFavoriteData(it)
