@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.viewItem.presenter.fragment
+package com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

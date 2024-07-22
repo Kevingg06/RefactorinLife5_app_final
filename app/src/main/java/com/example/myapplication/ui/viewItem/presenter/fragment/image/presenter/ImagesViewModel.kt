@@ -1,10 +1,9 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.model.StateSimilar
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants

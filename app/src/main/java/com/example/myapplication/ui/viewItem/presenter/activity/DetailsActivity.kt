@@ -8,7 +8,7 @@ import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.ui.viewItem.presenter.fragment.CommentFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.DescriptionFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.FinancingFragment
-import com.example.myapplication.ui.viewItem.presenter.fragment.ImageFragment
+import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -41,7 +41,6 @@ class DetailsActivity : AppCompatActivity() {
 
         binding.detailsTvDescriptionFirst.setOnClickListener {
             showFragment(fragmentDescription, DescriptionFragment::class.java.toString())
-
         }
 
         binding.detailsTvDescriptionSecond.setOnClickListener {
