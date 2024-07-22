@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.viewItem.presenter.activity.DetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/details_linearLayout_leftbar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="#FF7353B9"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/details_gl_leftBar">
+
+        <TextView
+            android:id="@+id/details_tv_image_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="      nes  "
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"
+            android:layout_marginTop="120dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_image_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image   "
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/details_tv_description_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" pcion"
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"
+            android:layout_marginTop="100dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_description_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="-90"
+            android:text="Descri"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_financing_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" iacion"
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"
+            android:layout_marginTop="100dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_financing_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Financ"
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"
+            android:layout_marginTop="28dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_comments_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ntarios"
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="19sp"
+            android:layout_marginTop="100dp"/>
+
+        <TextView
+            android:id="@+id/details_tv_comments_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Come"
+            android:textColor="@color/white"
+            android:rotation="-90"
+            android:textSize="20sp"
+            android:layout_marginTop="34dp"/>
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/details_gl_leftBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="62dp" />
+
+    <FrameLayout
+        android:id="@+id/item_view_fragment"
+        android:name="com.example.myapplication.ui.imagenes.presenter.ImageFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toEndOf="@+id/details_gl_leftBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/details_circle_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/circle_violet"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="140dp"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/details_circle_descrption"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/circle_violet"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="310dp"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/details_circle_financing"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/circle_violet"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="490dp"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/details_circle_comments"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/circle_violet"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="670dp"
+            android:visibility="gone"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
