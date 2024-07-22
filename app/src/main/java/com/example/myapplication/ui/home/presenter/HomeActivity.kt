@@ -5,23 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.dataSource.getToken
 import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductType
-import com.example.myapplication.data.dto.response.ProductTypesResponse
-import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
-import com.example.myapplication.data.service.ProductServiceImp
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.launch
 
 
 class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickListener {
@@ -75,7 +70,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         viewModel.putFavorites(id)
     }
 
-    private fun setRecicleView(
+    private fun setRecyclerView(
         value: MutableList<ProductType>?,
         listener: ProductTypesAdapter.OnCategoryClickListener
     ) {
@@ -123,7 +118,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             when (data) {
                 is StateProduct.SuccessProductType -> {
                     hideLoading()
-                    setRecicleView(data.info.productTypes, this)
+                    setRecyclerView(data.info.productTypes, this)
                 }
 
                 is StateProduct.SuccessProducts -> {
