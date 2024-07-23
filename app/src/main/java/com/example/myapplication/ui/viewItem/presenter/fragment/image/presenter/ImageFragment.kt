@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
-import com.example.myapplication.ui.home.presenter.HomeActivity
 
 class ImageFragment : Fragment() {
 
@@ -81,8 +79,7 @@ class ImageFragment : Fragment() {
 
     private fun actions(){
         binding.arrowButton.setOnClickListener {
-            val intent = Intent(requireContext(), HomeActivity::class.java)
-            startActivity(intent)
+            activity?.finish()
         }
 
         binding.productButton.setOnClickListener {
