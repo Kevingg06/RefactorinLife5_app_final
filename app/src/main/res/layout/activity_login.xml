@@ -16,7 +16,7 @@
         android:layout_marginTop="120dp"
         android:text="@string/login_tv_title"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size_title_login"
+        android:textSize="@dimen/text_size_title_large"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
