@@ -2,6 +2,7 @@ package com.example.myapplication.ui.viewItem.presenter.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ActivityDetailsBinding
@@ -38,6 +39,12 @@ class DetailsActivity : AppCompatActivity() {
         idMainProduct?.let {
             fragmentDescription = DescriptionFragment.newInstance(it)
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+            }
+        })
 
         showFragment(fragmentImage, ImageFragment::class.java.toString())
         actions()

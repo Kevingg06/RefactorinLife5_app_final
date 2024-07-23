@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.viewItem.presenter.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProductDescription
 import com.example.myapplication.data.dto.response.ProductExact
 import com.example.myapplication.databinding.FragmentDescriptionBinding
+import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 import com.example.myapplication.ui.viewItem.presenter.fragment.viewmodel.DescriptionFragmentViewModel
 
 class DescriptionFragment : Fragment() {
@@ -31,8 +33,15 @@ class DescriptionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val idMainProduct = arguments?.getInt(ARG_ID_MAIN_PRODUCT)
 
+        actions()
         idMainProduct?.let { callProductoInfo(it) }
         observeProductInfo()
+    }
+
+    private fun actions() {
+        binding.ivLeftArrow.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun showProduct(info: ProductExact) {
