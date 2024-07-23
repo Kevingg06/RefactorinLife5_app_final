@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.home.presenter
 
+import android.content.Intent
 import com.example.myapplication.ui.adapter.ProductTypesAdapter
 import android.os.Bundle
 import android.view.View
@@ -13,9 +14,11 @@ import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductType
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
+import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 import com.squareup.picasso.Picasso
 
 
@@ -52,6 +55,14 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             token?.let {
                 getHomeInfo()
             }
+        }
+
+        binding.mainSaleLayout.setOnClickListener {
+            val myIntent = Intent(this, DetailsActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt(ARG_PRODUCT_ID, idMainProduct?: -1)
+            myIntent.putExtras(bundle)
+            startActivity(myIntent)
         }
     }
 

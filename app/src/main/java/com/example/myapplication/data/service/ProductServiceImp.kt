@@ -1,6 +1,7 @@
 package com.example.myapplication.data.service
 
 import com.example.myapplication.data.dto.request.AuthInterceptor
+import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
@@ -42,8 +43,8 @@ class ProductServiceImp {
         return service.getDailyOffer()
     }
 
-    suspend fun getSimilarProducts(id: Int): Response<ProductsResponse> {
-        return service.getSimilarProducts(id)
+    suspend fun getProductById(id: Int): Response<ProductByIdResponse> {
+        return service.getProductById(id)
     }
 
     suspend fun updateFavoriteProduct(productId: Int): Response<Unit> {

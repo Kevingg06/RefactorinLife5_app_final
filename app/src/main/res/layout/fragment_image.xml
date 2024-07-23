@@ -27,14 +27,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.2" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <TextView
             android:id="@+id/images_tv_title"
@@ -80,6 +80,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/product_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
@@ -113,6 +114,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/colors_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="30dp"
@@ -145,6 +147,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/similar_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="30dp"
@@ -178,20 +181,44 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="200dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="150dp"
             android:layout_height="40dp"
-            android:layout_marginStart="@dimen/margin_standard"
-            android:textSize="@dimen/text_size_title_images"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="70dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:id="@+id/iv_product_currency"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_title_images"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/iv_product_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:paddingStart="5dp"
+                android:textSize="@dimen/text_size_title_images"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_product_currency" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buy_product_button"
             android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="@dimen/margin_large"
             android:background="@drawable/bg_btn_enabled"
             android:elevation="10dp"
             android:gravity="center"
@@ -199,10 +226,13 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="@dimen/margin_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <include
+            android:id="@+id/loading_screen_images"
+            layout="@layout/loading_screen"
+            android:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
