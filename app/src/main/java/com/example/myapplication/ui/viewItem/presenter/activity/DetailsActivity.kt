@@ -9,7 +9,7 @@ import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.ui.viewItem.presenter.fragment.CommentFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.DescriptionFragment
-import com.example.myapplication.ui.viewItem.presenter.fragment.FinancingFragment
+import com.example.myapplication.ui.viewItem.presenter.fragment.financing.presenter.FinancingFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
 
 class DetailsActivity : AppCompatActivity() {
