@@ -40,7 +40,11 @@ class ImagesHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun render(value: Image, product: ProductByIdResponse) {
-        Picasso.get().load(value.link).into(binding.imageProductDetails)
+
         setFavorite(product.isFavorite ?: false)
+        Picasso.get()
+            .load(value.link)
+            .error(R.drawable.error_img)
+            .into(binding.imageProductDetails)
     }
 }
