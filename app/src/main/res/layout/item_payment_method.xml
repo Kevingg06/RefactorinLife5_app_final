@@ -1,27 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="8dp">-->
 
-    <data>
-        <variable
-            name="paymentMethod"
-            type="com.example.myapplication.data.dto.response.PaymentMethod" />
-    </data>
+<!--    &lt;!&ndash; Table 1 &ndash;&gt;-->
+<!--    <TableLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#FF9800"-->
+<!--        android:padding="8dp">-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:contentDescription="@string/icon_description"-->
+<!--                android:src="@drawable/icon_entity" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_entity_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="8dp"-->
+<!--                android:text="Entity 1"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_installments_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:text="3 cuotas: interest"-->
+<!--                android:textSize="14sp" />-->
+<!--        </TableRow>-->
+
+<!--    </TableLayout>-->
+
+<!--    &lt;!&ndash; Table 2 &ndash;&gt;-->
+<!--    <TableLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#000000"-->
+<!--        android:marginTop="16dp"-->
+<!--        android:padding="8dp">-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:contentDescription="@string/icon_description"-->
+<!--                android:src="@drawable/icon_entity" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_entity_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="8dp"-->
+<!--                android:text="Entity 2"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_installments_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:text="4 cuotas: interest"-->
+<!--                android:textSize="14sp" />-->
+<!--        </TableRow>-->
+
+<!--    </TableLayout>-->
+
+<!--    &lt;!&ndash; Table 3 &ndash;&gt;-->
+<!--    <TableLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#000000"-->
+<!--        android:marginTop="16dp"-->
+<!--        android:padding="8dp">-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:contentDescription="@string/icon_description"-->
+<!--                android:src="@drawable/icon_entity" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_entity_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="8dp"-->
+<!--                android:text="Entity 3"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_installments_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="32dp"-->
+<!--                android:text="5 cuotas: interest"-->
+<!--                android:textSize="14sp" />-->
+<!--        </TableRow>-->
+
+<!--    </TableLayout>-->
+
+<!--</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:src="@drawable/ic_person"
+        android:contentDescription="@string/login_email" />
 
-        <TextView
-            android:id="@+id/payment_method_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@{paymentMethod.entity}" />
+    <TextView
+        android:id="@+id/tv_entity_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingStart="8dp" />
+</LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>

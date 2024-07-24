@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class ProductServiceImp {
 
     private val client = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(3000, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(AuthInterceptor(savedToken))

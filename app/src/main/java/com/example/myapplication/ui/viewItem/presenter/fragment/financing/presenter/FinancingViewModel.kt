@@ -5,32 +5,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.dto.model.StatePaymentMethods
+import com.example.myapplication.data.dto.response.PaymentMethod
 import com.example.myapplication.data.repository.PaymentRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class FinancingViewModel(private val repository: PaymentRepository = PaymentRepository()) : ViewModel() {
+class FinancingViewModel : ViewModel() {
 
-    private val _data = MutableLiveData<StatePaymentMethods>()
-    val data: LiveData<StatePaymentMethods> = _data
+    private val repository = PaymentRepository()
 
-    init {
-        getPaymentMethods()
-    }
+    private val _paymentMethods = MutableLiveData<StatePaymentMethods>()
+    val paymentMethods: LiveData<StatePaymentMethods> get() = _paymentMethods
 
-    private fun getPaymentMethods() {
+    fun getPaymentMethods() {
+        _paymentMethods.value = StatePaymentMethods.Loading
         viewModelScope.launch {
-            _data.value = StatePaymentMethods.Loading
             try {
                 val response = repository.getPaymentMethods()
-                if (response.isSuccessful) {
-                    _data.value = StatePaymentMethods.Success(response.body()?.paymentMethods ?: emptyList())
+                _paymentMethods.value = if (response.isSuccessful) {
+                    StatePaymentMethods.Success(response.body()?.paymentMethods ?: emptyList())
                 } else {
-                    _data.value = StatePaymentMethods.Error("Error fetching payment methods")
+                    StatePaymentMethods.Error("Error fetching data")
                 }
             } catch (e: Exception) {
-                _data.value = StatePaymentMethods.Error(e.message ?: "Unknown error")
+                _paymentMethods.value = StatePaymentMethods.Error("Error: ${e.message}")
             }
         }
     }
