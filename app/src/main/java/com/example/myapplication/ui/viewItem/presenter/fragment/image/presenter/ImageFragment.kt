@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.dto.response.ProductByIdResponse
@@ -45,7 +46,9 @@ class ImageFragment : Fragment() {
     }
 
     private fun initRecyclerView(product: ProductByIdResponse){
-        binding.recyclerView.adapter = ProductImagesAdapter(product)
+        viewModel.viewModelScope.launch {
+            binding.recyclerView.adapter = ProductImagesAdapter(product)
+        }
     }
 
     private fun getProduct(id: Int){
