@@ -53,4 +53,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- details -->
+    <string name="image_description_back">Botón de retroceso</string>
+    <string name="buy_button">Comprar</string>
+    <string name="button_product_description">Camiseta</string>
+    <string name="button_colors_description">Paleta de colores</string>
+    <string name="button_similar_description">tienda</string>
+    <string name="button_product_title">Producto</string>
+    <string name="button_similar_title">Similares</string>
+    <string name="button_colors_title">Colores</string>
+
 </resources>

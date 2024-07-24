@@ -19,4 +19,5 @@ object Constants {
     const val PRODUCTS_BASE_URL = "https://api-products-fe4p.onrender.com"
     const val BASE_URL_TEST = "https://stoplight.io"
     const val USER_TOKEN = "TOKEN_KEY"
+    const val ARG_PRODUCT_ID = "product_id"
 }
