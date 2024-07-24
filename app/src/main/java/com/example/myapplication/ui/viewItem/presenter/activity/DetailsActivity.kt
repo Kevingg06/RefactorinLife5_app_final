@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.ui.viewItem.presenter.fragment.CommentFragment
-import com.example.myapplication.ui.viewItem.presenter.fragment.DescriptionFragment
+import com.example.myapplication.ui.viewItem.presenter.fragment.description.presenter.DescriptionFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.FinancingFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
 
@@ -22,7 +22,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private val fragmentComment = CommentFragment.newInstance()
 
-    private val fragmentDescription = DescriptionFragment.newInstance()
+    private lateinit var fragmentDescription : DescriptionFragment
 
     private lateinit var binding: ActivityDetailsBinding
 
@@ -44,6 +44,7 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         fragmentImage = ImageFragment.newInstance(idProduct?: -1)
+        fragmentDescription = DescriptionFragment.newInstance(idProduct?: -1)
 
         showFragment(fragmentImage, ImageFragment::class.java.toString())
         actions()
