@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,9 +15,11 @@ import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
 import kotlinx.coroutines.launch
+import com.example.myapplication.ui.similar.presenter.SimilarActivity
 
 class ImageFragment : Fragment() {
 
+    private var idProduct: Int? = null
     private var _binding: FragmentImageBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ImagesViewModel>()
@@ -34,8 +37,8 @@ class ImageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {bundle ->
-            val idProduct = bundle.getInt(ARG_PRODUCT_ID)
-            getProduct(idProduct)
+            idProduct = bundle.getInt(ARG_PRODUCT_ID)
+            getProduct(idProduct!!)
         }
 
         observeState()
@@ -102,6 +105,12 @@ class ImageFragment : Fragment() {
             binding.similarButton.setBackgroundResource(R.drawable.bg_btn_pressed)
             binding.productButton.setBackgroundResource(R.drawable.bg_btn_normal)
             binding.colorsButton.setBackgroundResource(R.drawable.bg_btn_normal)
+
+            val myIntent = Intent(activity, SimilarActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt(ARG_PRODUCT_ID, idProduct?: -1)
+            myIntent.putExtras(bundle)
+            startActivity(myIntent)
         }
     }
 

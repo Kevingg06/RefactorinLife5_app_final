@@ -28,6 +28,10 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
     suspend fun getProductById(id: Int): Response<ProductByIdResponse> {
         return service.getProductById(id)
     }
+
+    suspend fun getSimilarProductsById(id: Int, page: Int, size: Int): Response<ProductsResponse> {
+        return service.getSimilarProductsById(id, page, size)
+    }
 }
 
 data class ObjectComplete(

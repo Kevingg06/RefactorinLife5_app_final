@@ -20,4 +20,6 @@ object Constants {
     const val BASE_URL_TEST = "https://stoplight.io"
     const val USER_TOKEN = "TOKEN_KEY"
     const val ARG_PRODUCT_ID = "product_id"
+    const val SIZE_DEFAULT = 1
+    const val PAGE_DEFAULT = 10
 }

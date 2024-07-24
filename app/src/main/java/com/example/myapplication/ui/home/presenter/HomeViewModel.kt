@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-
 class HomeViewModel(private val repository: ProductRepository = ProductRepository()) : ViewModel() {
     private val _data = MutableLiveData<StateProduct>()
     val data: LiveData<StateProduct> = _data
