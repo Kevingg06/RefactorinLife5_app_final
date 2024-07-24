@@ -32,6 +32,17 @@ class DescriptionFragment : Fragment() {
             callProductoInfo(idProduct)
         }
         observeProductInfo()
+        actions()
+    }
+
+    private fun actions() {
+        binding.arrowButton.setOnClickListener {
+            activity?.finish()
+        }
+
+        binding.buyProductButton.setOnClickListener{
+
+        }
     }
 
     private fun showProduct(info: ProductByIdResponse) {

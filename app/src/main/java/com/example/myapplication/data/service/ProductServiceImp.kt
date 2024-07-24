@@ -12,6 +12,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 class ProductServiceImp {
@@ -49,5 +50,9 @@ class ProductServiceImp {
 
     suspend fun updateFavoriteProduct(productId: Int): Response<Unit> {
         return service.updateFavorite(productId)
+    }
+
+    suspend fun getSimilarProductsById(id: Int, page: Int, size: Int): Response<ProductsResponse> {
+        return service.getSimilarProductsById(id, page, size)
     }
 }

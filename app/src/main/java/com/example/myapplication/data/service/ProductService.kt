@@ -8,6 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ProductService {
     @GET("/api/v1/product-types")
@@ -21,6 +22,13 @@ interface ProductService {
 
     @GET("/api/v1/products/{idProduct}")
     suspend fun getProductById(@Path("idProduct") id: Int): Response<ProductByIdResponse>
+
+    @GET("/api/v1/products/{idProduct}/similar")
+    suspend fun getSimilarProductsById(
+        @Path("idProduct") id: Int,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<ProductsResponse>
 
     @PUT("/api/v1/products/{idProduct}/favorite")
     suspend fun updateFavorite(@Path("idProduct") id: Int): Response<Unit>
