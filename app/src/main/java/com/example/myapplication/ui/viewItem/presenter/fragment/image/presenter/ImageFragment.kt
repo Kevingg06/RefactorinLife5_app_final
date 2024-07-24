@@ -13,6 +13,7 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
+import kotlinx.coroutines.launch
 import com.example.myapplication.ui.similar.presenter.SimilarActivity
 
 class ImageFragment : Fragment() {
