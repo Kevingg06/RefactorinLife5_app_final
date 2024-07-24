@@ -87,7 +87,6 @@ class DetailsActivity : AppCompatActivity() {
             .replace(binding.itemViewFragment.id, fragment, tag)
             .addToBackStack(null)
             .commit()
-
             effectSelectView(fragment)
     }
     private fun effectSelectView(fragment : Fragment){
