@@ -5,7 +5,8 @@
     android:layout_height="150dp"
     android:layout_margin="@dimen/margin_small"
     android:background="@color/white"
-    android:elevation="8dp">
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_cv_product_image"
@@ -28,7 +29,7 @@
 
     <TextView
         android:id="@+id/item_product_brand"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_standard"
         android:layout_marginTop="@dimen/margin_standard"
@@ -41,7 +42,7 @@
 
     <TextView
         android:id="@+id/product_description"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"

@@ -4,6 +4,7 @@ import com.example.myapplication.data.dto.request.AuthInterceptor
 import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.dto.response.ProductsResponse
 import com.example.myapplication.data.dto.response.ProductTypesResponse
+import com.example.myapplication.data.dto.response.ProductsSearchResponse
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.data.utils.TokenHolder.savedToken
@@ -38,6 +39,10 @@ class ProductServiceImp {
 
     suspend fun getProducts(): Response<ProductsResponse> {
         return service.getProducts()
+    }
+
+    suspend fun searchProducts(idProductType: Int,productName: String, onlyFavorite: Boolean): Response<ProductsSearchResponse> {
+        return service.searchProducts(idProductType,productName,onlyFavorite)
     }
 
     suspend fun getDailyOffer(): Response<SingleProductResponse> {
