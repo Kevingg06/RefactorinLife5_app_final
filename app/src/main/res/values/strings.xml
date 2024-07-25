@@ -17,7 +17,7 @@
     <string name="tv_error_message">User or password error!</string>
     <string name="login_tv_title">Log In</string>
     <string name="login_tv_register_here">Register here</string>
-    <string name="login_tv_no_account">If you don't have an account,</string>
+    <string name="login_tv_no_account">If you don\'t have an account,</string>
     <string name="register_tv_title">Register</string>
     <string name="register_email">Email</string>
     <string name="register_pasword">Password</string>
@@ -28,9 +28,9 @@
     <string name="register_tv_login_here">log in here</string>
 
     <!-- Home -->
-    <string name="no_content_message">Sorry, we couldn't find the content</string>
+    <string name="no_content_message">Sorry, we couldn\'t find the content</string>
     <string name="retry_message">Retry</string>
-    <string name="error_message">Sorry, we couldn't load the content</string>
+    <string name="error_message">Sorry, we couldn\'t load the content</string>
     <string name="error_img_description">Error Image</string>
     <string name="item_rv_btn_text">View</string>
     <string name="home_icon_description">App Icon</string>
@@ -46,7 +46,7 @@
     <string name="login_email">Email</string>
     <string name="login_checkbox_show_password">Show Password</string>
     <string name="login_register_here">Register here</string>
-    <string name="login_no_account">If you don't have an account,</string>
+    <string name="login_no_account">If you don\'t have an account,</string>
     <string name="login_error">User or password error!</string>
     <string name="register_error">User or password error!</string>
 
