@@ -11,25 +11,25 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class FinancingViewModel : ViewModel() {
-
-    private val repository = PaymentRepository()
+class FinancingViewModel(private val repository: PaymentRepository = PaymentRepository()) : ViewModel() {
 
     private val _paymentMethods = MutableLiveData<StatePaymentMethods>()
     val paymentMethods: LiveData<StatePaymentMethods> get() = _paymentMethods
 
     fun getPaymentMethods() {
-        _paymentMethods.value = StatePaymentMethods.Loading
         viewModelScope.launch {
+            _paymentMethods.postValue(StatePaymentMethods.Loading)
             try {
                 val response = repository.getPaymentMethods()
-                _paymentMethods.value = if (response.isSuccessful) {
-                    StatePaymentMethods.Success(response.body()?.paymentMethods ?: emptyList())
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        _paymentMethods.postValue(StatePaymentMethods.Success(it.paymentMethods))
+                    } ?: _paymentMethods.postValue(StatePaymentMethods.Error("Error en el formato de respuesta"))
                 } else {
-                    StatePaymentMethods.Error("Error fetching data")
+                    _paymentMethods.postValue(StatePaymentMethods.Error("Error en la red"))
                 }
             } catch (e: Exception) {
-                _paymentMethods.value = StatePaymentMethods.Error("Error: ${e.message}")
+                _paymentMethods.postValue(StatePaymentMethods.Error("Error en la solicitud"))
             }
         }
     }

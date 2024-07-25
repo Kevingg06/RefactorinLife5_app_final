@@ -7,65 +7,67 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.dto.model.StatePaymentMethods
 import com.example.myapplication.data.dto.response.PaymentMethod
 import com.example.myapplication.databinding.FragmentFinancingBinding
-import com.example.myapplication.ui.adapter.PaymentMethodsAdapter
+import com.example.myapplication.ui.adapter.PaymentMethodAdapter
 
-class FinancingFragment : Fragment() {
+    class FinancingFragment : Fragment() {
 
-    private var _binding: FragmentFinancingBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel by viewModels<FinancingViewModel>()
+        private var _binding: FragmentFinancingBinding? = null
+        private val binding get() = _binding!!
+        private lateinit var financingViewModel: FinancingViewModel
 
-    companion object {
-        @JvmStatic
-        fun newInstance(): FinancingFragment {
-            return FinancingFragment().apply {
-                // You can pass arguments here if needed using Bundle
-                arguments = Bundle().apply {
-                    // put arguments here
-                }
+        companion object {
+            fun newInstance(): FinancingFragment {
+                return FinancingFragment()
             }
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFinancingBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View {
+            _binding = FragmentFinancingBinding.inflate(inflater, container, false)
+            return binding.root
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.paymentMethods.observe(viewLifecycleOwner, Observer { state ->
-            when (state) {
-                is StatePaymentMethods.Loading -> {
-                    binding.loadingScreenFinancing.rlLoading.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
+        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            super.onViewCreated(view, savedInstanceState)
+            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            financingViewModel = ViewModelProvider(this).get(FinancingViewModel::class.java)
+
+            financingViewModel.paymentMethods.observe(viewLifecycleOwner, Observer { state ->
+                when (state) {
+                    is StatePaymentMethods.Loading -> {
+                        binding.loadingScreenFinancing.rlLoading.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
+                    }
+                    is StatePaymentMethods.Success -> {
+                        binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
+                        binding.recyclerView.visibility = View.VISIBLE
+                        setupRecyclerView(state.info)
+                    }
+                    is StatePaymentMethods.Error -> {
+                        binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
+                        binding.recyclerView.visibility = View.GONE
+                    }
                 }
-                is StatePaymentMethods.Success -> {
-                    binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
-                    setupRecyclerView(state.info)
-                }
-                is StatePaymentMethods.Error -> {
-                    binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                    // Handle error
-                }
-            }
-        })
-    }
+            })
 
-    private fun setupRecyclerView(paymentMethods: List<PaymentMethod>) {
-        binding.recyclerView.adapter = PaymentMethodsAdapter(paymentMethods)
-    }
+            financingViewModel.getPaymentMethods()
+        }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        private fun setupRecyclerView(paymentMethods: List<PaymentMethod>) {
+            val adapter = PaymentMethodAdapter(paymentMethods)
+            binding.recyclerView.adapter = adapter
+        }
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
+
     }
-}

@@ -32,6 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.prelogin.presenter.PreLoginActivity"
+
+
             android:exported="true"/>
         <activity
             android:name=".ui.register.presenter.RegisterActivity"

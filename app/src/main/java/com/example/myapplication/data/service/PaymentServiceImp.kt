@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit
 class PaymentServiceImp {
 
     private val client = OkHttpClient.Builder()
-        .connectTimeout(3000, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
         .addInterceptor(AuthInterceptor(savedToken))
         .build()
 
