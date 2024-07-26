@@ -20,7 +20,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private lateinit var fragmentImage: ImageFragment
 
-    private val fragmentComment = CommentFragment.newInstance()
+    private lateinit var fragmentComment : CommentFragment
 
     private lateinit var fragmentDescription : DescriptionFragment
 
@@ -45,7 +45,7 @@ class DetailsActivity : AppCompatActivity() {
 
         fragmentImage = ImageFragment.newInstance(idProduct?: -1)
         fragmentDescription = DescriptionFragment.newInstance(idProduct?: -1)
-
+        fragmentComment = CommentFragment.newInstance(idProduct?: -1)
         showFragment(fragmentImage, ImageFragment::class.java.toString())
         actions()
     }
