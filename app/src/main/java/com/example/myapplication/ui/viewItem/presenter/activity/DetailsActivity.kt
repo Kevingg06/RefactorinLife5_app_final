@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.ActivityDetailsBinding
-import com.example.myapplication.ui.viewItem.presenter.fragment.CommentFragment
+import com.example.myapplication.ui.viewItem.presenter.fragment.comment.CommentFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.description.presenter.DescriptionFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.FinancingFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
@@ -20,9 +20,9 @@ class DetailsActivity : AppCompatActivity() {
 
     private lateinit var fragmentImage: ImageFragment
 
-    private lateinit var fragmentComment : CommentFragment
+    private lateinit var fragmentComment: CommentFragment
 
-    private lateinit var fragmentDescription : DescriptionFragment
+    private lateinit var fragmentDescription: DescriptionFragment
 
     private lateinit var binding: ActivityDetailsBinding
 
@@ -43,14 +43,14 @@ class DetailsActivity : AppCompatActivity() {
             idProduct = it.getInt(ARG_PRODUCT_ID)
         }
 
-        fragmentImage = ImageFragment.newInstance(idProduct?: -1)
-        fragmentDescription = DescriptionFragment.newInstance(idProduct?: -1)
-        fragmentComment = CommentFragment.newInstance(idProduct?: -1)
+        fragmentImage = ImageFragment.newInstance(idProduct ?: -1)
+        fragmentDescription = DescriptionFragment.newInstance(idProduct ?: -1)
+        fragmentComment = CommentFragment.newInstance(idProduct ?: -1)
         showFragment(fragmentImage, ImageFragment::class.java.toString())
         actions()
     }
 
-    private fun actions(){
+    private fun actions() {
         binding.detailsTvImageFirst.setOnClickListener {
             showFragment(fragmentImage, ImageFragment::class.java.toString())
         }
@@ -83,19 +83,25 @@ class DetailsActivity : AppCompatActivity() {
             showFragment(fragmentComment, CommentFragment::class.java.toString())
         }
     }
+
     private fun showFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction()
             .replace(binding.itemViewFragment.id, fragment, tag)
             .addToBackStack(null)
             .commit()
-            effectSelectView(fragment)
+        effectSelectView(fragment)
     }
-    private fun effectSelectView(fragment : Fragment){
-       binding.apply {
-           detailsCircleComments.visibility = if (fragment is CommentFragment) View.VISIBLE else View.GONE
-           detailsCircleDescrption.visibility = if (fragment is DescriptionFragment) View.VISIBLE else View.GONE
-           detailsCircleFinancing.visibility = if (fragment is FinancingFragment) View.VISIBLE else View.GONE
-           detailsCircleImage.visibility = if (fragment is ImageFragment) View.VISIBLE else View.GONE
-       }
+
+    private fun effectSelectView(fragment: Fragment) {
+        binding.apply {
+            detailsCircleComments.visibility =
+                if (fragment is CommentFragment) View.VISIBLE else View.GONE
+            detailsCircleDescrption.visibility =
+                if (fragment is DescriptionFragment) View.VISIBLE else View.GONE
+            detailsCircleFinancing.visibility =
+                if (fragment is FinancingFragment) View.VISIBLE else View.GONE
+            detailsCircleImage.visibility =
+                if (fragment is ImageFragment) View.VISIBLE else View.GONE
+        }
     }
 }
