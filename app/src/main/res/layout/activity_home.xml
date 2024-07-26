@@ -38,6 +38,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/main_icon_home"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_small"
@@ -47,27 +48,38 @@
                 android:contentDescription="@string/home_icon_description"
                 android:src="@drawable/icon"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/sv_home"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <!--                app:layout_constraintEnd_toStartOf="@id/clickable_overlay"-->
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/sv_home"
+            <FrameLayout
                 android:layout_width="250dp"
                 android:layout_height="32dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:background="@drawable/bg_sv_home"
-                app:iconifiedByDefault="false"
-                android:enabled="false"
-                android:allowClickWhenDisabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_icon_heart"
-                app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="@string/home_sv_hint"
-                android:focusable="false"
-                android:focusableInTouchMode="false" />
+                app:layout_constraintStart_toEndOf="@+id/main_icon_home"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/sv_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:allowClickWhenDisabled="true"
+                    android:background="@drawable/bg_sv_home"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="@string/home_sv_hint" />
+
+                <View
+                    android:id="@+id/clickable_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent" />
+
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/iv_icon_heart"

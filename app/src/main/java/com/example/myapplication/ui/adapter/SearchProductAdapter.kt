@@ -53,12 +53,14 @@ class SearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name = value.name
         val description = value.description
         val price = value.price.toString()
+        val currency = value.currency
         val idProduct = value.idProduct
         val favorite = value.isFavorite
         Picasso.get().load(image).into(binding.itemProductImage)
         binding.itemProductBrand.text = name
         binding.productDescription.text = description
         binding.itemProductPrice.text = price
+        binding.itemProductCurrency.text = currency
 
         if (favorite!!) {
             binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)

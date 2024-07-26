@@ -31,7 +31,13 @@ class SearchViewModel(private val repository: ProductRepository = ProductReposit
             val response = repository.searchProducts(idProductType, productName, onlyFavorite)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    _data.postValue(StateProductsSearch.Success(it))
+                    val sizeProducts = it.products?.size ?: 0
+
+                    if (sizeProducts > 0){
+                        _data.postValue(StateProductsSearch.Success(it))
+                    }else{
+                        _data.postValue(StateProductsSearch.NoContent)
+                    }
                 } ?: {
                     _data.postValue(StateProductsSearch.Error(Constants.LOGIN_FAILED))
                 }

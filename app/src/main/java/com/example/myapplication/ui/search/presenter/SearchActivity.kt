@@ -85,6 +85,7 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
             when (data) {
                 is StateProductsSearch.Success -> {
                     hideLoading()
+                    hideNoContent()
                     setRecyclerView(data.info.products)
                 }
 
@@ -94,6 +95,11 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
                 is StateProductsSearch.Error -> {
                     hideLoading()
                     showError()
+                }
+
+                StateProductsSearch.NoContent -> {
+                    hideLoading()
+                    showNoContent()
                 }
             }
         }
@@ -131,6 +137,20 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
         runOnUiThread {
             binding.rvProductsSearch.visibility = View.GONE
             binding.errorLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showNoContent() {
+        runOnUiThread {
+            binding.rvProductsSearch.visibility = View.GONE
+            binding.noContentLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideNoContent() {
+        runOnUiThread {
+            binding.rvProductsSearch.visibility = View.VISIBLE
+            binding.noContentLayout.visibility = View.GONE
         }
     }
 

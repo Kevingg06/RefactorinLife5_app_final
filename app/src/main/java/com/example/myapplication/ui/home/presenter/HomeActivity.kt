@@ -67,14 +67,13 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             startActivity(myIntent)
         }
 
-        binding.svHome.setOnClickListener {
+        binding.clickableOverlay.setOnClickListener {
             val myIntent = Intent(this, SearchActivity::class.java)
             val bundle = Bundle()
             bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType?: 1)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
         }
-
     }
 
     private fun setupRecyclerViews() {
