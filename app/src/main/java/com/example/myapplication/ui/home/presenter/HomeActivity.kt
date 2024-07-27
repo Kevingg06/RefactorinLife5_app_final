@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-       token = getToken(this)
+        token = getToken(this)
 
         token?.let {
             savedToken = it
@@ -61,7 +61,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         binding.mainSaleLayout.setOnClickListener {
             val myIntent = Intent(this, DetailsActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt(ARG_PRODUCT_ID, idMainProduct?: -1)
+            bundle.putInt(ARG_PRODUCT_ID, idMainProduct ?: -1)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
         }
@@ -75,10 +75,10 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
     }
 
     private fun getHomeInfo() {
-            viewModel.getHomeInfo()
+        viewModel.getHomeInfo()
     }
 
-    private fun setFavorite( id: Int) {
+    private fun setFavorite(id: Int) {
         viewModel.putFavorites(id)
     }
 
@@ -157,6 +157,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
                     hideLoading()
                     showError()
                 }
+
                 is StateProduct.FilteredProducts -> {
                     hideLoading()
                     updateFilteredProducts(data.products)
@@ -180,17 +181,25 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             val buttonState = viewModel.isFavorite.value ?: false
             val currentButtonState = !buttonState
             setFavoriteData(currentButtonState)
-                idMainProduct?.let {
-                    setFavorite(it)
+            idMainProduct?.let {
+                setFavorite(it)
             }
         }
     }
 
     private fun setRecyclerViewProduct(value: MutableList<Product>?) {
         runOnUiThread {
-            productsAdapter = AdapterProduct(value)
+            productsAdapter = AdapterProduct(value, goToDetails = { goToDetails(it) })
             binding.rvRecommendationsHome.adapter = productsAdapter
         }
+    }
+
+    private fun goToDetails(item: Product) {
+        val myIntent = Intent(this, DetailsActivity::class.java)
+        val bundle = Bundle()
+        bundle.putInt(ARG_PRODUCT_ID, item.idProduct ?: -1)
+        myIntent.putExtras(bundle)
+        startActivity(myIntent)
     }
 
     private fun setFavoriteIcon(isFavorite: Boolean?) {
@@ -207,10 +216,12 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = singleProductResponse.price.toString().transformPrice(singleProductResponse.currency ?: "")
+            binding.productPrice.text = singleProductResponse.price.toString()
+                .transformPrice(singleProductResponse.currency ?: "")
 
-            if(!singleProductResponse.images.isNullOrEmpty())
-                Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)
+            if (!singleProductResponse.images.isNullOrEmpty())
+                Picasso.get().load(singleProductResponse.images[0].link)
+                    .into(binding.imageMainProduct)
 
             singleProductResponse.isFavorite?.let {
                 setFavoriteData(it)
