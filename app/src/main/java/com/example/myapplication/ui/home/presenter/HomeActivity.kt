@@ -18,6 +18,7 @@ import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
+import com.example.myapplication.ui.utils.transformPrice
 import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 import com.squareup.picasso.Picasso
 
@@ -206,8 +207,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
             binding.productName.text = singleProductResponse.name
             binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text =
-                "${singleProductResponse.currency} ${singleProductResponse.price}"
+            binding.productPrice.text = singleProductResponse.price.toString().transformPrice(singleProductResponse.currency ?: "")
 
             if(!singleProductResponse.images.isNullOrEmpty())
                 Picasso.get().load(singleProductResponse.images[0].link).into(binding.imageMainProduct)

@@ -16,6 +16,7 @@ import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
 import kotlinx.coroutines.launch
 import com.example.myapplication.ui.similar.presenter.SimilarActivity
+import com.example.myapplication.ui.utils.transformPrice
 
 class ImageFragment : Fragment() {
 
@@ -80,8 +81,7 @@ class ImageFragment : Fragment() {
 
     private fun render(value: ProductByIdResponse){
         binding.imagesTvTitle.text = value.name
-        binding.ivProductPrice.text = value.price.toString()
-        binding.ivProductCurrency.text = value.currency
+        binding.ivProductPrice.text = value.price.toString().transformPrice(value.currency?: "")
     }
 
     private fun actions(){

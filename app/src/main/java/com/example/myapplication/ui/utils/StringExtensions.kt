@@ -38,3 +38,27 @@ fun String?.isValidEmail(): Boolean {
 fun String?.isConfirmedPassword(confirmPassword: String?): Boolean {
     return this == confirmPassword
 }
+
+fun String.transformPrice(currency: String): String {
+    val stringBuilder = StringBuilder()
+    var count = 0
+    stringBuilder.append("$currency ")
+
+    for (i in this.indices) {
+        if (this[i].isDigit()) {
+            stringBuilder.append(this[i])
+            count++
+
+            if (count % 3 == 1 && i != this.lastIndex) {
+                stringBuilder.append(".")
+            }
+        }
+    }
+    for(j in stringBuilder.length -1 downTo 0){
+        if (stringBuilder[j] == '.'){
+            stringBuilder.setCharAt(j, ',')
+            return stringBuilder.toString()
+        }
+    }
+    return stringBuilder.toString()
+}

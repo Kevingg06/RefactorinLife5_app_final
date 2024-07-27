@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.databinding.ItemRvRecommendationsBinding
+import com.example.myapplication.ui.utils.transformPrice
 import com.squareup.picasso.Picasso
 
 class AdapterProduct(private var productList: MutableList<Product>?) : RecyclerView.Adapter<ProductHolder>() {
@@ -38,8 +39,11 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(value: Product) {
         val image = value.image
         val name = value.name
-        val price = value.price.toString()
-        Picasso.get().load(image).into(binding.imageProduct)
+        val price = value.price.toString().transformPrice(value.currency ?: "")
+        Picasso.get()
+            .load(image)
+            .error(R.drawable.error_img_home)
+            .into(binding.imageProduct)
         binding.nameProduct.text = name
         binding.priceProduct.text = price
 
