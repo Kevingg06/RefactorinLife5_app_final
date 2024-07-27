@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/bg_layout_main_sale"
+    android:elevation="8dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -18,9 +21,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/roboto_black"
                 android:textColor="@color/black"
-                android:fontFamily="@font/roboto_bold"
-                android:textSize="20sp" />
+                android:textSize="19sp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -35,10 +38,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="7dp"
                 android:layout_marginEnd="16dp"
-                android:textColor="@color/black"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/roboto_light"
+                android:lineSpacingExtra="2dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

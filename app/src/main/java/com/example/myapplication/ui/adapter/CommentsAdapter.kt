@@ -9,11 +9,12 @@ import com.example.myapplication.data.dto.response.Comments
 import com.example.myapplication.data.dto.response.CommentsResponse
 import com.example.myapplication.databinding.ItemRvCommentsBinding
 
-class CommentAdapter(private val comments : CommentsResponse)
-    : RecyclerView.Adapter<CommentHolder>() {
+class CommentAdapter(private val comments: CommentsResponse) :
+    RecyclerView.Adapter<CommentHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_comments, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_rv_comments, parent, false)
         return CommentHolder(view)
     }
 
@@ -26,9 +27,9 @@ class CommentAdapter(private val comments : CommentsResponse)
     }
 }
 
-class CommentHolder(view : View) : RecyclerView.ViewHolder(view) {
+class CommentHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemRvCommentsBinding.bind(view)
-    fun render(value: Comments){
+    fun render(value: Comments) {
         binding.commentName.text = value.commentBy
         binding.comment.text = value.comment
     }

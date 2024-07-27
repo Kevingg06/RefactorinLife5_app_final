@@ -19,17 +19,15 @@ class CommentsServiceImp {
         .addInterceptor(AuthInterceptor(TokenHolder.savedToken))
         .build()
 
-    //http://localhost:3000
-    //https://stoplight.io/mocks/tomasas214456/mock-rf5/461694548
     private val retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl("https://stoplight.io/mocks/tomasas214456/mock-rf5/461694548")
+        .baseUrl("https://api-comments-3yzc.onrender.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     private val service = retrofit.create<CommentService>()
 
-    fun getComments(id : Int) : Response<CommentsResponse> {
+    suspend fun getComments(id: Int): Response<CommentsResponse> {
         return service.getComments(id)
     }
 

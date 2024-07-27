@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.dto.model.StateComments
-import com.example.myapplication.data.dto.response.Comments
+import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.dto.response.CommentsResponse
+import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.FragmentCommentBinding
 import com.example.myapplication.ui.adapter.CommentAdapter
@@ -34,14 +35,20 @@ class CommentFragment : Fragment() {
         arguments?.let { bundle ->
             val idComments = bundle.getInt(Constants.ARG_PRODUCT_ID)
             callCommentsInfo(idComments)
+            callProductById(idComments)
         }
         actions()
         setUpRecyclerView()
+        observePriceInfo()
         observeCommentInfo()
     }
 
-    private fun callCommentsInfo(id : Int) {
+    private fun callCommentsInfo(id: Int) {
         viewModel.getComments(id)
+    }
+
+    private fun callProductById(id: Int) {
+        viewModel.getProductById(id)
     }
 
     private fun setUpRecyclerView() {
@@ -56,18 +63,23 @@ class CommentFragment : Fragment() {
         binding.rvComments.adapter = adapter
     }
 
+    private fun render(value: ProductByIdResponse) {
+        binding.commentsTvPrice.text = value.price.toString()
+        binding.commentsTvCurrency.text = value.currency
+    }
+
     private fun actions() {
         binding.commentImageViewBack.setOnClickListener {
             activity?.finish()
         }
     }
 
-    fun hideLoading() {
-
+    private fun hideLoading() {
+        binding.loadingScreenImages.rlLoading.visibility = View.GONE
     }
 
-    fun showLoading() {
-
+    private fun showLoading() {
+        binding.loadingScreenImages.rlLoading.visibility = View.VISIBLE
     }
 
     private fun observeCommentInfo() {
@@ -94,6 +106,30 @@ class CommentFragment : Fragment() {
         }
     }
 
+    private fun observePriceInfo() {
+        viewModel.data1.observe(viewLifecycleOwner) { data1 ->
+            when (data1) {
+                is StateProductById.Success -> {
+                    hideLoading()
+                    render(data1.info)
+                }
+
+                is StateProductById.Error -> {
+                    hideLoading()
+                }
+
+                is StateProductById.Loading -> {
+                    showLoading()
+                }
+
+                else -> {
+
+                }
+            }
+
+        }
+    }
+
     companion object {
         fun newInstance(productId: Int): CommentFragment {
             val fragment = CommentFragment()
@@ -103,17 +139,5 @@ class CommentFragment : Fragment() {
             fragment.arguments = bundle
             return fragment
         }
-    }
-
-    private fun getInfo(): CommentsResponse {
-
-        return CommentsResponse(
-            listOf(
-                Comments(1, "asjkiojgng", "pepe"),
-                Comments(2, "asdasd", "elena"),
-                Comments(2, "asdasd", "elena"),
-                Comments(2, "asdasd", "elena")
-            )
-        )
     }
 }

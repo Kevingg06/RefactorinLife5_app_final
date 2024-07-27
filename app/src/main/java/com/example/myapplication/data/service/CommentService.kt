@@ -7,6 +7,6 @@ import retrofit2.http.Query
 
 interface CommentService {
     @GET("/api/v1/comments")
-    fun getComments(@Query("idProduct") productId: Int) : Response<CommentsResponse>
+    suspend fun getComments(@Query("idProduct") productId: Int): Response<CommentsResponse>
 
 }
