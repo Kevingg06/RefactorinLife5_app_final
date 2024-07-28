@@ -11,7 +11,10 @@ import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.launch
 
-class FinancingViewModel(private val repository: PaymentRepository = PaymentRepository(),private val repositoryProduct: ProductRepository = ProductRepository()) : ViewModel() {
+class FinancingViewModel(
+    private val repository: PaymentRepository = PaymentRepository(),
+    private val repositoryProduct: ProductRepository = ProductRepository()
+) : ViewModel() {
 
     private val _paymentMethods = MutableLiveData<StatePaymentMethods>()
     val paymentMethods: LiveData<StatePaymentMethods> get() = _paymentMethods
@@ -19,16 +22,13 @@ class FinancingViewModel(private val repository: PaymentRepository = PaymentRepo
     fun getPaymentMethods() {
         viewModelScope.launch {
             _paymentMethods.postValue(StatePaymentMethods.Loading)
-            try {
-                val response = repository.getPaymentMethods()
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        _paymentMethods.postValue(StatePaymentMethods.Success(it.paymentMethods))
-                    } ?: _paymentMethods.postValue(StatePaymentMethods.Error(Constants.PRODUCT_PAYMENT_METHOD_FAILED))
-                } else {
-                    _paymentMethods.postValue(StatePaymentMethods.Error(Constants.NETWORK_ERROR))
+            val response = repository.getPaymentMethods()
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _paymentMethods.postValue(StatePaymentMethods.Success(it.paymentMethods))
                 }
-            } catch (e: Exception) {
+                    ?: _paymentMethods.postValue(StatePaymentMethods.Error(Constants.PRODUCT_PAYMENT_METHOD_FAILED))
+            } else {
                 _paymentMethods.postValue(StatePaymentMethods.Error(Constants.NETWORK_ERROR))
             }
         }
