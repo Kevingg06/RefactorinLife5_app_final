@@ -20,15 +20,8 @@
             android:id="@+id/header_icon"
             android:layout_width="125dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_entity_header"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:paddingStart="8dp" />-->
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/Financing_img_description" />
 
     </androidx.cardview.widget.CardView>
 

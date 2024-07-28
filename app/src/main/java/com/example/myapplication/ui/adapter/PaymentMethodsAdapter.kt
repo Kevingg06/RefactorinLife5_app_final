@@ -33,8 +33,8 @@ class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>) : Re
 
             val iconResId = when (paymentMethod.entity) {
                 "Galicia" -> R.drawable.ic_galicia
-                "Santander" -> R.drawable.ic_santander2
-                else -> R.drawable.ic_default2
+                "Santander" -> R.drawable.ic_santander
+                else -> R.drawable.ic_default
             }
             binding.headerIcon.setImageResource(iconResId)
 
