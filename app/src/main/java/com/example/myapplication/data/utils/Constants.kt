@@ -2,11 +2,13 @@ package com.example.myapplication.data.utils
 
 object Constants {
     const val NETWORK_ERROR = "Error de Servicio."
+
     const val LOGIN_FAILED = "Error en el usuario o contraseña!"
     const val SUPPORT_EMAIL = "centro.ayuda.rla@gmail.com"
     const val SUPPORT_EMAIL_SUBJECT = "Consulta de soporte - RLA"
 
     const val PRODUCT_TYPE_FAILED = "Error al obtener tipos de productos!"
+    const val PRODUCT_PAYMENT_METHOD_FAILED = "Error al obtener metodo de pago!"
     const val PRODUCTS_FAILED = "Error al obtener los productos!"
     const val LAST_USER_PRODUCT_FAILED = "Error al obtener el ultimo producto visitado!"
     const val DAILY_OFFER_FAILED = "Error al obtener la oferta del dia!"

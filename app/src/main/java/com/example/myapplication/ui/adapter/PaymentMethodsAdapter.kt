@@ -1,7 +1,11 @@
 package com.example.myapplication.ui.adapter
 
 import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -9,47 +13,60 @@ import com.example.myapplication.data.dto.response.PaymentMethod
 import com.example.myapplication.databinding.ItemInstallmentBinding
 import com.example.myapplication.databinding.ItemPaymentMethodBinding
 
-class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>) : RecyclerView.Adapter<PaymentMethodAdapter.ViewHolder>() {
+class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>) : RecyclerView.Adapter<PaymentMethodAdapter.PaymentMethodViewHolder>() {
 
-    class ViewHolder(val binding: ItemPaymentMethodBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ItemPaymentMethodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val paymentMethod = paymentMethods[position]
-        holder.binding.tvEntityHeader.text = paymentMethod.entity
-
-        // Set dynamic icon
-        val iconResId = when (paymentMethod.entity) {
-            "Galicia" -> R.drawable.ic_galicia
-            "Santander" -> R.drawable.ic_santander
-            else -> R.drawable.ic_default
-        }
-        holder.binding.headerIcon.setImageResource(iconResId)
-
-        // Set background color and text style
-        if (paymentMethod.entity == "Galicia") {
-            holder.binding.headerLayout.setBackgroundColor(Color.parseColor("#FF6600"))
-            holder.binding.tvEntityHeader.setBackgroundResource(R.drawable.text_background_orange)
-            holder.binding.tvEntityHeader.setTextColor(Color.parseColor("#000000"))
-        } else {
-            holder.binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
-            holder.binding.tvEntityHeader.setBackgroundResource(R.drawable.text_background_black)
-            holder.binding.tvEntityHeader.setTextColor(Color.parseColor("#FFFFFF"))
-        }
-
-        // Set installments
-        holder.binding.llInstallments.removeAllViews()
-        paymentMethod.installments.forEach { installment ->
-            val installmentBinding = ItemInstallmentBinding.inflate(LayoutInflater.from(holder.binding.llInstallments.context), holder.binding.llInstallments, false)
-            installmentBinding.root.text = "${installment.quantity} cuotas: ${installment.interest}"
-            holder.binding.llInstallments.addView(installmentBinding.root)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentMethodViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_payment_method, parent, false)
+        return PaymentMethodViewHolder(view)
     }
 
     override fun getItemCount(): Int = paymentMethods.size
+
+    override fun onBindViewHolder(holder: PaymentMethodViewHolder, position: Int) {
+        holder.render(paymentMethods[position])
+    }
+
+    class PaymentMethodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ItemPaymentMethodBinding.bind(view)
+
+        fun render(paymentMethod: PaymentMethod) {
+
+            val iconResId = when (paymentMethod.entity) {
+                "Galicia" -> R.drawable.ic_galicia
+                "Santander" -> R.drawable.ic_santander2
+                else -> R.drawable.ic_default2
+            }
+            binding.headerIcon.setImageResource(iconResId)
+
+            when (paymentMethod.entity) {
+                "Galicia" -> {
+                    binding.headerLayout.setBackgroundColor(Color.parseColor("#FF6600"))
+                }
+                "Santander" -> {
+                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
+                }
+                "Otros" -> {
+                    val colorFilter = PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+                    binding.headerIcon.colorFilter = colorFilter
+
+                    val layoutParams = binding.headerIcon.layoutParams as ViewGroup.LayoutParams
+                    layoutParams.width = 100
+                    binding.headerIcon.layoutParams = layoutParams
+
+                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
+                }
+                else -> {
+                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
+                }
+            }
+
+            binding.llInstallments.removeAllViews()
+            paymentMethod.installments.forEach { installment ->
+                val installmentBinding = ItemInstallmentBinding.inflate(LayoutInflater.from(binding.llInstallments.context), binding.llInstallments, false)
+                val formattedText = "<b>${installment.quantity} cuotas:</b> ${installment.interest}"
+                installmentBinding.root.text = Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY)
+                binding.llInstallments.addView(installmentBinding.root)
+            }
+        }
+    }
 }

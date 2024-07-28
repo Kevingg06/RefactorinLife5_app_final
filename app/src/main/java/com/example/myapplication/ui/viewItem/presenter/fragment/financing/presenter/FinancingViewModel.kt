@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.dto.model.StatePaymentMethods
-import com.example.myapplication.data.dto.response.PaymentMethod
+import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.repository.PaymentRepository
+import com.example.myapplication.data.repository.ProductRepository
+import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
-class FinancingViewModel(private val repository: PaymentRepository = PaymentRepository()) : ViewModel() {
+class FinancingViewModel(private val repository: PaymentRepository = PaymentRepository(),private val repositoryProduct: ProductRepository = ProductRepository()) : ViewModel() {
 
     private val _paymentMethods = MutableLiveData<StatePaymentMethods>()
     val paymentMethods: LiveData<StatePaymentMethods> get() = _paymentMethods
@@ -24,12 +24,29 @@ class FinancingViewModel(private val repository: PaymentRepository = PaymentRepo
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _paymentMethods.postValue(StatePaymentMethods.Success(it.paymentMethods))
-                    } ?: _paymentMethods.postValue(StatePaymentMethods.Error("Error en el formato de respuesta"))
+                    } ?: _paymentMethods.postValue(StatePaymentMethods.Error(Constants.PRODUCT_PAYMENT_METHOD_FAILED))
                 } else {
-                    _paymentMethods.postValue(StatePaymentMethods.Error("Error en la red"))
+                    _paymentMethods.postValue(StatePaymentMethods.Error(Constants.NETWORK_ERROR))
                 }
             } catch (e: Exception) {
-                _paymentMethods.postValue(StatePaymentMethods.Error("Error en la solicitud"))
+                _paymentMethods.postValue(StatePaymentMethods.Error(Constants.NETWORK_ERROR))
+            }
+        }
+    }
+
+    private val _dataProduct = MutableLiveData<StateProductById>()
+    val dataProduct: LiveData<StateProductById> = _dataProduct
+
+    fun getProductById(id: Int) {
+        viewModelScope.launch {
+            _dataProduct.postValue(StateProductById.Loading)
+            val response = repositoryProduct.getProductById(id)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _dataProduct.postValue(StateProductById.Success(it))
+                } ?: _dataProduct.postValue(StateProductById.Error(Constants.PRODUCTS_FAILED))
+            } else {
+                _dataProduct.postValue(StateProductById.Error(Constants.NETWORK_ERROR))
             }
         }
     }
