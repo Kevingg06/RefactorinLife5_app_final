@@ -63,4 +63,8 @@
     <string name="button_similar_title">Similares</string>
     <string name="button_colors_title">Colores</string>
 
+    <!-- Fragment Financing -->
+    <string name="Financing_img_description">Métodos de pago</string>
+
+
 </resources>
