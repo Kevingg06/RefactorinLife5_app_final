@@ -9,14 +9,14 @@ import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.ActivityDetailsBinding
 import com.example.myapplication.ui.viewItem.presenter.fragment.comment.CommentFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.description.presenter.DescriptionFragment
-import com.example.myapplication.ui.viewItem.presenter.fragment.FinancingFragment
+import com.example.myapplication.ui.viewItem.presenter.fragment.financing.presenter.FinancingFragment
 import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
 
 class DetailsActivity : AppCompatActivity() {
 
     private var idProduct: Int? = null
 
-    private val fragmentFinancing = FinancingFragment.newInstance()
+    private lateinit var fragmentFinancing: FinancingFragment
 
     private lateinit var fragmentImage: ImageFragment
 
@@ -44,6 +44,7 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         fragmentImage = ImageFragment.newInstance(idProduct ?: -1)
+        fragmentFinancing = FinancingFragment.newInstance(idProduct ?: -1)
         fragmentDescription = DescriptionFragment.newInstance(idProduct ?: -1)
         fragmentComment = CommentFragment.newInstance(idProduct ?: -1)
         showFragment(fragmentImage, ImageFragment::class.java.toString())

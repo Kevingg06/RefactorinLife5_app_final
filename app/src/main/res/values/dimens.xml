@@ -7,6 +7,7 @@
     <dimen name="text_size_title_medium">26sp</dimen>
     <dimen name="text_size_title_large">40sp</dimen>
     <dimen name="text_size_title_images">28sp</dimen>
+    <dimen name="text_size_title_financing">22sp</dimen>
 
     <!-- Padding -->
     <dimen name="padding_standard">9dp</dimen>
