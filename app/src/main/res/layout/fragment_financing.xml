@@ -14,12 +14,12 @@
 
         <ImageView
             android:id="@+id/arrow_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginTop="@dimen/margin_standard"
-            android:layout_marginEnd="35dp"
+            android:layout_marginEnd="25dp"
             android:contentDescription="@string/image_description_back"
-            android:src="@drawable/arrow_image"
+            android:src="@drawable/arrow_left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.20" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_2"
@@ -41,10 +41,10 @@
             android:id="@+id/financing_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/margin_standard"
-            android:layout_marginBottom="44dp"
-            android:textSize="@dimen/text_size_title_images"
+            android:layout_marginBottom="43dp"
+            android:textSize="@dimen/text_size_title_financing"
             android:textStyle="bold"
             android:text="Financiación"
             app:layout_constraintBottom_toTopOf="@+id/guideline_1"
@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7.5dp"
             android:background="@color/dark_gray"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_margin="25dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/line_header"
@@ -109,7 +109,7 @@
             android:id="@+id/buy_product_button"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="45dp"
+            android:layout_marginEnd="26dp"
             android:layout_marginBottom="@dimen/margin_large"
             android:background="@drawable/bg_btn_enabled"
             android:elevation="10dp"

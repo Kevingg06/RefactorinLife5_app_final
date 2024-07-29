@@ -40,6 +40,8 @@ class FinancingFragment : Fragment() {
             getProduct(idProduct)
         }
 
+        actions()
+
         financingViewModel.paymentMethods.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is StatePaymentMethods.Loading -> {
@@ -55,7 +57,8 @@ class FinancingFragment : Fragment() {
 
                 is StatePaymentMethods.Error -> {
                     binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    setupRecyclerView(emptyList())
                 }
             }
         })
@@ -92,6 +95,12 @@ class FinancingFragment : Fragment() {
     private fun setupRecyclerView(paymentMethods: List<PaymentMethod>) {
         val adapter = PaymentMethodAdapter(paymentMethods)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun actions() {
+        binding.arrowButton.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     override fun onDestroyView() {

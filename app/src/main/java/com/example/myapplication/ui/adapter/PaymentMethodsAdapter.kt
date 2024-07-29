@@ -1,29 +1,34 @@
 package com.example.myapplication.ui.adapter
 
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.data.dto.response.Installment
 import com.example.myapplication.data.dto.response.PaymentMethod
 import com.example.myapplication.databinding.ItemInstallmentBinding
 import com.example.myapplication.databinding.ItemPaymentMethodBinding
 
-class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>) : RecyclerView.Adapter<PaymentMethodAdapter.PaymentMethodViewHolder>() {
+class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>?, private val isError: Boolean = false) : RecyclerView.Adapter<PaymentMethodAdapter.PaymentMethodViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentMethodViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_payment_method, parent, false)
         return PaymentMethodViewHolder(view)
     }
 
-    override fun getItemCount(): Int = paymentMethods.size
+    override fun getItemCount(): Int {
+        return if (isError || paymentMethods.isNullOrEmpty()) 1 else paymentMethods.size
+    }
 
     override fun onBindViewHolder(holder: PaymentMethodViewHolder, position: Int) {
-        holder.render(paymentMethods[position])
+        if (isError || paymentMethods.isNullOrEmpty()) {
+            holder.renderStatic()
+        } else {
+            holder.render(paymentMethods[position])
+        }
     }
 
     class PaymentMethodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,31 +43,41 @@ class PaymentMethodAdapter(private val paymentMethods: List<PaymentMethod>) : Re
             }
             binding.headerIcon.setImageResource(iconResId)
 
-            when (paymentMethod.entity) {
-                "Galicia" -> {
-                    binding.headerLayout.setBackgroundColor(Color.parseColor("#FF6600"))
+            binding.headerLayout.setBackgroundColor(
+                when (paymentMethod.entity) {
+                    "Galicia" -> Color.parseColor("#FF6600")
+                    "Santander" -> Color.parseColor("#000000")
+                    else -> Color.parseColor("#000000")
                 }
-                "Santander" -> {
-                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
-                }
-                "Otros" -> {
-                    val colorFilter = PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
-                    binding.headerIcon.colorFilter = colorFilter
-
-                    val layoutParams = binding.headerIcon.layoutParams as ViewGroup.LayoutParams
-                    layoutParams.width = 100
-                    binding.headerIcon.layoutParams = layoutParams
-
-                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
-                }
-                else -> {
-                    binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
-                }
-            }
+            )
 
             binding.llInstallments.removeAllViews()
             paymentMethod.installments.forEach { installment ->
                 val installmentBinding = ItemInstallmentBinding.inflate(LayoutInflater.from(binding.llInstallments.context), binding.llInstallments, false)
+                val formattedText = "<b>${installment.quantity} cuotas:</b> ${installment.interest}"
+                installmentBinding.root.text = Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY)
+                binding.llInstallments.addView(installmentBinding.root)
+            }
+        }
+
+        fun renderStatic() {
+            binding.headerIcon.setImageResource(R.drawable.ic_default)
+            binding.headerLayout.setBackgroundColor(Color.parseColor("#000000"))
+
+            val staticInstallments = listOf(
+                Installment(3, "sin interes"),
+                Installment(6, "Sin interes"),
+                Installment(9, "fijas"),
+                Installment(12, "fijas")
+            )
+
+            binding.llInstallments.removeAllViews()
+            staticInstallments.forEach { installment ->
+                val installmentBinding = ItemInstallmentBinding.inflate(
+                    LayoutInflater.from(binding.llInstallments.context),
+                    binding.llInstallments,
+                    false
+                )
                 val formattedText = "<b>${installment.quantity} cuotas:</b> ${installment.interest}"
                 installmentBinding.root.text = Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY)
                 binding.llInstallments.addView(installmentBinding.root)
