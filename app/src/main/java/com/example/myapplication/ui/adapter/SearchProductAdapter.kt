@@ -5,38 +5,38 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.dto.response.Product
+import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.databinding.ItemRvSearchBinding
 import com.example.myapplication.ui.utils.transformPrice
 import com.squareup.picasso.Picasso
 
-class SimilarProductSearch(
-    private var productList: MutableList<Product>?,
-    private val listener: OnSimilarProductItemClickListener
-) : RecyclerView.Adapter<SimilarSearchProductHolder>() {
+class SearchProductAdapter(
+    private var productList: MutableList<ProductSearch>?,
+    private val listener: OnSearchProductItemClickListener
+) : RecyclerView.Adapter<SearchProductHolder>() {
 
-    interface OnSimilarProductItemClickListener {
-        fun OnSimilarProductItemClick(idProduct: Int)
+    interface OnSearchProductItemClickListener {
+        fun OnSearchProductItemClick(idProduct: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarSearchProductHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchProductHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_rv_search, parent, false)
-        return SimilarSearchProductHolder(view)
+        return SearchProductHolder(view)
     }
 
     override fun getItemCount(): Int {
         return productList?.size ?: 0
     }
 
-    override fun onBindViewHolder(holder: SimilarSearchProductHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchProductHolder, position: Int) {
         val product = productList?.get(position)
         product?.let {
             holder.render(it, listener)
         }
     }
 
-    fun updateData(newProductList: MutableList<Product>?) {
+    fun updateData(newProductList: MutableList<ProductSearch>?) {
         productList?.clear()
         if (newProductList != null) {
             productList?.addAll(newProductList)
@@ -45,10 +45,10 @@ class SimilarProductSearch(
     }
 }
 
-class SimilarSearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
+class SearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemRvSearchBinding.bind(view)
 
-    fun render(value: Product, listener: SimilarProductSearch.OnSimilarProductItemClickListener) {
+    fun render(value: ProductSearch, listener: SearchProductAdapter.OnSearchProductItemClickListener) {
         val image = value.image
         val name = value.name
         val description = value.description
@@ -68,7 +68,7 @@ class SimilarSearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.seeProductButton.setOnClickListener {
             idProduct?.let {
-                listener.OnSimilarProductItemClick(it)
+                listener.OnSearchProductItemClick(it)
             }
         }
     }

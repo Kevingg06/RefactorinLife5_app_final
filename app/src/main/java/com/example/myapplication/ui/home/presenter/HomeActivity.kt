@@ -15,17 +15,19 @@ import com.example.myapplication.data.dto.response.ProductType
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_TYPE_ID
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
 import com.example.myapplication.ui.adapter.AdapterProduct
 import com.example.myapplication.ui.utils.transformPrice
+import com.example.myapplication.ui.search.presenter.SearchActivity
 import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 import com.squareup.picasso.Picasso
-
 
 class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickListener {
     private val viewModel by viewModels<HomeViewModel>()
     private var idMainProduct: Int? = null
+    private var idProductType: Int = 1
     private lateinit var binding: ActivityHomeBinding
     private var productsAdapter: AdapterProduct? = null
 
@@ -62,6 +64,14 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             val myIntent = Intent(this, DetailsActivity::class.java)
             val bundle = Bundle()
             bundle.putInt(ARG_PRODUCT_ID, idMainProduct ?: -1)
+            myIntent.putExtras(bundle)
+            startActivity(myIntent)
+        }
+
+        binding.clickableOverlay.setOnClickListener {
+            val myIntent = Intent(this, SearchActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType?: 1)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
         }
@@ -230,6 +240,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
     }
 
     override fun onCategoryClick(category: Int) {
+        idProductType = category
         viewModel.filterProductsByCategory(category)
     }
 

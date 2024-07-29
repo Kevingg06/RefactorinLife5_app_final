@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_home"
     android:orientation="vertical"
-    tools:context=".ui.home.presenter.HomeActivity">
+    tools:context=".ui.search.presenter.SearchActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
@@ -21,7 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.36935705" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94254446" />
 
     <LinearLayout
         android:id="@+id/header_home"
@@ -29,7 +36,7 @@
         android:layout_height="0dp"
         android:background="@drawable/bg_home_activity"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/guideLine_header"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,8 +45,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="50dp"
-                android:id="@+id/main_icon_home"                
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginTop="5dp"
@@ -48,37 +54,22 @@
                 android:contentDescription="@string/home_icon_description"
                 android:src="@drawable/icon"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sv_search_product"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/sv_search_product"
                 android:layout_width="250dp"
                 android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:background="@drawable/bg_sv_home"
+                app:iconifiedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_icon_heart"
-                app:layout_constraintStart_toEndOf="@+id/main_icon_home"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/sv_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:allowClickWhenDisabled="true"
-                    android:background="@drawable/bg_sv_home"
-                    android:enabled="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:inputType="none"
-                    app:iconifiedByDefault="false"
-                    app:queryHint="@string/home_sv_hint" />
-
-                <View
-                    android:id="@+id/clickable_overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent" />
-
-            </FrameLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="@string/home_sv_hint" />
 
             <ImageView
                 android:id="@+id/iv_icon_heart"
@@ -93,144 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_categories_home"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginStart="10dp"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_rv_categories_home" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_recommendations_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_rv_recommendations" />
-
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_sale_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/margin_standard"
-        android:layout_marginTop="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_standard"
-        android:background="@drawable/bg_layout_main_sale"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
-        app:layout_constraintTop_toTopOf="@+id/guideLine_header"
-        tools:layout_editor_absoluteX="25dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/header_main_sale"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_state_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_add_favorites"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:contentDescription="@string/home_heart_icon_description"
-                android:src="@drawable/icon_favorite"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/bottom_main_product"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" />
-
-        <ImageView
-            android:id="@+id/image_main_product"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
-            android:contentDescription="@string/product_image_description"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_main_product"
-            app:layout_constraintTop_toBottomOf="@+id/header_main_sale" />
-
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:maxLines="1"
-            android:paddingStart="25dp"
-            android:paddingEnd="@dimen/padding_text"
-            android:textSize="18sp"
-            android:fontFamily="@font/roboto_bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bottom_main_product" />
-
-        <TextView
-            android:id="@+id/product_description"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:layout_marginTop="5dp"
-            android:paddingStart="25dp"
-            android:paddingEnd="@dimen/padding_text"
-            android:fontFamily="@font/roboto_light"
-            android:textSize="@dimen/text_size_small"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_name" />
-
-        <TextView
-            android:id="@+id/product_price"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:maxLines="1"
-            android:paddingStart="25dp"
-            android:paddingEnd="@dimen/padding_text"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/support_message_home"
@@ -249,9 +103,10 @@
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products_search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_very_small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
