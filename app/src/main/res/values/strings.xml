@@ -52,6 +52,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="comments_btn_buy">Comprar</string>
+    <string name="comments_comments">Comentarios</string>
 
     <!-- details -->
     <string name="image_description_back">Back Button</string>

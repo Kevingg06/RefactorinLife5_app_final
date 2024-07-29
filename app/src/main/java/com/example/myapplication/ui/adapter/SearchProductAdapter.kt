@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.databinding.ItemRvSearchBinding
+import com.example.myapplication.ui.utils.transformPrice
 import com.squareup.picasso.Picasso
 
 class SearchProductAdapter(
@@ -52,15 +52,13 @@ class SearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image = value.image
         val name = value.name
         val description = value.description
-        val price = value.price.toString()
-        val currency = value.currency
+        val price = value.price.toString().transformPrice(value.currency?: "")
         val idProduct = value.idProduct
         val favorite = value.isFavorite
         Picasso.get().load(image).into(binding.itemProductImage)
         binding.itemProductBrand.text = name
         binding.productDescription.text = description
         binding.itemProductPrice.text = price
-        binding.itemProductCurrency.text = currency
 
         if (favorite!!) {
             binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
