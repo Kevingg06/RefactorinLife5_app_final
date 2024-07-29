@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <!--pre_login-->
+    <string name="pre_login_tv_title">Refactoring Life \nAcademy</string>
+    <string name="pre_login_tv_description">Refactoring Life</string>
+    <string name="pre_login_btn_login">Iniciar sesión</string>
+    <string name="pre_login_btn_register">Registrarse</string>
+    <string name="pre_login_tv_support_message">En caso de tener problemas comunicarse con soporte</string>
+
+    <!--login - register-->
+    <string name="tie_email">Email</string>
+    <string name="tie_password">Contraseña</string>
+    <string name="tie_confirm_password">Confirmar contraseña</string>
+    <string name="cb_show_password">Mostrar contraseña</string>
+    <string name="btn_enter">Entrar</string>
+    <string name="tv_error_message">Error en el usuario o contraseña!</string>
+    <string name="login_tv_title">Iniciar sesión</string>
+    <string name="login_tv_register_here">registrate aquí</string>
+    <string name="login_tv_no_account">Si no tienes una cuenta,</string>
+    <string name="register_tv_title">Registrarse</string>
+    <string name="register_email">Email</string>
+    <string name="register_pasword">Contraseña</string>
+    <string name="register_confirm_password">Confirmar contraseña</string>
+    <string name="register_checkbox_show_password">Mostrar contraseña</string>
+    <string name="register_btn_enter">Entrar</string>
+    <string name="register_tv_yes_account">Si ya tienes una cuenta,</string>
+    <string name="register_tv_login_here">inicia sesión aquí</string>
+
+    <!-- Home -->
+    <string name="no_content_message">Perdon, no pudimos encontrar el contenido</string>
+    <string name="retry_message">Reintentar</string>
+    <string name="error_message">Perdón, no pudimos cargar el contenido</string>
+    <string name="error_img_description">Imagen de error</string>
+    <string name="item_rv_btn_text">Ver</string>
+    <string name="home_icon_description">Icono de la app</string>
+    <string name="home_sv_hint">Busca en Refactoring Life Shop</string>
+    <string name="home_heart_icon_description">Favoritos</string>
+    <string name="product_image_description">Producto</string>
+    <string name="support_message">En caso de problemas comunicate con <b>soporte</b></string>
+
+
+    <!--login-->
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_btn">Entrar</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_email">Email</string>
+    <string name="login_checkbox_show_password">Mostrar contraseña</string>
+    <string name="login_register_here">registrate aqui</string>
+    <string name="login_no_account">Si no tienes una cuenta,</string>
+    <string name="login_error">Error en el usuario o contraseña!</string>
+    <string name="register_error">Error en el usuario o contraseña!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- details -->
+    <string name="image_description_back">Botón de retroceso</string>
+    <string name="buy_button">Comprar</string>
+    <string name="button_product_description">Camiseta</string>
+    <string name="button_colors_description">Paleta de colores</string>
+    <string name="button_similar_description">tienda</string>
+    <string name="button_product_title">Producto</string>
+    <string name="button_similar_title">Similares</string>
+    <string name="button_colors_title">Colores</string>
+
+</resources>

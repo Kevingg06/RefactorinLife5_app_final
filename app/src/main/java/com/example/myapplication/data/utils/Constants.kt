@@ -17,10 +17,15 @@ object Constants {
     const val DAILY_OFFER_STATE = "Oferta del día"
     const val LAST_USER_PRODUCT_STATE = "Ultimo visitado"
 
+    const val COMMENTS_FAILED = "Error al cargar comentarios"
+
     const val USER_BASE_URL = "https://api-users-c9xg.onrender.com"
     const val PRODUCTS_BASE_URL = "https://api-products-fe4p.onrender.com"
     const val PAYMENTS_BASE_URL = "https://api-payments-1ztc.onrender.com"
     const val BASE_URL_TEST = "https://stoplight.io"
     const val USER_TOKEN = "TOKEN_KEY"
     const val ARG_PRODUCT_ID = "product_id"
+    const val ARG_PRODUCT_TYPE_ID = "product_type_id"
+    const val SIZE_DEFAULT = 1
+    const val PAGE_DEFAULT = 10
 }
