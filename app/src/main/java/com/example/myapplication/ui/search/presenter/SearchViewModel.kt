@@ -8,6 +8,7 @@ import com.example.myapplication.data.dto.model.StateProduct
 import com.example.myapplication.data.dto.model.StateProductSimilar
 import com.example.myapplication.data.dto.model.StateProductsSearch
 import com.example.myapplication.data.dto.model.StateRegister
+import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -33,9 +34,9 @@ class SearchViewModel(private val repository: ProductRepository = ProductReposit
                 response.body()?.let {
                     val sizeProducts = it.products?.size ?: 0
 
-                    if (sizeProducts > 0){
+                    if (sizeProducts > 0) {
                         _data.postValue(StateProductsSearch.Success(it))
-                    }else{
+                    } else {
                         _data.postValue(StateProductsSearch.NoContent)
                     }
                 } ?: {
@@ -55,6 +56,33 @@ class SearchViewModel(private val repository: ProductRepository = ProductReposit
                 _data2.postValue(StateProduct.SuccessFavorites)
             } else {
                 _data2.postValue(StateProduct.Error(Constants.PRODUCT_NOT_UPDATED))
+            }
+        }
+    }
+
+    private val _favoriteStatus = MutableLiveData<Pair<Int, Boolean>>()
+    val favoriteStatus: LiveData<Pair<Int, Boolean>> get() = _favoriteStatus
+
+    fun updateFavoriteStatus(product: ProductSearch) {
+        viewModelScope.launch {
+            try {
+                val updatedProduct = product.idProduct?.let { repository.updateFavoriteProduct(it) }
+                if (updatedProduct != null && updatedProduct.isSuccessful) {
+                    _favoriteStatus.postValue(
+                        Pair(
+                            updatedProduct.body()?.idProduct,
+                            updatedProduct.body()?.isFavorite
+                        ) as Pair<Int, Boolean>?
+                    )
+                } else {
+                    _favoriteStatus.postValue(
+                        Pair(-1, false) as Pair<Int, Boolean>?
+                    )
+                }
+            } catch (e: Exception) {
+                _favoriteStatus.postValue(
+                    Pair(-1, false) as Pair<Int, Boolean>?
+                )
             }
         }
     }

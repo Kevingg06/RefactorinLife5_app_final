@@ -11,12 +11,14 @@ import com.example.myapplication.ui.utils.transformPrice
 import com.squareup.picasso.Picasso
 
 class SearchProductAdapter(
-    private var productList: MutableList<ProductSearch>?,
-    private val listener: OnSearchProductItemClickListener
+    var productList: MutableList<ProductSearch>?,
+    private val listener: OnSearchProductItemClickListener,
+    private val listenerFavorite: OnSearchProductItemClickListener,
 ) : RecyclerView.Adapter<SearchProductHolder>() {
 
     interface OnSearchProductItemClickListener {
-        fun OnSearchProductItemClick(idProduct: Int)
+        fun onSearchProductItemClick(idProduct: Int)
+        fun onSearchProductFavoriteItemClick(product: ProductSearch)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchProductHolder {
@@ -32,7 +34,7 @@ class SearchProductAdapter(
     override fun onBindViewHolder(holder: SearchProductHolder, position: Int) {
         val product = productList?.get(position)
         product?.let {
-            holder.render(it, listener)
+            holder.render(it, listener, listenerFavorite)
         }
     }
 
@@ -48,11 +50,15 @@ class SearchProductAdapter(
 class SearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemRvSearchBinding.bind(view)
 
-    fun render(value: ProductSearch, listener: SearchProductAdapter.OnSearchProductItemClickListener) {
+    fun render(
+        value: ProductSearch,
+        listener: SearchProductAdapter.OnSearchProductItemClickListener,
+        listenerFavorite: SearchProductAdapter.OnSearchProductItemClickListener
+    ) {
         val image = value.image
         val name = value.name
         val description = value.description
-        val price = value.price.toString().transformPrice(value.currency?: "")
+        val price = value.price.toString().transformPrice(value.currency ?: "")
         val idProduct = value.idProduct
         val favorite = value.isFavorite
         Picasso.get().load(image).into(binding.itemProductImage)
@@ -60,16 +66,24 @@ class SearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.productDescription.text = description
         binding.itemProductPrice.text = price
 
-        if (favorite!!) {
-            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
-        } else {
-            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite)
+        updateFavoriteIcon(favorite)
+
+        binding.itemIvAddFavorites.setOnClickListener {
+            listenerFavorite.onSearchProductFavoriteItemClick(value)
         }
 
         binding.seeProductButton.setOnClickListener {
             idProduct?.let {
-                listener.OnSearchProductItemClick(it)
+                listener.onSearchProductItemClick(it)
             }
+        }
+    }
+
+    private fun updateFavoriteIcon(favorite: Boolean?) {
+        if (favorite == true) {
+            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
+        } else {
+            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite)
         }
     }
 }

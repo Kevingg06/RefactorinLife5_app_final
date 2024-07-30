@@ -53,7 +53,7 @@ class ProductServiceImp {
         return service.getProductById(id)
     }
 
-    suspend fun updateFavoriteProduct(productId: Int): Response<Unit> {
+    suspend fun updateFavoriteProduct(productId: Int): Response<ProductByIdResponse> {
         return service.updateFavorite(productId)
     }
 

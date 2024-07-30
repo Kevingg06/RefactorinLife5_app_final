@@ -39,5 +39,5 @@ interface ProductService {
     ): Response<ProductsResponse>
 
     @PUT("/api/v1/products/{idProduct}/favorite")
-    suspend fun updateFavorite(@Path("idProduct") id: Int): Response<Unit>
+    suspend fun updateFavorite(@Path("idProduct") id: Int): Response<ProductByIdResponse>
 }

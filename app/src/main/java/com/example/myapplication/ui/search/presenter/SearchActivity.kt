@@ -41,6 +41,8 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
         observeFavorites()
         setupRecyclerView()
         observerSearchProduct()
+        observeFavoriteStatus()
+
 
         binding?.apply {
             svSearchProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -106,7 +108,7 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
     }
 
     private fun setupRecyclerView() {
-        adapter = SearchProductAdapter(mutableListOf(), this)
+        adapter = SearchProductAdapter(mutableListOf(), this, this)
         binding.rvProductsSearch.layoutManager = LinearLayoutManager(this)
         binding.rvProductsSearch.adapter = adapter
     }
@@ -177,11 +179,28 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
         }
     }
 
-    override fun OnSearchProductItemClick(idProduct: Int) {
+    override fun onSearchProductItemClick(idProduct: Int) {
         val myIntent = Intent(this, DetailsActivity::class.java)
         val bundle = Bundle()
         bundle.putInt(Constants.ARG_PRODUCT_ID, idProduct)
         myIntent.putExtras(bundle)
         startActivity(myIntent)
+    }
+
+    override fun onSearchProductFavoriteItemClick(product: ProductSearch) {
+        viewModel.updateFavoriteStatus(product)
+    }
+
+    private fun observeFavoriteStatus() {
+        viewModel.favoriteStatus.observe(this) { pair ->
+            val (productId, isFavorite) = pair
+            if (productId > 0) {
+                val index = adapter.productList?.indexOfFirst { it.idProduct == productId }
+                if (index != null && index != -1) {
+                    adapter.productList?.get(index)?.isFavorite = isFavorite
+                    adapter.notifyItemChanged(index)
+                }
+            }
+        }
     }
 }
