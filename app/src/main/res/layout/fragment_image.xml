@@ -90,7 +90,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_btn_pressed"
-                android:elevation="15dp">
+                android:elevation="8dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -123,7 +123,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_details"
-                android:elevation="15dp">
+                android:elevation="8dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -156,7 +156,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_details"
-                android:elevation="15dp">
+                android:elevation="8dp">
 
                 <ImageView
                     android:layout_width="50dp"
