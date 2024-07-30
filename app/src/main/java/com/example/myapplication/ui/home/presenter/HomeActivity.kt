@@ -226,7 +226,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
             binding.productName.text = product.name
             binding.productDescription.text = product.description
-            binding.productPrice.text = product.price?.let { Math.round(it).toString().transformPrice(product.currency ?: "") }
+            binding.productPrice.text = product.price.toString().transformPrice(product.currency?: "")
 
             if (!product.images.isNullOrEmpty())
                 Picasso.get().load(product.images[0].link)

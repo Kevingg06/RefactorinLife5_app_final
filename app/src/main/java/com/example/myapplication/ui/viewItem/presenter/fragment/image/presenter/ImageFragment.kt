@@ -82,7 +82,7 @@ class ImageFragment : Fragment() {
 
     private fun render(value: ProductByIdResponse){
         binding.imagesTvTitle.text = value.name
-        binding.ivProductPrice.text = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
+        binding.ivProductPrice.text = value.price.toString().transformPrice(value.currency?: "")
     }
 
     private fun actions(){
