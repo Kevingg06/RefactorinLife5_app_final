@@ -39,7 +39,7 @@ class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(value: Product, goToDetails : (Product) -> Any) {
         val image = value.image
         val name = value.name
-        val price = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
+        val price = value.price.toString().transformPrice(value.currency?: "")
         binding.nameProduct.text = name
         binding.priceProduct.text = price
         Picasso.get()

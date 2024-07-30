@@ -65,7 +65,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun render(value: ProductByIdResponse) {
-        binding.commentsTvPrice.text = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
+        binding.commentsTvPrice.text = value.price.toString().transformPrice(value.currency?: "")
     }
 
     private fun actions() {

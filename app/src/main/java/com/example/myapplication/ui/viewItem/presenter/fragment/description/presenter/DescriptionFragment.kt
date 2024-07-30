@@ -49,7 +49,7 @@ class DescriptionFragment : Fragment() {
     private fun showProduct(info: ProductByIdResponse) {
         binding.tvProductName.text = info.name
         binding.tvProductDescription.text = info.largeDescription
-        binding.ivProductPrice.text = info.price?.let { Math.round(it).toString().transformPrice(info.currency?: "") }
+        binding.ivProductPrice.text = info.price.toString().transformPrice(info.currency?: "")
     }
 
     private fun showProductError() {

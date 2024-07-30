@@ -84,7 +84,7 @@ class FinancingFragment : Fragment() {
     }
 
     private fun render(value: ProductByIdResponse) {
-        binding.ivProductPrice.text = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
+        binding.ivProductPrice.text = value.price.toString().transformPrice(value.currency?: "")
     }
 
     private fun getProduct(id: Int) {
