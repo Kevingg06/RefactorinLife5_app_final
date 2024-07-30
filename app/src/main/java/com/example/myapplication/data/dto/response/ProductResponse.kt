@@ -31,5 +31,5 @@ data class Product (
     @SerializedName("description")
     val description: String?,
     @SerializedName("isFavorite")
-    val isFavorite: Boolean?
+    var isFavorite: Boolean?
 )

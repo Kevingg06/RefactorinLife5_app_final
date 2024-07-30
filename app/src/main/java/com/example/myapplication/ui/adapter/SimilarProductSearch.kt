@@ -6,17 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.response.Product
+import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.databinding.ItemRvSearchBinding
 import com.example.myapplication.ui.utils.transformPrice
 import com.squareup.picasso.Picasso
 
 class SimilarProductSearch(
-    private var productList: MutableList<Product>?,
-    private val listener: OnSimilarProductItemClickListener
+    var productList: MutableList<Product>?,
+    private val listener: OnSimilarProductItemClickListener,
+    private val listenerFavorite: OnSimilarProductItemClickListener
 ) : RecyclerView.Adapter<SimilarSearchProductHolder>() {
 
     interface OnSimilarProductItemClickListener {
-        fun OnSimilarProductItemClick(idProduct: Int)
+        fun onSimilarProductItemClick(idProduct: Int)
+        fun onSimilarProductFavoriteItemClick(product: Product)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarSearchProductHolder {
@@ -32,7 +35,7 @@ class SimilarProductSearch(
     override fun onBindViewHolder(holder: SimilarSearchProductHolder, position: Int) {
         val product = productList?.get(position)
         product?.let {
-            holder.render(it, listener)
+            holder.render(it, listener, listenerFavorite)
         }
     }
 
@@ -48,7 +51,11 @@ class SimilarProductSearch(
 class SimilarSearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemRvSearchBinding.bind(view)
 
-    fun render(value: Product, listener: SimilarProductSearch.OnSimilarProductItemClickListener) {
+    fun render(
+        value: Product,
+        listener: SimilarProductSearch.OnSimilarProductItemClickListener,
+        listenerFavorite: SimilarProductSearch.OnSimilarProductItemClickListener
+    ) {
         val image = value.image
         val name = value.name
         val description = value.description
@@ -60,16 +67,24 @@ class SimilarSearchProductHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.productDescription.text = description
         binding.itemProductPrice.text = price
 
-        if (favorite!!) {
-            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
-        } else {
-            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite)
+        updateFavoriteIcon(favorite)
+
+        binding.itemIvAddFavorites.setOnClickListener {
+            listenerFavorite.onSimilarProductFavoriteItemClick(value)
         }
 
         binding.seeProductButton.setOnClickListener {
             idProduct?.let {
-                listener.OnSimilarProductItemClick(it)
+                listener.onSimilarProductItemClick(it)
             }
+        }
+    }
+
+    private fun updateFavoriteIcon(favorite: Boolean?) {
+        if (favorite == true) {
+            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite_solid)
+        } else {
+            binding.itemIvAddFavorites.setImageResource(R.drawable.icon_favorite)
         }
     }
 }

@@ -36,6 +36,7 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
 
         idProduct?.let { callSimilarProductsById(it) }
         observeProductInfo()
+        observeFavoriteStatus()
         actions()
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -47,7 +48,7 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
 
     private fun setupRecyclerView(
     ) {
-        adapter = SimilarProductSearch(mutableListOf(), this)
+        adapter = SimilarProductSearch(mutableListOf(), this,this)
         binding.rvSearchSimilar.layoutManager = LinearLayoutManager(this)
         binding.rvSearchSimilar.adapter = adapter
     }
@@ -99,11 +100,28 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
         }
     }
 
-    override fun OnSimilarProductItemClick(idProduct: Int) {
+    override fun onSimilarProductItemClick(idProduct: Int) {
         val myIntent = Intent(this, DetailsActivity::class.java)
         val bundle = Bundle()
         bundle.putInt(ARG_PRODUCT_ID, idProduct)
         myIntent.putExtras(bundle)
         startActivity(myIntent)
+    }
+
+    override fun onSimilarProductFavoriteItemClick(product: Product) {
+        viewModel.updateFavoriteStatus(product)
+    }
+
+    private fun observeFavoriteStatus() {
+        viewModel.favoriteStatus.observe(this) { pair ->
+            val (productId, isFavorite) = pair
+            if (productId > 0) {
+                val index = adapter.productList?.indexOfFirst { it.idProduct == productId }
+                if (index != null && index != -1) {
+                    adapter.productList?.get(index)?.isFavorite = isFavorite
+                    adapter.notifyItemChanged(index)
+                }
+            }
+        }
     }
 }
