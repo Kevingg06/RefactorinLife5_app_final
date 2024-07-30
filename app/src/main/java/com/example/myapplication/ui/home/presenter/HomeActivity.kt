@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         binding.clickableOverlay.setOnClickListener {
             val myIntent = Intent(this, SearchActivity::class.java)
             val bundle = Bundle()
-            bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType?: 1)
+            bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
         }
@@ -221,19 +221,18 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         }
     }
 
-    private fun setProductDailyOffer(singleProductResponse: SingleProductResponse) {
+    private fun setProductDailyOffer(product: SingleProductResponse) {
         runOnUiThread {
             binding.tvStateProduct.text = Constants.DAILY_OFFER_STATE
-            binding.productName.text = singleProductResponse.name
-            binding.productDescription.text = singleProductResponse.description
-            binding.productPrice.text = singleProductResponse.price.toString()
-                .transformPrice(singleProductResponse.currency ?: "")
+            binding.productName.text = product.name
+            binding.productDescription.text = product.description
+            binding.productPrice.text = product.price?.let { Math.round(it).toString().transformPrice(product.currency ?: "") }
 
-            if (!singleProductResponse.images.isNullOrEmpty())
-                Picasso.get().load(singleProductResponse.images[0].link)
+            if (!product.images.isNullOrEmpty())
+                Picasso.get().load(product.images[0].link)
                     .into(binding.imageMainProduct)
 
-            singleProductResponse.isFavorite?.let {
+            product.isFavorite?.let {
                 setFavoriteData(it)
             }
         }

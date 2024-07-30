@@ -14,6 +14,7 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.FragmentCommentBinding
 import com.example.myapplication.ui.adapter.CommentAdapter
+import com.example.myapplication.ui.utils.transformPrice
 
 class CommentFragment : Fragment() {
 
@@ -64,8 +65,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun render(value: ProductByIdResponse) {
-        binding.commentsTvPrice.text = value.price.toString()
-        binding.commentsTvCurrency.text = value.currency
+        binding.commentsTvPrice.text = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
     }
 
     private fun actions() {
