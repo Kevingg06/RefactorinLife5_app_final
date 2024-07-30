@@ -68,4 +68,6 @@
     <!-- Fragment Financing -->
     <string name="Financing_img_description">Payment methods</string>
 
+    <!-- Confirmation -->
+    <string name="confirmation_message"><b>The seller will contact you shortly</b></string>
 </resources>

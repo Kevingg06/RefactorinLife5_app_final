@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.viewItem.presenter.fragment.description.presenter
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentDescriptionBinding
+import com.example.myapplication.ui.confirmation.presenter.ConfirmationActivity
+import com.example.myapplication.ui.similar.presenter.SimilarActivity
 
 class DescriptionFragment : Fragment() {
 
@@ -41,7 +44,8 @@ class DescriptionFragment : Fragment() {
         }
 
         binding.buyProductButton.setOnClickListener{
-
+            val myIntent = Intent(activity, ConfirmationActivity::class.java)
+            startActivity(myIntent)
         }
     }
 

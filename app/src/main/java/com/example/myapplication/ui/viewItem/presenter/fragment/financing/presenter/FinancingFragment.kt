@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.viewItem.presenter.fragment.financing.presenter
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.FragmentFinancingBinding
 import com.example.myapplication.ui.adapter.PaymentMethodAdapter
+import com.example.myapplication.ui.confirmation.presenter.ConfirmationActivity
 
 class FinancingFragment : Fragment() {
 
@@ -100,6 +102,10 @@ class FinancingFragment : Fragment() {
     private fun actions() {
         binding.arrowButton.setOnClickListener {
             activity?.finish()
+        }
+        binding.buyProductButton.setOnClickListener{
+            val myIntent = Intent(activity, ConfirmationActivity::class.java)
+            startActivity(myIntent)
         }
     }
 

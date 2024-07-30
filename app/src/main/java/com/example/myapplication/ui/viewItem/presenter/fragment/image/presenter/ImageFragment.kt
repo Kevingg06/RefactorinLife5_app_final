@@ -14,6 +14,7 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
+import com.example.myapplication.ui.confirmation.presenter.ConfirmationActivity
 import kotlinx.coroutines.launch
 import com.example.myapplication.ui.similar.presenter.SimilarActivity
 import com.example.myapplication.ui.utils.transformPrice
@@ -87,6 +88,11 @@ class ImageFragment : Fragment() {
     private fun actions(){
         binding.arrowButton.setOnClickListener {
             activity?.finish()
+        }
+
+        binding.buyProductButton.setOnClickListener{
+            val myIntent = Intent(activity, ConfirmationActivity::class.java)
+            startActivity(myIntent)
         }
 
         binding.productButton.setOnClickListener {
