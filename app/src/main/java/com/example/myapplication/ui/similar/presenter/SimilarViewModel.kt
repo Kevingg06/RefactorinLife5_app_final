@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.dto.model.StateProductSimilar
 import com.example.myapplication.data.dto.response.Product
-import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
 import kotlinx.coroutines.CoroutineScope

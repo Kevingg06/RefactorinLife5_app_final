@@ -13,6 +13,7 @@ import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentDescriptionBinding
 import com.example.myapplication.ui.confirmation.presenter.ConfirmationActivity
 import com.example.myapplication.ui.similar.presenter.SimilarActivity
+import com.example.myapplication.ui.utils.transformPrice
 
 class DescriptionFragment : Fragment() {
 
@@ -32,7 +33,7 @@ class DescriptionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let { bundle ->
             val idProduct = bundle.getInt(ARG_PRODUCT_ID)
-            callProductoInfo(idProduct)
+            callProductInfo(idProduct)
         }
         observeProductInfo()
         actions()
@@ -52,8 +53,7 @@ class DescriptionFragment : Fragment() {
     private fun showProduct(info: ProductByIdResponse) {
         binding.tvProductName.text = info.name
         binding.tvProductDescription.text = info.largeDescription
-        binding.ivProductPrice.text = info.price.toString()
-        binding.ivProductCurrency.text = info.currency.toString()
+        binding.ivProductPrice.text = info.price?.let { Math.round(it).toString().transformPrice(info.currency?: "") }
     }
 
     private fun showProductError() {
@@ -71,7 +71,7 @@ class DescriptionFragment : Fragment() {
         binding.loadingScreenImages.rlLoading.visibility = View.GONE
     }
 
-    private fun callProductoInfo(idMainProduct: Int) {
+    private fun callProductInfo(idMainProduct: Int) {
         viewModel.getProductById(idMainProduct)
     }
 

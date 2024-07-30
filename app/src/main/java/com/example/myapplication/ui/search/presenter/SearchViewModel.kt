@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.dto.model.StateProduct
-import com.example.myapplication.data.dto.model.StateProductSimilar
 import com.example.myapplication.data.dto.model.StateProductsSearch
-import com.example.myapplication.data.dto.model.StateRegister
 import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.data.repository.ProductRepository
 import com.example.myapplication.data.utils.Constants
@@ -44,18 +42,6 @@ class SearchViewModel(private val repository: ProductRepository = ProductReposit
                 }
             } else {
                 _data.postValue(StateProductsSearch.Error(Constants.NETWORK_ERROR))
-            }
-        }
-    }
-
-    fun putFavorites(id: Int) {
-        viewModelScope.launch {
-            val response = repository.updateFavoriteProduct(id)
-
-            if (response.isSuccessful) {
-                _data2.postValue(StateProduct.SuccessFavorites)
-            } else {
-                _data2.postValue(StateProduct.Error(Constants.PRODUCT_NOT_UPDATED))
             }
         }
     }
