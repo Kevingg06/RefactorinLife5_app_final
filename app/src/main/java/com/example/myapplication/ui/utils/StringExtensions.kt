@@ -45,7 +45,6 @@ fun String.transformPrice(currency: String): String {
     stringBuilder.append("$currency ")
 
     if (this.length < 6) {
-        this.replace('.', ',')
         return "$currency ${this.replace('.', ',')}"
     }
 
