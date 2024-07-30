@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.dto.model.StatePaymentMethods
@@ -15,6 +14,7 @@ import com.example.myapplication.data.dto.response.ProductByIdResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.FragmentFinancingBinding
 import com.example.myapplication.ui.adapter.PaymentMethodAdapter
+import com.example.myapplication.ui.utils.transformPrice
 
 class FinancingFragment : Fragment() {
 
@@ -42,7 +42,7 @@ class FinancingFragment : Fragment() {
 
         actions()
 
-        financingViewModel.paymentMethods.observe(viewLifecycleOwner, Observer { state ->
+        financingViewModel.paymentMethods.observe(viewLifecycleOwner){ state ->
             when (state) {
                 is StatePaymentMethods.Loading -> {
                     binding.loadingScreenFinancing.rlLoading.visibility = View.VISIBLE
@@ -61,9 +61,9 @@ class FinancingFragment : Fragment() {
                     setupRecyclerView(emptyList())
                 }
             }
-        })
+        }
 
-        financingViewModel.dataProduct.observe(viewLifecycleOwner, Observer { state ->
+        financingViewModel.dataProduct.observe(viewLifecycleOwner){ state ->
             when (state) {
                 is StateProductById.Loading -> {
                     binding.loadingScreenFinancing.rlLoading.visibility = View.VISIBLE
@@ -78,14 +78,13 @@ class FinancingFragment : Fragment() {
                     binding.loadingScreenFinancing.rlLoading.visibility = View.GONE
                 }
             }
-        })
+        }
 
         financingViewModel.getPaymentMethods()
     }
 
     private fun render(value: ProductByIdResponse) {
-        binding.ivProductPrice.text = value.price.toString()
-        binding.ivProductCurrency.text = value.currency
+        binding.ivProductPrice.text = value.price?.let { Math.round(it).toString().transformPrice(value.currency?: "") }
     }
 
     private fun getProduct(id: Int) {

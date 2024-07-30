@@ -13,7 +13,6 @@ import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.ui.register.presenter.RegisterActivity
 import com.example.myapplication.data.dto.model.StateLogin
 import com.example.myapplication.ui.home.presenter.HomeActivity
-import com.example.myapplication.ui.prelogin.presenter.PreLoginActivity
 
 class LoginActivity : AppCompatActivity() {
 

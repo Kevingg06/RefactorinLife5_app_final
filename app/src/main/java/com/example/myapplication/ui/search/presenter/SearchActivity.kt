@@ -44,7 +44,7 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
         observeFavoriteStatus()
 
 
-        binding?.apply {
+        binding.apply {
             svSearchProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
