@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.dto.response.ProductByIdResponse
+import com.example.myapplication.data.dto.response.ProductType2
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
@@ -53,6 +54,15 @@ class ImageFragment : Fragment() {
         }
     }
 
+    private fun initRecyclerViewError(){
+        var product : ProductByIdResponse =  ProductByIdResponse(0,"",ProductType2(0,""),"",1.0,
+            listOf(),"","",false)
+
+        viewModel.viewModelScope.launch {
+            binding.recyclerView.adapter = ProductImagesAdapter(product)
+        }
+    }
+
     private fun getProduct(id: Int){
         viewModel.getSimilarProducts(id)
     }
@@ -73,7 +83,10 @@ class ImageFragment : Fragment() {
                     render(data.info)
                 }
 
-                is StateProductById.Error -> hideLoading()
+                is StateProductById.Error -> {
+                    hideLoading()
+                    initRecyclerViewError()
+                }
 
                 is StateProductById.Loading -> showLoading()
             }

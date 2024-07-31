@@ -22,35 +22,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/comments_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="87dp"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/comments_comments"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_title_comment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="#B6B6B6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/comments_tv_title" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/comments_gl_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
+            app:layout_constraintGuide_percent="0.20" />
+
+        <TextView
+            android:id="@+id/comments_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginBottom="43dp"
+            android:textSize="@dimen/text_size_title_financing"
+            android:text="@string/comments_comments"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/comments_gl_first"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/line_header"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:layout_marginTop="7.5dp"
+            android:background="@color/dark_gray"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comments_tv_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_comments"
@@ -74,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.78" />
 
         <TextView
             android:id="@+id/comments_tv_price"
