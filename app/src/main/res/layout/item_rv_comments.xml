@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
+    android:layout_marginBottom="24dp"
     android:background="@drawable/bg_layout_main_sale"
     android:elevation="8dp">
 
@@ -20,16 +20,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/roboto_black"
+                android:layout_marginTop="9dp"
                 android:textColor="@color/black"
-                android:textSize="19sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="9dp"
                 android:layout_marginEnd="16dp"
                 android:background="#B8A8DB" />
 
@@ -38,15 +39,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="7dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/roboto_light"
+                android:layout_marginBottom="12dp"
+                android:textSize="15sp"
                 android:lineSpacingExtra="2dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
+                android:textColor="@color/black" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

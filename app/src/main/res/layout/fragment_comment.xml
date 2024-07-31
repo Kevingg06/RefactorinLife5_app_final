@@ -24,8 +24,8 @@
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/comments_gl_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.20" />
 
@@ -36,7 +36,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginBottom="43dp"
-            android:textSize="@dimen/text_size_title_financing"
+            android:textSize="@dimen/text_size_title_comment"
             android:text="@string/comments_comments"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -57,25 +57,22 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_comments"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_margin="25dp"
             android:orientation="vertical"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/comments_gl_second"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/comments_gl_first"
+            app:layout_constraintTop_toBottomOf="@id/line_header"
             tools:listitem="@layout/item_rv_comments" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/comments_gl_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.78" />
 
@@ -85,9 +82,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/roboto_bold"
             android:textColor="@color/black"
             android:textSize="28sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/comments_gl_second" />
 
