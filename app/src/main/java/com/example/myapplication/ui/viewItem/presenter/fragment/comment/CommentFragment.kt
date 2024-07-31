@@ -71,10 +71,10 @@ class CommentFragment : Fragment() {
     }
 
     private fun actions() {
-        binding.commentImageViewBack.setOnClickListener {
+        binding.arrowButton.setOnClickListener {
             activity?.finish()
         }
-        binding.commentsBtnBuy.setOnClickListener{
+        binding.buyProductButton.setOnClickListener{
             val myIntent = Intent(activity, ConfirmationActivity::class.java)
             startActivity(myIntent)
         }

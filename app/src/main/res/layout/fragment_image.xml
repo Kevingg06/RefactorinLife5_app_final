@@ -13,12 +13,12 @@
 
         <ImageView
             android:id="@+id/arrow_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginTop="@dimen/margin_standard"
-            android:layout_marginEnd="35dp"
+            android:layout_marginEnd="25dp"
             android:contentDescription="@string/image_description_back"
-            android:src="@drawable/arrow_image"
+            android:src="@drawable/arrow_left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -207,7 +207,7 @@
             android:id="@+id/buy_product_button"
             android:layout_width="100dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="45dp"
+            android:layout_marginEnd="26dp"
             android:layout_marginBottom="@dimen/margin_large"
             android:background="@drawable/bg_btn_enabled"
             android:elevation="10dp"

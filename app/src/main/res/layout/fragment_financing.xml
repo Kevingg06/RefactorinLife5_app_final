@@ -45,6 +45,7 @@
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginBottom="43dp"
             android:textSize="@dimen/text_size_title_financing"
+            android:text="@string/financing_tv_title"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline_1"
             app:layout_constraintStart_toStartOf="parent" />
@@ -68,8 +69,10 @@
             android:layout_margin="25dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/guideline_2"
             app:layout_constraintTop_toBottomOf="@id/line_header"
-            app:layout_constraintBottom_toTopOf="@id/guideline_2"/>
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="150dp"

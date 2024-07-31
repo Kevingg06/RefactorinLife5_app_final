@@ -4,10 +4,12 @@
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">17sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_button">13sp</dimen>
     <dimen name="text_size_title_medium">26sp</dimen>
     <dimen name="text_size_title_large">40sp</dimen>
-    <dimen name="text_size_title_images">28sp</dimen>
-    <dimen name="text_size_title_financing">22sp</dimen>
+    <dimen name="text_size_title_images">25sp</dimen>
+    <dimen name="text_size_title_financing">23sp</dimen>
+    <dimen name="text_size_title_comment">23sp</dimen>
 
     <!-- Padding -->
     <dimen name="padding_standard">9dp</dimen>

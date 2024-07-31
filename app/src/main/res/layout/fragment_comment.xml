@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.viewItem.presenter.fragment.comment.CommentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,12 +12,13 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/comment_image_view_back"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:src="@drawable/arrow_image"
+            android:id="@+id/arrow_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginEnd="25dp"
+            android:contentDescription="@string/image_description_back"
+            android:src="@drawable/arrow_left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +31,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="@string/comments_comments"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="@dimen/text_size_title_comment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,18 +89,18 @@
             app:layout_constraintTop_toBottomOf="@id/comments_gl_second" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/see_product_button"
+            android:id="@+id/buy_product_button"
             android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_margin="40dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="@dimen/margin_large"
             android:background="@drawable/bg_btn_enabled"
             android:elevation="10dp"
             android:gravity="center"
-            android:text="@string/item_rv_btn_text"
+            android:text="@string/buy_button"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_small"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

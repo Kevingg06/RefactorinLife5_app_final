@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_margin="@dimen/margin_small"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="9dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:elevation="8dp"
     app:cardCornerRadius="8dp">
 
@@ -73,24 +75,24 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/see_product_button"
-            android:layout_width="100dp"
+            android:layout_width="99dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginBottom="13dp"
             android:background="@drawable/bg_btn_enabled"
             android:elevation="10dp"
             android:gravity="center"
             android:text="@string/item_rv_btn_text"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold"
-            android:layout_margin="@dimen/margin_very_small"
+            android:textSize="@dimen/text_size_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/item_iv_add_favorites"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginTop="@dimen/margin_very_small"
             android:layout_marginEnd="@dimen/margin_very_small"
             android:contentDescription="@string/home_heart_icon_description"

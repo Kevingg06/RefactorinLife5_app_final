@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37" />
+        app:layout_constraintGuide_percent="0.33" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
@@ -36,7 +36,7 @@
         android:layout_height="0dp"
         android:background="@drawable/bg_home_activity"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintBottom_toTopOf="@id/guideLine_header"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,8 +73,8 @@
 
             <ImageView
                 android:id="@+id/iv_icon_heart"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:contentDescription="@string/home_heart_icon_description"
@@ -106,7 +106,6 @@
         android:id="@+id/rv_products_search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_very_small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
