@@ -26,6 +26,9 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> = _isFavorite
 
+    private val _isFavoriteHeader = MutableLiveData<Boolean>()
+    val isFavoriteHeader: LiveData<Boolean> = _isFavoriteHeader
+
     fun getHomeInfo() {
         CoroutineScope(Dispatchers.IO).launch {
             _data.postValue(StateProduct.Loading)
@@ -51,6 +54,10 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
 
     fun setFavoriteData(isFavoriteProduct: Boolean?) {
         _isFavorite.postValue(isFavoriteProduct ?: false)
+    }
+
+    fun setFavoriteDataHeader(isFavoriteProduct: Boolean?) {
+        _isFavoriteHeader.postValue(isFavoriteProduct ?: false)
     }
 
     private suspend fun processProductTypes(productTypes: Response<ProductTypesResponse>?): Boolean {

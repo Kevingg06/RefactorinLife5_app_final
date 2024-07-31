@@ -52,35 +52,19 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun actions() {
-        binding.detailsTvImageFirst.setOnClickListener {
+        binding.detailsTvImages.setOnClickListener {
             showFragment(fragmentImage, ImageFragment::class.java.toString())
         }
 
-        binding.detailsTvImageSecond.setOnClickListener {
-            showFragment(fragmentImage, ImageFragment::class.java.toString())
-        }
-
-        binding.detailsTvDescriptionFirst.setOnClickListener {
+        binding.detailsTvDescription.setOnClickListener {
             showFragment(fragmentDescription, DescriptionFragment::class.java.toString())
         }
 
-        binding.detailsTvDescriptionSecond.setOnClickListener {
-            showFragment(fragmentDescription, DescriptionFragment::class.java.toString())
-        }
-
-        binding.detailsTvFinancingFirst.setOnClickListener {
+        binding.detailsTvFinancing.setOnClickListener {
             showFragment(fragmentFinancing, FinancingFragment::class.java.toString())
         }
 
-        binding.detailsTvFinancingSecond.setOnClickListener {
-            showFragment(fragmentFinancing, FinancingFragment::class.java.toString())
-        }
-
-        binding.detailsTvCommentsFirst.setOnClickListener {
-            showFragment(fragmentComment, CommentFragment::class.java.toString())
-        }
-
-        binding.detailsTvCommentsSecond.setOnClickListener {
+        binding.detailsTvComments.setOnClickListener {
             showFragment(fragmentComment, CommentFragment::class.java.toString())
         }
     }
