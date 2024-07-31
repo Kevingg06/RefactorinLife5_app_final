@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.home.presenter
 
 import android.content.Intent
+import android.net.Uri
 import com.example.myapplication.ui.adapter.ProductTypesAdapter
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.myapplication.data.dto.response.ProductType
 import com.example.myapplication.data.dto.response.SingleProductResponse
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_STATE
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_TYPE_ID
 import com.example.myapplication.data.utils.TokenHolder.savedToken
 import com.example.myapplication.databinding.ActivityHomeBinding
@@ -28,6 +30,7 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
     private val viewModel by viewModels<HomeViewModel>()
     private var idMainProduct: Int? = null
     private var idProductType: Int = 1
+    private var favorite: Boolean = false
     private lateinit var binding: ActivityHomeBinding
     private var productsAdapter: AdapterProduct? = null
 
@@ -49,10 +52,13 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         setupRecyclerViews()
         getHomeInfo()
         observerHomeInfo()
+        observeFavoriteHeader()
+        initFavoriteIconHeader()
         observeFavorites()
     }
 
     private fun actions() {
+
         binding.retryMessage.setOnClickListener {
             hideError()
             token?.let {
@@ -72,8 +78,13 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             val myIntent = Intent(this, SearchActivity::class.java)
             val bundle = Bundle()
             bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType)
+            bundle.putBoolean(ARG_PRODUCT_STATE, favorite)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
+        }
+
+        binding.supportMessageHome.setOnClickListener {
+            sendSupportEmail()
         }
     }
 
@@ -182,8 +193,18 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         }
     }
 
+    private fun observeFavoriteHeader() {
+        viewModel.isFavoriteHeader.observe(this) { isFavorite ->
+            setFavoriteIconHeader(isFavorite)
+        }
+    }
+
     private fun setFavoriteData(iconState: Boolean) {
         viewModel.setFavoriteData(iconState)
+    }
+
+    private fun setFavoriteDataHeader(iconState: Boolean) {
+        viewModel.setFavoriteDataHeader(iconState)
     }
 
     private fun initFavoriteIcon() {
@@ -194,6 +215,15 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             idMainProduct?.let {
                 setFavorite(it)
             }
+        }
+    }
+
+    private fun initFavoriteIconHeader() {
+        binding.ivIconHeart.setOnClickListener {
+            val buttonState = viewModel.isFavoriteHeader.value ?: false
+            val currentButtonState = !buttonState
+            setFavoriteDataHeader(currentButtonState)
+            favorite = !favorite
         }
     }
 
@@ -210,6 +240,15 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         bundle.putInt(ARG_PRODUCT_ID, item.idProduct ?: -1)
         myIntent.putExtras(bundle)
         startActivity(myIntent)
+    }
+
+    private fun setFavoriteIconHeader(isFavorite: Boolean?) {
+        favorite = isFavorite ?: false
+        if (favorite) {
+            binding.ivIconHeart.setImageResource(R.drawable.icon_heart_solid)
+        } else {
+            binding.ivIconHeart.setImageResource(R.drawable.icon_heart)
+        }
     }
 
     private fun setFavoriteIcon(isFavorite: Boolean?) {
@@ -248,5 +287,19 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             productsAdapter?.updateProducts(products)
             productsAdapter?.notifyDataSetChanged()
         }
+    }
+
+    private fun createEmailIntent(): Intent {
+        val subject = Constants.SUPPORT_EMAIL_SUBJECT
+        val email = Constants.SUPPORT_EMAIL
+        val uriText = "mailto:$email?subject=${Uri.encode(subject)}"
+        return Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(uriText)
+        }
+    }
+
+    private fun sendSupportEmail() {
+        val emailIntent = createEmailIntent()
+        startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
     }
 }

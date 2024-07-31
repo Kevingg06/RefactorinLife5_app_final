@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.search.presenter
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -11,6 +12,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProductsSearch
 import com.example.myapplication.data.dto.response.ProductSearch
 import com.example.myapplication.data.utils.Constants
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_STATE
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_TYPE_ID
 import com.example.myapplication.databinding.ActivitySearchBinding
 import com.example.myapplication.ui.adapter.SearchProductAdapter
@@ -32,11 +34,13 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
 
         bundle?.let {
             idProductType = it.getInt(ARG_PRODUCT_TYPE_ID)
+            favorite = it.getBoolean(ARG_PRODUCT_STATE)
+
+            setFavoriteData(favorite)
         }
 
         callFirstProducts(idProductType, favorite)
 
-        actions()
         initFavoriteIcon()
         observeFavorites()
         setupRecyclerView()
@@ -47,17 +51,21 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
         binding.apply {
             svSearchProduct.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if (!newText.isNullOrEmpty()) {
-                        productName = newText
-                        viewModel.searchProducts(idProductType, newText, favorite)
+                    if (!query.isNullOrEmpty()) {
+                        productName = query
+                        viewModel.searchProducts(idProductType, query, favorite)
                     }
                     return true
                 }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
             })
+
+            binding.supportMessageHome.setOnClickListener {
+                sendSupportEmail()
+            }
         }
 
     }
@@ -68,12 +76,6 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
             "",
             favorite
         )
-    }
-
-    private fun actions() {
-        binding.ivIconHeart.setOnClickListener {
-            favorite = !favorite
-        }
     }
 
     private fun observeFavorites() {
@@ -202,5 +204,19 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
                 }
             }
         }
+    }
+
+    private fun createEmailIntent(): Intent {
+        val subject = Constants.SUPPORT_EMAIL_SUBJECT
+        val email = Constants.SUPPORT_EMAIL
+        val uriText = "mailto:$email?subject=${Uri.encode(subject)}"
+        return Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(uriText)
+        }
+    }
+
+    private fun sendSupportEmail() {
+        val emailIntent = createEmailIntent()
+        startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
     }
 }

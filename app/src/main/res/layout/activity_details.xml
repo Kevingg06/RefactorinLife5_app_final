@@ -8,6 +8,13 @@
     android:background="@color/white"
     tools:context=".ui.viewItem.presenter.activity.DetailsActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/details_gl_leftBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17031631" />
+
     <LinearLayout
         android:id="@+id/details_linearLayout_leftbar"
         android:layout_width="0dp"
@@ -15,97 +22,70 @@
         android:background="#FF7353B9"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/details_gl_leftBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/details_gl_leftBar">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/details_tv_image_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="      nes  "
-            android:textColor="@color/white"
+            android:id="@+id/details_tv_images"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingTop="50dp"
+            android:gravity="left"
             android:rotation="-90"
-            android:textSize="20sp"
-            android:layout_marginTop="120dp"/>
+            android:singleLine="true"
+            android:text="Imagenes"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/details_tv_image_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Image   "
+            android:id="@+id/details_tv_description"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingTop="50dp"
+            android:gravity="left"
+            android:text="Descripción"
             android:textColor="@color/white"
             android:rotation="-90"
-            android:textSize="20sp"/>
+            android:textSize="16sp"
+            android:singleLine="true" />
 
         <TextView
-            android:id="@+id/details_tv_description_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" pcion"
+            android:id="@+id/details_tv_financing"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingTop="50dp"
+            android:gravity="left"
+            android:text="Financiación"
             android:textColor="@color/white"
             android:rotation="-90"
-            android:textSize="20sp"
-            android:layout_marginTop="100dp"/>
+            android:textSize="16sp"
+            android:singleLine="true" />
 
         <TextView
-            android:id="@+id/details_tv_description_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:rotation="-90"
-            android:text="Descri"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginTop="25dp"/>
-
-        <TextView
-            android:id="@+id/details_tv_financing_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" iacion"
+            android:id="@+id/details_tv_comments"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:paddingTop="50dp"
+            android:gravity="left"
+            android:text="Comentarios"
             android:textColor="@color/white"
             android:rotation="-90"
-            android:textSize="20sp"
-            android:layout_marginTop="100dp"/>
-
-        <TextView
-            android:id="@+id/details_tv_financing_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Financ"
-            android:textColor="@color/white"
-            android:rotation="-90"
-            android:textSize="20sp"
-            android:layout_marginTop="28dp"/>
-
-        <TextView
-            android:id="@+id/details_tv_comments_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ntarios"
-            android:textColor="@color/white"
-            android:rotation="-90"
-            android:textSize="19sp"
-            android:layout_marginTop="100dp"/>
-
-        <TextView
-            android:id="@+id/details_tv_comments_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Come"
-            android:textColor="@color/white"
-            android:rotation="-90"
-            android:textSize="20sp"
-            android:layout_marginTop="34dp"/>
-
-
+            android:textSize="16sp"
+            android:singleLine="true" />
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/details_gl_leftBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="62dp" />
 
     <FrameLayout
         android:id="@+id/item_view_fragment"
@@ -128,8 +108,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="110dp"
             android:visibility="gone"/>
 
         <View
@@ -139,8 +119,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="310dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="305dp"
             android:visibility="gone"/>
 
         <View
@@ -150,8 +130,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="490dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="495dp"
             android:visibility="gone"/>
 
         <View
@@ -161,8 +141,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="670dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="690dp"
             android:visibility="gone"/>
 
 

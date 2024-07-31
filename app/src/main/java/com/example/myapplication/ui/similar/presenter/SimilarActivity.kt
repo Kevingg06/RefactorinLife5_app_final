@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.similar.presenter
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -56,6 +57,10 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
     private fun actions() {
         binding.arrowButton.setOnClickListener {
             finish()
+        }
+
+        binding.supportMessageHome.setOnClickListener {
+            sendSupportEmail()
         }
     }
 
@@ -123,5 +128,19 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
                 }
             }
         }
+    }
+
+    private fun createEmailIntent(): Intent {
+        val subject = Constants.SUPPORT_EMAIL_SUBJECT
+        val email = Constants.SUPPORT_EMAIL
+        val uriText = "mailto:$email?subject=${Uri.encode(subject)}"
+        return Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse(uriText)
+        }
+    }
+
+    private fun sendSupportEmail() {
+        val emailIntent = createEmailIntent()
+        startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
     }
 }
