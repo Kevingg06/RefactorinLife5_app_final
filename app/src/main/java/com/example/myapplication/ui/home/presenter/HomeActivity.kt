@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.dataSource.getToken
@@ -50,8 +49,6 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         token?.let {
             savedToken = it
         }
-
-
 
         actions()
         reduceSize()
@@ -289,6 +286,8 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             binding.productDescription.text = product.description
             binding.productPrice.text = product.price.toString().transformPrice(product.currency?: "")
 
+            setDailyOfferTitle(product.dailyOffer)
+            
             if (!product.images.isNullOrEmpty())
                 Picasso.get().load(product.images[0].link)
                     .into(binding.imageMainProduct)
@@ -311,6 +310,15 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         }
     }
 
+    private fun setDailyOfferTitle(isDailyOffer: Boolean?) {
+        val dailyOffer = isDailyOffer ?: false
+        if (dailyOffer) {
+            binding.tvStateProduct.text = getString(R.string.daily_offer_title)
+        } else {
+            binding.tvStateProduct.text = getString(R.string.last_visited_title)
+        }
+    }
+
     private fun createEmailIntent(): Intent {
         val subject = Constants.SUPPORT_EMAIL_SUBJECT
         val email = Constants.SUPPORT_EMAIL
@@ -322,6 +330,6 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
 
     private fun sendSupportEmail() {
         val emailIntent = createEmailIntent()
-        startActivity(Intent.createChooser(emailIntent, "Enviar correo"))
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_message)))
     }
 }

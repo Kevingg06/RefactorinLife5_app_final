@@ -59,4 +59,8 @@ class ProductServiceImp {
     suspend fun getSimilarProductsById(id: Int, page: Int, size: Int): Response<ProductsResponse> {
         return service.getSimilarProductsById(id, page, size)
     }
+
+    suspend fun updateDailyOffer(id: Int): Response<Unit>{
+        return service.updateDailyOffer(id)
+    }
 }

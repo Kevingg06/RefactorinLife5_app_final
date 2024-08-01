@@ -79,11 +79,11 @@
         android:layout_width="209dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
         android:text="@string/confirmation_message"
         android:textSize="@dimen/text_size_medium"
-        android:maxLines="2"
-        android:gravity="center"
-        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
         android:id="@+id/buy_product_button"
         android:layout_width="100dp"
         android:layout_height="35dp"
-android:layout_marginTop="300dp"
+        android:layout_marginTop="300dp"
         android:background="@drawable/bg_btn_enabled"
         android:elevation="10dp"
         android:gravity="center"
@@ -101,11 +101,10 @@ android:layout_marginTop="300dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_small"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
         app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_top" />
 
     <!--        android:layout_marginEnd="45dp"-->
     <!--        android:layout_marginBottom="@dimen/margin_large"-->
