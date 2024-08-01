@@ -71,6 +71,7 @@ class ImageFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner){ data ->
             when(data){
                 is StateProductById.Success -> {
+                    hideLoading()
                     categoryProduct = data.info.productType?.descripcion.toString()
                     initRecyclerView(data.info)
                     render(data.info)

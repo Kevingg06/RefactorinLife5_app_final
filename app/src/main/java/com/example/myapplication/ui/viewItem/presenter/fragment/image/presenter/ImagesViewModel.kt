@@ -17,8 +17,8 @@ class ImagesViewModel(private val repository: ProductRepository = ProductReposit
 
     fun getSimilarProducts(id: Int) {
         viewModelScope.launch {
-            val response = repository.getProductById(id)
             _data.postValue(StateProductById.Loading)
+            val response = repository.getProductById(id)
             if (response.isSuccessful) {
                 response.body()?.let {
                     _data.postValue(StateProductById.Success(it))
