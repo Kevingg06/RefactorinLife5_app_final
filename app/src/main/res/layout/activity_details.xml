@@ -131,7 +131,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="495dp"
+            android:layout_marginTop="515dp"
             android:visibility="gone"/>
 
         <View
@@ -142,7 +142,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/circle_violet"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="690dp"
+            android:layout_marginTop="720dp"
             android:visibility="gone"/>
 
 
