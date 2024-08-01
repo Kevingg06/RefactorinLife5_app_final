@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp" >
+        android:layout_marginStart="15dp">
 
         <ImageView
             android:id="@+id/arrow_button"
@@ -58,8 +58,8 @@
             android:layout_marginTop="7.5dp"
             android:background="@color/dark_gray"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
 
         <TextView
@@ -70,10 +70,10 @@
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginEnd="16dp"
             android:textColor="@android:color/black"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_end_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_header"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_end_desc" />
+            app:layout_constraintTop_toBottomOf="@id/line_header" />
 
         <LinearLayout
             android:id="@+id/line_footer"
@@ -90,15 +90,16 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginStart="@dimen/margin_large"
-            android:layout_marginTop="65dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_product_description">
+            android:layout_marginBottom="90dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/iv_product_currency"
-                android:layout_width="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_title_images"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -111,6 +112,7 @@
                 android:maxLength="7"
                 android:maxLines="1"
                 android:paddingStart="5dp"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_title_images"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
