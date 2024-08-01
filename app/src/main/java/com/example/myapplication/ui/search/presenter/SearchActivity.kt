@@ -1,9 +1,11 @@
 package com.example.myapplication.ui.search.presenter
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -41,6 +43,7 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
 
         callFirstProducts(idProductType, favorite)
 
+        reduceSize()
         initFavoriteIcon()
         observeFavorites()
         setupRecyclerView()
@@ -179,6 +182,14 @@ class SearchActivity : AppCompatActivity(), SearchProductAdapter.OnSearchProduct
             favorite = !favorite
             viewModel.searchProducts(idProductType, productName, favorite)
         }
+    }
+
+    private fun reduceSize(){
+        val searchView = findViewById<SearchView>(R.id.sv_search_product)
+        val hintTextView = searchView.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
+
+        hintTextView.textSize = 13f
+        hintTextView.setTextColor(Color.GRAY)
     }
 
     override fun onSearchProductItemClick(idProduct: Int) {

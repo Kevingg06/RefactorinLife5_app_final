@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.model.StateProductById
 import com.example.myapplication.data.dto.response.ProductByIdResponse
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_CATEGORY
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.FragmentImageBinding
 import com.example.myapplication.ui.adapter.ProductImagesAdapter
@@ -22,6 +23,7 @@ import com.example.myapplication.ui.utils.transformPrice
 class ImageFragment : Fragment() {
 
     private var idProduct: Int? = null
+    private var categoryProduct: String = ""
     private var _binding: FragmentImageBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ImagesViewModel>()
@@ -69,6 +71,7 @@ class ImageFragment : Fragment() {
         viewModel.data.observe(viewLifecycleOwner){ data ->
             when(data){
                 is StateProductById.Success -> {
+                    categoryProduct = data.info.productType?.descripcion.toString()
                     initRecyclerView(data.info)
                     render(data.info)
                 }
@@ -115,6 +118,7 @@ class ImageFragment : Fragment() {
             val myIntent = Intent(activity, SimilarActivity::class.java)
             val bundle = Bundle()
             bundle.putInt(ARG_PRODUCT_ID, idProduct?: -1)
+            bundle.putString(ARG_PRODUCT_CATEGORY, categoryProduct)
             myIntent.putExtras(bundle)
             startActivity(myIntent)
         }

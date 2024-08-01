@@ -1,12 +1,16 @@
 package com.example.myapplication.ui.home.presenter
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import com.example.myapplication.ui.adapter.ProductTypesAdapter
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.dto.dataSource.getToken
@@ -47,7 +51,10 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             savedToken = it
         }
 
+
+
         actions()
+        reduceSize()
         initFavoriteIcon()
         setupRecyclerViews()
         getHomeInfo()
@@ -86,6 +93,14 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
         binding.supportMessageHome.setOnClickListener {
             sendSupportEmail()
         }
+    }
+
+    private fun reduceSize(){
+        val searchView = findViewById<SearchView>(R.id.sv_home)
+        val hintTextView = searchView.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
+
+        hintTextView.textSize = 13f
+        hintTextView.setTextColor(Color.GRAY)
     }
 
     private fun setupRecyclerViews() {
@@ -224,6 +239,13 @@ class HomeActivity : AppCompatActivity(), ProductTypesAdapter.OnCategoryClickLis
             val currentButtonState = !buttonState
             setFavoriteDataHeader(currentButtonState)
             favorite = !favorite
+
+            val myIntent = Intent(this, SearchActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt(ARG_PRODUCT_TYPE_ID, idProductType)
+            bundle.putBoolean(ARG_PRODUCT_STATE, favorite)
+            myIntent.putExtras(bundle)
+            startActivity(myIntent)
         }
     }
 

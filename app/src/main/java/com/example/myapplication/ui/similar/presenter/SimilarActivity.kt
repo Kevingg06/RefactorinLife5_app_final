@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.data.dto.model.StateProductSimilar
 import com.example.myapplication.data.dto.response.Product
 import com.example.myapplication.data.utils.Constants
+import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_CATEGORY
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
 import com.example.myapplication.databinding.ActivitySimilarBinding
 import com.example.myapplication.ui.adapter.SimilarProductSearch
@@ -19,6 +20,7 @@ import com.example.myapplication.ui.viewItem.presenter.activity.DetailsActivity
 class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProductItemClickListener {
 
     private var idProduct: Int? = null
+    private var categoryProduct: String = ""
     private val viewModel by viewModels<SimilarViewModel>()
     private lateinit var binding: ActivitySimilarBinding
     private lateinit var adapter: SimilarProductSearch
@@ -33,6 +35,8 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
         val bundle = intent.extras
         bundle?.let {
             idProduct = it.getInt(ARG_PRODUCT_ID)
+            categoryProduct = it.getString(ARG_PRODUCT_CATEGORY).toString()
+            setup()
         }
 
         idProduct?.let { callSimilarProductsById(it) }
@@ -52,6 +56,10 @@ class SimilarActivity : AppCompatActivity(), SimilarProductSearch.OnSimilarProdu
         adapter = SimilarProductSearch(mutableListOf(), this,this)
         binding.rvSearchSimilar.layoutManager = LinearLayoutManager(this)
         binding.rvSearchSimilar.adapter = adapter
+    }
+
+    private fun setup() {
+        binding.tvNameCategory.text = categoryProduct
     }
 
     private fun actions() {
