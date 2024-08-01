@@ -21,5 +21,5 @@ data class ProductByIdResponse (
         @SerializedName("largeDescription")
         val largeDescription: String?,
         @SerializedName("isFavorite")
-        val isFavorite: Boolean?
+        var isFavorite: Boolean?
     )
