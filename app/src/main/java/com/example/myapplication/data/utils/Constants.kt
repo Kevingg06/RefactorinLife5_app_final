@@ -23,6 +23,7 @@ object Constants {
     const val PAYMENTS_BASE_URL = "https://api-payments-1ztc.onrender.com"
     const val USER_TOKEN = "TOKEN_KEY"
     const val ARG_PRODUCT_ID = "product_id"
+    const val ARG_PRODUCT_CATEGORY = "product_category"
     const val ARG_PRODUCT_STATE = "product_state"
     const val ARG_PRODUCT_TYPE_ID = "product_type_id"
     const val SIZE_DEFAULT = 1

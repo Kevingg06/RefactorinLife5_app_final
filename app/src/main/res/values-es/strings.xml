@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Refact+oring Life Shop</string>
 
     <!--pre_login-->
     <string name="pre_login_tv_title">Refactoring Life \nAcademy</string>
@@ -71,5 +71,8 @@
 
     <!-- Confirmation -->
     <string name="confirmation_message"><b>El vendedor se comunicara con vos en breve</b></string>
+
+    <!-- Similar -->
+    <string name="category">Categoria:</string>
 
 </resources>

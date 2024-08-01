@@ -34,24 +34,23 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_name_rol"
+                android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Vendedor:"
+                android:text="@string/category"
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/tv_name_seller"
+                android:id="@+id/tv_name_category"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:paddingStart="5dp"
-                android:text="TestSeller"
                 android:textSize="@dimen/text_size_medium"
-                app:layout_constraintStart_toEndOf="@+id/tv_name_rol" />
+                app:layout_constraintStart_toEndOf="@+id/tv_category" />
 
             <ImageView
                 android:id="@+id/arrow_button"
