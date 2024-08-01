@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.viewItem.presenter.fragment.comment.CommentFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp">
+
+        <ImageView
+            android:id="@+id/arrow_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginEnd="25dp"
+            android:contentDescription="@string/image_description_back"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/comments_gl_first"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <TextView
+            android:id="@+id/comments_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginBottom="43dp"
+            android:text="@string/comments_comments"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_title_comment"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/comments_gl_first"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/line_header"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:layout_marginTop="7.5dp"
+            android:background="@color/dark_gray"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comments_tv_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_comments"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="25dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/comments_gl_second"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_header"
+            tools:listitem="@layout/item_rv_comments" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/comments_gl_second"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.78" />
+
+        <TextView
+            android:id="@+id/comments_tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comments_gl_second" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buy_product_button"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:background="@drawable/bg_btn_enabled"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="@string/buy_button"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/loading_screen_images"
+        layout="@layout/loading_screen"
+        android:visibility="gone" />
+
+</FrameLayout>

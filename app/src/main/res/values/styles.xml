@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SearchViewHintStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="SplashTheme">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+</resources>

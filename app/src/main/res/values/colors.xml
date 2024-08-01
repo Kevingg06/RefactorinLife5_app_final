@@ -4,4 +4,16 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#7353BA</color>
     <color name="sapphire_blue">#5DADE2</color>
+    <color name="wet_asphalt">#34495E</color>
+    <color name="gray">#D9D9D9</color>
+    <color name="login_red_error">#BF392B</color>
+    <color name="register_red_error">#CF6A60</color>
+    <color name="red_error">#C0392B</color>
+    <color name="gray_home">#F5F5F5</color>
+    <color name="text_color_error">#154360</color>
+    <color name="violet_left_bar">#7353B9</color>
+    <color name="dark_gray">#B7B7B7</color>
+    <color name="light_gray">#D0D0D0</color>
+    <color name="gray_images">#EEEEEE</color>
+    <color name="orange">#F39C12</color>
 </resources>
