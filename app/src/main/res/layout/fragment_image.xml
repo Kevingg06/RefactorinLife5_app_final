@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp" >
+        android:layout_marginStart="15dp">
 
         <ImageView
             android:id="@+id/arrow_button"
@@ -41,10 +41,10 @@
             android:id="@+id/images_tv_title"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_marginHorizontal="@dimen/margin_large"
             android:layout_marginBottom="40dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="@dimen/text_size_title_images"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline_1"
