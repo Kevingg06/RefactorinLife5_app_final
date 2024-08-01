@@ -89,6 +89,7 @@
                 android:maxLength="7"
                 android:maxLines="1"
                 android:paddingStart="5dp"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_title_images"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
