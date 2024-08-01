@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="0.9dp">
+        android:padding="1.5dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
