@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.20" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_2"
@@ -39,10 +39,12 @@
 
         <TextView
             android:id="@+id/images_tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginBottom="43dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="@dimen/text_size_title_images"
@@ -55,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="@dimen/margin_large"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7.5dp"
             android:background="@color/dark_gray"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,12 +88,12 @@
                 android:id="@+id/product_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="11dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_btn_pressed"
-                android:elevation="8dp">
+                android:elevation="6dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -120,11 +122,11 @@
                 android:id="@+id/colors_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="11dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_details"
-                android:elevation="8dp">
+                android:elevation="6dp">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -154,10 +156,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="11dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_button_details"
-                android:elevation="8dp">
+                android:elevation="6dp">
 
                 <ImageView
                     android:layout_width="50dp"

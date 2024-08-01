@@ -7,8 +7,8 @@
     <dimen name="text_size_button">13sp</dimen>
     <dimen name="text_size_title_medium">26sp</dimen>
     <dimen name="text_size_title_large">40sp</dimen>
-    <dimen name="text_size_title_images">25sp</dimen>
-    <dimen name="text_size_title_description">25sp</dimen>
+    <dimen name="text_size_title_images">24sp</dimen>
+    <dimen name="text_size_title_description">24sp</dimen>
     <dimen name="text_size_title_financing">24sp</dimen>
     <dimen name="text_size_title_comment">24sp</dimen>
 
