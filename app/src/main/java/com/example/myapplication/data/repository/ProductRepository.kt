@@ -37,6 +37,10 @@ class ProductRepository(private val service: ProductServiceImp = ProductServiceI
     suspend fun getSimilarProductsById(id: Int, page: Int, size: Int): Response<ProductsResponse> {
         return service.getSimilarProductsById(id, page, size)
     }
+
+    suspend fun setNewDailyOffer(id: Int): Response<Unit> {
+        return service.updateDailyOffer(id)
+    }
 }
 
 data class ObjectComplete(

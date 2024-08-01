@@ -3,6 +3,7 @@ package com.example.myapplication.ui.viewItem.presenter.activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapplication.data.utils.Constants.ARG_PRODUCT_ID
@@ -13,15 +14,13 @@ import com.example.myapplication.ui.viewItem.presenter.fragment.financing.presen
 import com.example.myapplication.ui.viewItem.presenter.fragment.image.presenter.ImageFragment
 
 class DetailsActivity : AppCompatActivity() {
+    private val viewModel by viewModels<DetailsViewModel>()
 
     private var idProduct: Int? = null
 
     private lateinit var fragmentFinancing: FinancingFragment
-
     private lateinit var fragmentImage: ImageFragment
-
     private lateinit var fragmentComment: CommentFragment
-
     private lateinit var fragmentDescription: DescriptionFragment
 
     private lateinit var binding: ActivityDetailsBinding
@@ -48,6 +47,7 @@ class DetailsActivity : AppCompatActivity() {
         fragmentDescription = DescriptionFragment.newInstance(idProduct ?: -1)
         fragmentComment = CommentFragment.newInstance(idProduct ?: -1)
         showFragment(fragmentImage, ImageFragment::class.java.toString())
+        setDailyOffer(idProduct ?: -1)
         actions()
     }
 
@@ -67,6 +67,10 @@ class DetailsActivity : AppCompatActivity() {
         binding.detailsTvComments.setOnClickListener {
             showFragment(fragmentComment, CommentFragment::class.java.toString())
         }
+    }
+
+    private fun setDailyOffer(id: Int) {
+        viewModel.setNewDailyOffer(id)
     }
 
     private fun showFragment(fragment: Fragment, tag: String) {
