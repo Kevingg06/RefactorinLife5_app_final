@@ -64,6 +64,7 @@
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="@dimen/padding_drawable"
                 android:hint="@string/tie_email"
+                android:textSize="14sp"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="@dimen/padding_horizontal"
                 android:paddingVertical="@dimen/padding_vertical" />
@@ -87,6 +88,7 @@
                 android:drawableStart="@drawable/ic_padlock"
                 android:drawablePadding="@dimen/padding_drawable"
                 android:hint="@string/tie_password"
+                android:textSize="14sp"
                 android:inputType="textPassword"
                 android:paddingHorizontal="@dimen/padding_horizontal"
                 android:paddingVertical="@dimen/padding_vertical" />
@@ -139,8 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_tv_no_account"
-            android:textColor="@color/wet_asphalt"
-            android:textSize="@dimen/text_size_medium" />
+            android:textColor="@color/wet_asphalt" />
 
         <TextView
             android:id="@+id/login_tv_register_here"
@@ -149,7 +150,6 @@
             android:layout_marginStart="5dp"
             android:text="@string/login_tv_register_here"
             android:textColor="@color/wet_asphalt"
-            android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tv_error_message"
         android:textColor="@color/red_error"
-        android:textSize="@dimen/text_size_medium"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/login_btn_enter"
