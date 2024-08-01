@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
 import com.example.myapplication.data.utils.Constants
 import com.example.myapplication.databinding.ActivityPreLoginBinding
 import com.example.myapplication.ui.login.presenter.LoginActivity
@@ -14,6 +15,8 @@ class PreLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(2000)
+        setTheme(R.style.Theme_MyApplication)
         super.onCreate(savedInstanceState)
         binding = ActivityPreLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -92,7 +92,7 @@
         android:name="com.example.myapplication.ui.imagenes.presenter.ImageFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="0dp"
         app:layout_constraintStart_toEndOf="@+id/details_gl_leftBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
