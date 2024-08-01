@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="9dp"
     android:layout_marginLeft="20dp"
+    android:layout_marginTop="12dp"
     android:layout_marginRight="20dp"
+    android:layout_marginBottom="9dp"
     android:elevation="8dp"
     app:cardCornerRadius="8dp">
 
@@ -37,13 +37,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_standard"
-            android:layout_marginEnd="@dimen/margin_very_small"
             android:layout_marginTop="@dimen/margin_standard"
+            android:layout_marginEnd="@dimen/margin_very_small"
             android:maxLines="1"
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
             app:layout_constraintEnd_toStartOf="@id/item_iv_add_favorites"
+            app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -55,8 +55,8 @@
             android:layout_marginEnd="@dimen/margin_very_small"
             android:maxLines="1"
             android:textSize="@dimen/text_size_small"
-            app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
             app:layout_constraintEnd_toStartOf="@id/item_iv_add_favorites"
+            app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
             app:layout_constraintTop_toBottomOf="@id/item_product_brand" />
 
         <TextView
@@ -70,8 +70,8 @@
             android:maxLines="1"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/product_description"
-            app:layout_constraintStart_toEndOf="@id/item_cv_product_image" />
+            app:layout_constraintStart_toEndOf="@id/item_cv_product_image"
+            app:layout_constraintTop_toBottomOf="@id/product_description" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/see_product_button"

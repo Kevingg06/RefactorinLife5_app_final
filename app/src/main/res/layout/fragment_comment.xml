@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp" >
+        android:layout_marginStart="15dp">
 
         <ImageView
             android:id="@+id/arrow_button"
@@ -37,9 +37,9 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginBottom="43dp"
-            android:textSize="@dimen/text_size_title_comment"
             android:text="@string/comments_comments"
             android:textColor="@color/black"
+            android:textSize="@dimen/text_size_title_comment"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/comments_gl_first"
             app:layout_constraintStart_toStartOf="parent" />
@@ -52,8 +52,8 @@
             android:layout_marginTop="7.5dp"
             android:background="@color/dark_gray"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/comments_tv_title" />
 
         <androidx.recyclerview.widget.RecyclerView

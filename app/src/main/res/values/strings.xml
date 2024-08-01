@@ -37,6 +37,9 @@
     <string name="home_sv_hint">Search in Refactoring Life Shop</string>
     <string name="home_heart_icon_description">Favorites</string>
     <string name="product_image_description">Product</string>
+    <string name="daily_offer_title">Daily offer</string>
+    <string name="last_visited_title">Last visited</string>
+    <string name="send_message">"Send email"</string>
     <string name="support_message">If you have issues, contact <b>support</b></string>
 
     <!--login-->
